@@ -27,3 +27,17 @@ app-inv-t refl = refl
 
 app-inv-s : ∀ {n t s n′ t′ s′} → app[ n ] t s ≡ app[ n′ ] t′ s′ → s ≡ s′
 app-inv-s refl = refl
+
+
+up-inv-n : ∀ {n t n′ t′} → up[ n ] t ≡ up[ n′ ] t′ → n ≡ n′
+up-inv-n refl = refl
+
+up-inv-t : ∀ {n t n′ t′} → up[ n ] t ≡ up[ n′ ] t′ → t ≡ t′
+up-inv-t refl = refl
+
+
+down-inv-n : ∀ {n t n′ t′} → down[ n ] t ≡ down[ n′ ] t′ → n ≡ n′
+down-inv-n refl = refl
+
+down-inv-t : ∀ {n t n′ t′} → down[ n ] t ≡ down[ n′ ] t′ → t ≡ t′
+down-inv-t refl = refl

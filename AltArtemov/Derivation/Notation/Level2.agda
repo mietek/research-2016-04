@@ -22,6 +22,16 @@ APP² : ∀ {t s A B Γ}
     → Γ ⊢ app t s ∶ B
 APP² {t} {s} =  APP[ 1 ] {ts = t ∷ []} {ss = s ∷ []}
 
+UP²_ : ∀ {t u A Γ}
+    → Γ ⊢ t ∶ u ∶ A
+    → Γ ⊢ up t ∶ quo u ∶ u ∶ A
+UP²_ {t} = UP[ 1 ] {ts = t ∷ []}
+
+DOWN²_ : ∀ {t u A Γ}
+    → Γ ⊢ t ∶ u ∶ A
+    → Γ ⊢ down t ∶ A
+DOWN²_ {t} = DOWN[ 1 ] {ts = t ∷ []}
+
 
 V0² : ∀ {Γ A} → Γ , A ⊢ var _ ∶ A
 V0² = VAR² IX0

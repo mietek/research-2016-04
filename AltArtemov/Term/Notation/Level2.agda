@@ -12,6 +12,12 @@ lam² t₂ = lam[ 1 ] t₂
 app² : ∀ t₂ s₂ → Tm
 app² t₂ s₂ = app[ 1 ] t₂ s₂
 
+up²_ : ∀ t₂ → Tm
+up² t₂ = up[ 1 ] t₂
+
+down²_ : ∀ t₂ → Tm
+down² t₂ = down[ 1 ] t₂
+
 
 v0² : Tm
 v0² = var² 0

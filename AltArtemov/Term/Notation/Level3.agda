@@ -12,6 +12,12 @@ lam³ t₃ = lam[ 2 ] t₃
 app³ : ∀ t₃ s₃ → Tm
 app³ t₃ s₃ = app[ 2 ] t₃ s₃
 
+up³_ : ∀ t₃ → Tm
+up³ t₃ = up[ 2 ] t₃
+
+down³_ : ∀ t₃ → Tm
+down³ t₃ = down[ 2 ] t₃
+
 
 v0³ : Tm
 v0³ = var³ 0

@@ -12,3 +12,9 @@ data Tm : Set where
 
   -- Function application.
   app[_] : (n : ℕ) → (t s : Tm) → Tm
+
+  -- Reification.
+  up[_] : (n : ℕ) → (t : Tm) → Tm
+
+  -- Reflection
+  down[_] : (n : ℕ) → (t : Tm) → Tm

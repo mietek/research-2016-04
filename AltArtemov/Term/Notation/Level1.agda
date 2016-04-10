@@ -12,6 +12,12 @@ lam t = lam[ 0 ] t
 app : ∀ t s → Tm
 app t s = app[ 0 ] t s
 
+up_ : ∀ t → Tm
+up t = up[ 0 ] t
+
+down_ : ∀ t → Tm
+down t = down[ 0 ] t
+
 
 v0 : Tm
 v0 = var 0

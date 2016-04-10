@@ -2,6 +2,7 @@ module AltArtemov.Derivation.Notation.Level1 where
 
 open import AltArtemov.Context
 open import AltArtemov.Derivation.Core
+open import AltArtemov.Term
 open import AltArtemov.TermVector
 open import AltArtemov.Type
 
@@ -20,6 +21,16 @@ APP : ∀ {A B Γ}
     → Γ ⊢ A ⊃ B    → Γ ⊢ A
     → Γ ⊢ B
 APP = APP[ 0 ] {ts = []} {ss = []}
+
+UP_ : ∀ {u A Γ}
+    → Γ ⊢ u ∶ A
+    → Γ ⊢ quo u ∶ u ∶ A
+UP_ = UP[ 0 ] {ts = []}
+
+DOWN_ : ∀ {u A Γ}
+    → Γ ⊢ u ∶ A
+    → Γ ⊢ A
+DOWN_ = DOWN[ 0 ] {ts = []}
 
 
 V0 : ∀ {Γ A} → Γ , A ⊢ A

@@ -22,6 +22,16 @@ APP³ : ∀ {t₂ t s₂ s A B Γ}
     → Γ ⊢ app² t₂ s₂ ∶ app t s ∶ B
 APP³ {t₂} {t} {s₂} {s} = APP[ 2 ] {ts = t₂ ∷ t ∷ []} {ss = s₂ ∷ s ∷ []}
 
+UP³_ : ∀ {t₂ t u A Γ}
+    → Γ ⊢ t₂ ∶ t ∶ u ∶ A
+    → Γ ⊢ up² t₂ ∶ up t ∶ quo u ∶ u ∶ A
+UP³_ {t₂} {t} = UP[ 2 ] {ts = t₂ ∷ t ∷ []}
+
+DOWN³_ : ∀ {t₂ t u A Γ}
+    → Γ ⊢ t₂ ∶ t ∶ u ∶ A
+    → Γ ⊢ down² t₂ ∶ down t ∶ A
+DOWN³_ {t₂} {t} = DOWN[ 2 ] {ts = t₂ ∷ t ∷ []}
+
 
 V0³ : ∀ {Γ A} → Γ , A ⊢ var² _ ∶ var _ ∶ A
 V0³ = VAR³ IX0
