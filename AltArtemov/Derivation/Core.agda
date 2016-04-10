@@ -8,7 +8,7 @@ open import AltArtemov.Type
 
 infixr 0 _⊢_
 
-data _⊢_ (Γ : Cx) : (A : Ty) → Set where
+data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
   -- Variable reference.
   VAR[_] : ∀ n {A}
       → (i : Γ ∋ A)

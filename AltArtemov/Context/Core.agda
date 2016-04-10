@@ -10,13 +10,13 @@ infixr 1 _∋_
 
 data Cx : Set where
   ∅ : Cx
-  _,_ : (Γ : Cx) → (A : Ty) → Cx
+  _,_ : ∀ (Γ : Cx) (A : Ty) → Cx
 
-data _∋_ : (Γ : Cx) → (A : Ty) → Set where
+data _∋_ : ∀ (Γ : Cx) (A : Ty) → Set where
   top : ∀ {Γ A} → Γ , A ∋ A
-  pop : ∀ {Γ A B} → (i : Γ ∋ A) → Γ , B ∋ A
+  pop : ∀ {Γ A B} (i : Γ ∋ A) → Γ , B ∋ A
 
 
-ix : ∀ {Γ A} → (i : Γ ∋ A) → ℕ
+ix : ∀ {Γ A} (i : Γ ∋ A) → ℕ
 ix top     = zero
 ix (pop i) = suc (ix i)

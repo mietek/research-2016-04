@@ -6,51 +6,30 @@ open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import AltArtemov
 
 
--- The intended interpretation of some theorems of propositional logic.
-module PL⁰ where
-  I : ∀ {A : Set}
-      → A → A
-  I x = x
-
-  K : ∀ {A B : Set}
-      → A → B → A
-  K x y = x
-
-  S : ∀ {A B C : Set}
-      → (A → B → C) → (A → B) → A → C
-  S f g x = (f x) (g x)
-
-
 -- Some theorems of propositional logic.
 module PL where
-  I : ∀ {A}
-      → ⊩ A ⊃ A
+  I : ∀ {A} → ⊩ A ⊃ A
   I = LAM V0
 
-  K : ∀ {A B}
-      → ⊩ A ⊃ B ⊃ A
+  K : ∀ {A B} → ⊩ A ⊃ B ⊃ A
   K = LAM LAM V1
 
-  S : ∀ {A B C}
-      → ⊩ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C
+  S : ∀ {A B C} → ⊩ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C
   S = LAM LAM LAM APP (APP V2 V0) (APP V1 V0)
 
 
 -- Some theorems of the λ-calculus.
 module PL² where
   -- □ (A ⊃ A)
-  I : ∀ {A}
-      → ⊩ lam v0 ∶ (A ⊃ A)
+  I : ∀ {A} → ⊩ lam v0 ∶ (A ⊃ A)
   I = LAM² V0²
 
   -- □ (A ⊃ B ⊃ A)
-  K : ∀ {A B}
-      → ⊩ lam lam v1 ∶ (A ⊃ B ⊃ A)
+  K : ∀ {A B} → ⊩ lam lam v1 ∶ (A ⊃ B ⊃ A)
   K = LAM² LAM² V1²
 
   -- □ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
-  S : ∀ {A B C}
-      → ⊩ lam lam lam app (app v2 v0) (app v1 v0) ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
+  S : ∀ {A B C} → ⊩ lam lam lam app (app v2 v0) (app v1 v0) ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
   S = LAM² LAM² LAM² APP² (APP² V2² V0²) (APP² V1² V0²)
 
 
@@ -78,36 +57,30 @@ module PLDemo where
 -- Some first-level realisations of theorems of the modal logic S4.
 module S4 where
   -- □ (A ⊃ B) ⊃ □ A ⊃ □ B
-  K : ∀ {f x A B}
-      → ⊩ f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B
+  K : ∀ {f x A B} → ⊩ f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B
   K = LAM LAM APP² V1 V0
 
   -- □ A ⊃ A
-  T : ∀ {x A}
-      → ⊩ x ∶ A ⊃ A
+  T : ∀ {x A} → ⊩ x ∶ A ⊃ A
   T = LAM DOWN V0
 
   -- □ A ⊃ □ □ A
-  #4 : ∀ {x A}
-      → ⊩ x ∶ A ⊃ quo x ∶ x ∶ A
+  #4 : ∀ {x A} → ⊩ x ∶ A ⊃ quo x ∶ x ∶ A
   #4 = LAM UP V0
 
 
 -- Some second-level realisations of theorems of the modal logic S4.
 module S4² where
   -- □ (□ (A ⊃ B) ⊃ □ A ⊃ □ B)
-  K : ∀ {f x A B}
-      → ⊩ lam lam app² v1 v0 ∶ (f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B)
+  K : ∀ {f x A B} → ⊩ lam lam app² v1 v0 ∶ (f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B)
   K = LAM² LAM² APP³ V1² V0²
 
   -- □ (□ A ⊃ A)
-  T : ∀ {x A}
-      → ⊩ lam down v0 ∶ (x ∶ A ⊃ A)
+  T : ∀ {x A} → ⊩ lam down v0 ∶ (x ∶ A ⊃ A)
   T = LAM² DOWN² V0²
 
   -- □ (□ A ⊃ □ □ A)
-  #4 : ∀ {x A}
-      → ⊩ lam up v0 ∶ (x ∶ A ⊃ quo x ∶ x ∶ A)
+  #4 : ∀ {x A} → ⊩ lam up v0 ∶ (x ∶ A ⊃ quo x ∶ x ∶ A)
   #4 = LAM² UP² V0²
 
 

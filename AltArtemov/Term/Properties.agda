@@ -63,22 +63,18 @@ unquo (down[ suc n ] t)  z<′l = down[ n ] (unquo t (z<′sn⊓m⇒z<′m n z<�
 
 
 -- Unquoting a term decrements its level.
-lev-unquo-t≡pred-lev-t : ∀ t → (z<′l : zero <′ lev t) → lev (unquo t z<′l) ≡ pred (lev t)
+lev-unquo-t≡pred-lev-t : ∀ t (z<′l : zero <′ lev t) → lev (unquo t z<′l) ≡ pred (lev t)
 lev-unquo-t≡pred-lev-t (var[ zero ] i)    ()
 lev-unquo-t≡pred-lev-t (lam[ zero ] t)    ()
 lev-unquo-t≡pred-lev-t (app[ zero ] t s)  ()
 lev-unquo-t≡pred-lev-t (up[ zero ] t)     ()
 lev-unquo-t≡pred-lev-t (down[ zero ] t)   ()
 lev-unquo-t≡pred-lev-t (var[ suc n ] i)   z<′l = refl
-lev-unquo-t≡pred-lev-t (lam[ suc n ] t)   z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⇒z<′m n z<′l) =
-    m⊓pn≡p[sm⊓n] n (lev t)
+lev-unquo-t≡pred-lev-t (lam[ suc n ] t)   z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⇒z<′m n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
 lev-unquo-t≡pred-lev-t (app[ suc n ] t s) z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⊓o⇒z<′m n (lev s) z<′l)
-                                                     | lev-unquo-t≡pred-lev-t s (z<′sn⊓m⊓o⇒z<′o n (lev t) z<′l) =
-    m⊓pn⊓po≡p[sm⊓n⊓o] n (lev t) (lev s)
-lev-unquo-t≡pred-lev-t (up[ suc n ] t)    z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⇒z<′m n z<′l) =
-    m⊓pn≡p[sm⊓n] n (lev t)
-lev-unquo-t≡pred-lev-t (down[ suc n ] t)  z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⇒z<′m n z<′l) =
-    m⊓pn≡p[sm⊓n] n (lev t)
+                                                     | lev-unquo-t≡pred-lev-t s (z<′sn⊓m⊓o⇒z<′o n (lev t) z<′l) = m⊓pn⊓po≡p[sm⊓n⊓o] n (lev t) (lev s)
+lev-unquo-t≡pred-lev-t (up[ suc n ] t)    z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⇒z<′m n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
+lev-unquo-t≡pred-lev-t (down[ suc n ] t)  z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sn⊓m⇒z<′m n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
 
 
 
@@ -86,7 +82,7 @@ lev-unquo-t≡pred-lev-t (down[ suc n ] t)  z<′l rewrite lev-unquo-t≡pred-le
 unquo-quo-t≡t : ∀ t → unquo (quo t) (z<′lev-quo-t t) ≡ t
 unquo-quo-t≡t t = aux t (z<′lev-quo-t t)
   where
-    aux : ∀ t → (z<′l : zero <′ lev (quo t)) → unquo (quo t) z<′l ≡ t    -- TODO: Simplify!
+    aux : ∀ t (z<′l : zero <′ lev (quo t)) → unquo (quo t) z<′l ≡ t    -- TODO: Simplify!
     aux (var[ n ] i)   z<′l = refl
     aux (lam[ n ] t)   z<′l rewrite aux t (z<′sn⊓m⇒z<′m n z<′l) = refl
     aux (app[ n ] t s) z<′l rewrite aux t (z<′sn⊓m⊓o⇒z<′m n (lev (quo s)) z<′l)
@@ -96,7 +92,7 @@ unquo-quo-t≡t t = aux t (z<′lev-quo-t t)
 
 
 -- Quoting after unquoting is identity.
-quo-unquo-t≡t : ∀ t → (z<′l : zero <′ lev t) → quo (unquo t z<′l) ≡ t
+quo-unquo-t≡t : ∀ t (z<′l : zero <′ lev t) → quo (unquo t z<′l) ≡ t
 quo-unquo-t≡t (var[ zero ] i)    ()
 quo-unquo-t≡t (lam[ zero ] t)    ()
 quo-unquo-t≡t (app[ zero ] t s)  ()

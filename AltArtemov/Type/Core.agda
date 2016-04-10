@@ -11,7 +11,7 @@ data Ty : Set where
   ⊥ : Ty
 
   -- Implication.
-  _⊃_ : (A : Ty) → (B : Ty) → Ty
+  _⊃_ : (A B : Ty) → Ty
 
   -- Type assertion.
   _∶_ : (t : Tm) → (A : Ty) → Ty

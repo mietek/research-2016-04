@@ -20,23 +20,6 @@ import Data.Nat as ℕ
 open module ℕDTO = DecTotalOrder ℕ.decTotalOrder using () renaming (trans to ≤-trans ; total to ≤-total) public
 
 
-⊓-zeroᴸ : ∀ n → zero ⊓ n ≡ zero
-⊓-zeroᴸ = proj₁ ⊓-zero
-
-⊓-zeroᴿ : ∀ n → n ⊓ zero ≡ zero
-⊓-zeroᴿ = proj₂ ⊓-zero
-
-
-m⊓pn≡p[sm⊓n] : ∀ m n → m ⊓ pred n ≡ pred (suc m ⊓ n)
-m⊓pn≡p[sm⊓n] m zero    rewrite ⊓-comm m zero = refl
-m⊓pn≡p[sm⊓n] m (suc n) rewrite ⊓-comm m n    = refl
-
-m⊓pn⊓po≡p[sm⊓n⊓o] : ∀ m n o → (m ⊓ pred n) ⊓ pred o ≡ pred ((suc m ⊓ n) ⊓ o)
-m⊓pn⊓po≡p[sm⊓n⊓o] m n       zero    rewrite ⊓-zeroᴿ (m ⊓ pred n) | ⊓-zeroᴿ (suc m ⊓ n) = refl
-m⊓pn⊓po≡p[sm⊓n⊓o] m zero    (suc o) rewrite ⊓-comm m zero = refl
-m⊓pn⊓po≡p[sm⊓n⊓o] m (suc n) (suc o) = refl
-
-
 n≤sn : ∀ {n} → n ≤ suc n
 n≤sn {zero}  = z≤n
 n≤sn {suc m} = s≤s n≤sn
@@ -89,6 +72,23 @@ n ≰′ m = ¬ n ≤′ m
 ≰′-excl {m} {n} m≰′n with ≤′-total m n
 ...                  | inj₁ m≤′n = expl (m≰′n m≤′n)
 ...                  | inj₂ n≤′m = n≤′m
+
+
+⊓-zeroᴸ : ∀ n → zero ⊓ n ≡ zero
+⊓-zeroᴸ = proj₁ ⊓-zero
+
+⊓-zeroᴿ : ∀ n → n ⊓ zero ≡ zero
+⊓-zeroᴿ = proj₂ ⊓-zero
+
+
+m⊓pn≡p[sm⊓n] : ∀ m n → m ⊓ pred n ≡ pred (suc m ⊓ n)
+m⊓pn≡p[sm⊓n] m zero    rewrite ⊓-comm m zero = refl
+m⊓pn≡p[sm⊓n] m (suc n) rewrite ⊓-comm m n    = refl
+
+m⊓pn⊓po≡p[sm⊓n⊓o] : ∀ m n o → (m ⊓ pred n) ⊓ pred o ≡ pred ((suc m ⊓ n) ⊓ o)
+m⊓pn⊓po≡p[sm⊓n⊓o] m n       zero    rewrite ⊓-zeroᴿ (m ⊓ pred n) | ⊓-zeroᴿ (suc m ⊓ n) = refl
+m⊓pn⊓po≡p[sm⊓n⊓o] m zero    (suc o) rewrite ⊓-comm m zero = refl
+m⊓pn⊓po≡p[sm⊓n⊓o] m (suc n) (suc o) = refl
 
 
 ≤′-idᴿ-⊓ : ∀ {m n} → m ≤′ n → m ⊓ n ≡ m
