@@ -9,7 +9,7 @@ open import AltArtemov.Term
 open import AltArtemov.Term.Properties using () renaming (lev to tm-lev)
 open import AltArtemov.TermVector
 open import AltArtemov.Type
-open import AltArtemov.Type.Properties using (lower) renaming (lev to ty-lev ; z<′lev-t∶A to z<′ty-lev-t∶A)
+open import AltArtemov.Type.Properties using (lower) renaming (lev to ty-lev)
 open import Data.Nat.Missing
 
 
@@ -94,17 +94,17 @@ z<′ty-lev-int-d d = z<′sn
 
 -- Derivations of level greater than 0, and of type that is of level greater than 0, can be uninternalised.
 unint : ∀ {Γ A} (d : Γ ⊢ A) → zero <′ lev d → (z<′tl : zero <′ ty-lev A) → Γ ⊢ lower A z<′tl
-unint (VAR[ zero ] i)                              ()   z<′tl
-unint (LAM[ zero ] d)                              ()   z<′tl
-unint (APP[ zero ] d c)                            ()   z<′tl
-unint (UP[ zero ] d)                               ()   z<′tl
-unint (DOWN[ zero ] d)                             ()   z<′tl
-unint (VAR[ suc n ] i)                             z<′l z<′tl = VAR[ n ] i
-unint (LAM[ suc n ] {t ∷ ts} {A} {B} d)            z<′l z<′tl = LAM[ n ] {ts} (unint d (z<′sn⊓m⇒z<′m n z<′l) (z<′ty-lev-t∶A t (ts ∶ⁿ B)))
-unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} {A} {B} d c) z<′l z<′tl = APP[ n ] {ts} {ss} (unint d (z<′sn⊓m⊓o⇒z<′m n (lev c) z<′l) (z<′ty-lev-t∶A t (ts ∶ⁿ (A ⊃ B))))
-                                                                                   (unint c (z<′sn⊓m⊓o⇒z<′o n (lev d) z<′l) (z<′ty-lev-t∶A s (ss ∶ⁿ A)))
-unint (UP[ suc n ] {t ∷ ts} {u} {A} d)             z<′l z<′tl = UP[ n ] {ts} (unint d (z<′sn⊓m⇒z<′m n z<′l) (z<′ty-lev-t∶A t (ts ∶ⁿ u ∶ A)))
-unint (DOWN[ suc n ] {t ∷ ts} {u} {A} d)           z<′l z<′tl = DOWN[ n ] {ts} (unint d (z<′sn⊓m⇒z<′m n z<′l) (z<′ty-lev-t∶A t (ts ∶ⁿ u ∶ A)))
+unint (VAR[ zero ] i)                      ()   z<′tl
+unint (LAM[ zero ] d)                      ()   z<′tl
+unint (APP[ zero ] d c)                    ()   z<′tl
+unint (UP[ zero ] d)                       ()   z<′tl
+unint (DOWN[ zero ] d)                     ()   z<′tl
+unint (VAR[ suc n ] i)                     z<′l z<′tl = VAR[ n ] i
+unint (LAM[ suc n ] {t ∷ ts} d)            z<′l z<′tl = LAM[ n ] (unint d (z<′sn⊓m⇒z<′m n z<′l) z<′sn)
+unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} d c) z<′l z<′tl = APP[ n ] (unint d (z<′sn⊓m⊓o⇒z<′m n (lev c) z<′l) z<′sn)
+                                                                 (unint c (z<′sn⊓m⊓o⇒z<′o n (lev d) z<′l) z<′sn)
+unint (UP[ suc n ] {t ∷ ts} d)             z<′l z<′tl = UP[ n ] (unint d (z<′sn⊓m⇒z<′m n z<′l) z<′sn)
+unint (DOWN[ suc n ] {t ∷ ts} d)           z<′l z<′tl = DOWN[ n ] (unint d (z<′sn⊓m⇒z<′m n z<′l) z<′sn)
 
 
 -- Unnecessitation is a special case of uninternalisation.

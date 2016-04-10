@@ -7,7 +7,6 @@ open import Data.Unit using () renaming (⊤ to Unit ; tt to unit)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
 open import AltArtemov
-open import AltArtemov.Type.Properties using () renaming (z<′lev-t∶A to z<′ty-lev-t∶A)
 open import Data.Nat.Missing
 open import README using (module PL ; module PL² ; module S4 ; module S4²)
 
@@ -35,40 +34,40 @@ drop (Γ , A) (pop i) = drop Γ i
 
 
 postulate
-  lam-lm : ∀ {Γ} n (ts : TmV n) {A B} (d : Γ , A ⊢ ts ∶ⁿ B) → n ≤′ dn-lev d
-  app-lm : ∀ {Γ} n (ts ss : TmV n) {A B} (d : Γ ⊢ ts ∶ⁿ (A ⊃ B)) (c : Γ ⊢ ss ∶ⁿ A) → n ≤′ dn-lev d ⊓ dn-lev c
-  up-down-lm : ∀ {Γ} n (ts : TmV n) {u A} (d : Γ ⊢ ts ∶ⁿ u ∶ A) → n ≤′ dn-lev d
+  lam-lm : ∀ {Γ} n (ts : TmV (suc n)) {A B} (d : Γ , A ⊢ ts ∶ⁿ B) → suc n ≤′ dn-lev d
+  app-lm : ∀ {Γ} n (ts ss : TmV (suc n)) {A B} (d : Γ ⊢ ts ∶ⁿ (A ⊃ B)) (c : Γ ⊢ ss ∶ⁿ A) → suc n ≤′ dn-lev d ⊓ dn-lev c
+  up-down-lm : ∀ {Γ} n (ts : TmV (suc n)) {u A} (d : Γ ⊢ ts ∶ⁿ u ∶ A) → suc n ≤′ dn-lev d
   ⊓-lm₁ : ∀ {n} m → suc n ≤′ m → zero <′ suc n ⊓ m
   ⊓-lm₂ : ∀ {n} m o → suc n ≤′ m ⊓ o → zero <′ suc n ⊓ m ⊓ o
   weak : ∀ {Γ A} {i : Γ ∋ A} → ⟦ A ⟧ty (drop Γ i) → ⟦ A ⟧ty Γ
 
 
 ⟦_⟧dn : ∀ {Γ A} (d : Γ ⊢ A) → ⟦ Γ ⟧cx → ⟦ A ⟧ty Γ
-
-⟦ VAR[ zero ] i ⟧dn               γ = weak (⟦ i ⟧ix γ)
-⟦ LAM[ zero ] {[]} d ⟧dn          γ = λ a → {!⟦ d ⟧dn (γ , a)!}
-⟦ APP[ zero ] {[]} {[]} d c ⟧dn   γ = (⟦ d ⟧dn γ) (⟦ c ⟧dn γ)
-⟦ UP[ zero ] {[]} d ⟧dn           γ = d
-⟦ DOWN[ zero ] {[]} d ⟧dn         γ = {!⟦ ⟦ d ⟧dn γ ⟧dn γ!} -- TODO: Termination
-
-⟦_⟧dn (VAR[ suc n ] i) γ =
-    unint (VAR[ suc n ] i) z<′sn z<′sn
-⟦_⟧dn (LAM[ suc n ] {t ∷ ts} {A} {B} d) γ =
+⟦ VAR[ zero ] i ⟧dn             γ = weak (⟦ i ⟧ix γ)
+⟦ LAM[ zero ] {[]} d ⟧dn        γ = λ a → {!⟦ d ⟧dn (γ , a)!}
+⟦ APP[ zero ] {[]} {[]} d c ⟧dn γ = (⟦ d ⟧dn γ) (⟦ c ⟧dn γ)
+⟦ UP[ zero ] {[]} d ⟧dn         γ = d
+⟦ DOWN[ zero ] {[]} d ⟧dn       γ = {!⟦ ⟦ d ⟧dn γ ⟧dn γ!} -- TODO: Termination
+⟦ VAR[ suc n ] i ⟧dn γ =
+    unint (VAR[ suc n ] i)
+      z<′sn
+      z<′sn
+⟦ LAM[ suc n ] {t ∷ ts} d ⟧dn γ =
     unint (LAM[ suc n ] {t ∷ ts} d)
-      (⊓-lm₁ (dn-lev d) (lam-lm (suc n) (t ∷ ts) d))
-      (z<′ty-lev-t∶A t (lamⁿ[ n ] ts ∶ⁿ (A ⊃ B)))
-⟦_⟧dn (APP[ suc n ] {t ∷ ts} {s ∷ ss} {A} {B} d c) γ =
+      (⊓-lm₁ (dn-lev d) (lam-lm n (t ∷ ts) d))
+      z<′sn
+⟦ APP[ suc n ] {t ∷ ts} {s ∷ ss} d c ⟧dn γ =
     unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} d c)
-      (⊓-lm₂ (dn-lev d) (dn-lev c) (app-lm (suc n) (t ∷ ts) (s ∷ ss) d c))
-      (z<′ty-lev-t∶A t (appⁿ[ n ] ts ss ∶ⁿ B))
-⟦_⟧dn (UP[ suc n ] {t ∷ ts} {u} {A} d) γ =
+      (⊓-lm₂ (dn-lev d) (dn-lev c) (app-lm n (t ∷ ts) (s ∷ ss) d c))
+      z<′sn
+⟦ UP[ suc n ] {t ∷ ts} d ⟧dn γ =
     unint (UP[ suc n ] {t ∷ ts} d)
-      (⊓-lm₁ (dn-lev d) (up-down-lm (suc n) (t ∷ ts) d))
-      (z<′ty-lev-t∶A t (upⁿ[ n ] ts ∶ⁿ quo u ∶ u ∶ A))
-⟦_⟧dn (DOWN[ suc n ] {t ∷ ts} {u} {A} d) γ =
+      (⊓-lm₁ (dn-lev d) (up-down-lm n (t ∷ ts) d))
+      z<′sn
+⟦ DOWN[ suc n ] {t ∷ ts} d ⟧dn γ =
     unint (DOWN[ suc n ] {t ∷ ts} d)
-      (⊓-lm₁ (dn-lev d) (up-down-lm (suc n) (t ∷ ts) d))
-      (z<′ty-lev-t∶A t (downⁿ[ n ] ts ∶ⁿ A))
+      (⊓-lm₁ (dn-lev d) (up-down-lm n (t ∷ ts) d))
+      z<′sn
 
 
 module AgPL where
