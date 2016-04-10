@@ -9,6 +9,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import AltArtemov
 open import AltArtemov.Type.Properties using () renaming (z<′lev-t∶A to z<′ty-lev-t∶A)
 open import Data.Nat.Missing
+open import README using (module PL ; module PL² ; module S4 ; module S4²)
 
 
 ⟦_⟧ty : ∀ (A : Ty) → Set
@@ -70,61 +71,79 @@ postulate
 ⟦_⟧dn {Γ , _} (DOWN[_] (suc n) {t ∷ ts} d)           γ = {!!}
 
 
-module ⟦PL⟧ where
-  -- ⟦ A ⊃ A ⟧
+module AgPL where
   I : ∀ {A} → ⟦ A ⟧ty → ⟦ A ⟧ty
   I = λ x → x
 
-  -- ⟦ A ⊃ B ⊃ A ⟧
   K : ∀ {A B} → ⟦ A ⟧ty → ⟦ B ⟧ty → ⟦ A ⟧ty
   K = λ x y → x
 
-  -- ⟦ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C ⟧
-  S : ∀ {A B C} → ⟦ A ⊃ B ⊃ C ⟧ty → ⟦ A ⊃ B ⟧ty → ⟦ A ⟧ty → ⟦ C ⟧ty
+  S : ∀ {A B C} → (⟦ A ⟧ty → ⟦ B ⟧ty → ⟦ C ⟧ty) → (⟦ A ⟧ty → ⟦ B ⟧ty) → ⟦ A ⟧ty → ⟦ C ⟧ty
   S = λ f g x → (f x) (g x)
 
 
-module ⟦PL²⟧ where
-  -- ⟦ □ (A ⊃ A) ⟧
-  I : ∀ {A} → ∅ ⊢ A ⊃ A
-  I = ⟦ LAM² V0² ⟧dn unit
+module PLDemo where
+  -- ⟦ A ⟧ty → ⟦ A ⟧ty
+  ⟦I⟧≡AgI : ∀ {A} → ⟦ PL.I {A} ⟧dn unit ≡ AgPL.I
+  ⟦I⟧≡AgI = refl
 
-  -- ⟦ □ (A ⊃ B ⊃ A) ⟧
-  K : ∀ {A B} → ∅ ⊢ A ⊃ B ⊃ A
-  K = ⟦ LAM² LAM² V1² ⟧dn unit
+  -- ⟦ A ⟧ty → ⟦ B ⟧ty → ⟦ A ⟧ty
+  ⟦K⟧≡AgK : ∀ {A B} → ⟦ PL.K {A} {B} ⟧dn unit ≡ AgPL.K
+  ⟦K⟧≡AgK = refl
 
-  -- ⟦ □ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C) ⟧
-  S : ∀ {A B C} → ∅ ⊢ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C
-  S = ⟦ LAM² LAM² LAM² APP² (APP² V2² V0²) (APP² V1² V0²) ⟧dn unit
+  -- (⟦ A ⟧ty → ⟦ B ⟧ty → ⟦ C ⟧ty) → (⟦ A ⟧ty → ⟦ B ⟧ty) → ⟦ A ⟧ty → ⟦ C ⟧ty
+  ⟦S⟧≡AgS : ∀ {A B C} → ⟦ PL.S {A} {B} {C} ⟧dn unit ≡ AgPL.S
+  ⟦S⟧≡AgS = refl
+
+  -- ∅ ⊢ A ⊃ A
+  ⟦I²⟧≡I : ∀ {A} → ⟦ PL².I {A} ⟧dn unit ≡ PL.I
+  ⟦I²⟧≡I = refl
+
+  -- ∅ ⊢ A ⊃ B ⊃ A
+  ⟦K²⟧≡I : ∀ {A B} → ⟦ PL².K {A} {B} ⟧dn unit ≡ PL.K
+  ⟦K²⟧≡I = refl
+
+  -- ∅ ⊢ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C
+  ⟦S²⟧≡I : ∀ {A B C} → ⟦ PL².S {A} {B} {C} ⟧dn unit ≡ PL.S
+  ⟦S²⟧≡I = refl
 
 
 postulate
   wat : ∀ {A} (d : ⟦ A ⟧ty) → ∅ ⊢ A
 
 
-module ⟦S4⟧ where
-  -- ⟦ □ (A ⊃ B) ⊃ □ A ⊃ □ B ⟧
+module AgS4 where
   K : ∀ {A B} → (f : ∅ ⊢ A ⊃ B) → (x : ∅ ⊢ A) → ∅ ⊢ B
   K = λ f x → wat ((⟦ f ⟧dn unit) (⟦ x ⟧dn unit))
 
-  -- ⟦ □ A ⊃ A ⟧
   T : ∀ {A} → (x : ∅ ⊢ A) → ⟦ A ⟧ty
   T = λ x → ⟦ x ⟧dn unit
 
-  -- ⟦ □ A ⊃ □ □ A ⟧
   #4 : ∀ {A} → (x : ∅ ⊢ A) → ∅ ⊢ repr x ∶ A
   #4 = λ x → nec x
 
 
-module ⟦S4²⟧ where
-  -- ⟦ □ (□ (A ⊃ B) ⊃ □ A ⊃ □ B) ⟧
-  K : ∀ {f x A B} → ∅ ⊢ f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B
-  K = ⟦ LAM² LAM² APP³ V1² V0² ⟧dn unit
+module S4Demo where
+  -- ∅ ⊢ A ⊃ B → ∅ ⊢ A → ∅ ⊢ B
+  ⟦K⟧≡AgK : ∀ {f x A B} → ⟦ S4.K {f} {x} {A} {B} ⟧dn unit ≡ AgS4.K
+  ⟦K⟧≡AgK = refl
 
-  -- ⟦ □ (□ A ⊃ A) ⟧
-  T : ∀ {x A} → ∅ ⊢ x ∶ A ⊃ A
-  T = ⟦ LAM² DOWN² V0² ⟧dn unit
+  -- ∅ ⊢ A → ⟦ A ⟧ty
+  ⟦T⟧≡AgT : ∀ {x A} → ⟦ S4.T {x} {A} ⟧dn unit ≡ AgS4.T
+  ⟦T⟧≡AgT = refl
 
-  -- ⟦ □ (□ A ⊃ □ □ A) ⟧
-  #4 : ∀ {x A} → ∅ ⊢ x ∶ A ⊃ quo x ∶ x ∶ A
-  #4 = ⟦ LAM² UP² V0² ⟧dn unit
+  -- ∅ ⊢ A → ∅ ⊢ x ∶ A
+  ⟦#4⟧≡Ag#4 : ∀ {x A} → ⟦ S4.#4 {x} {A} ⟧dn unit ≡ {!AgS4.#4!}
+  ⟦#4⟧≡Ag#4 = refl
+
+  -- ∅ ⊢ f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B
+  ⟦K²⟧≡K : ∀ {f x A B} → ⟦ S4².K {f} {x} {A} {B} ⟧dn unit ≡ S4.K
+  ⟦K²⟧≡K = refl
+
+  -- ∅ ⊢ x ∶ A ⊃ A
+  ⟦T²⟧≡T : ∀ {x A} → ⟦ S4².T {x} {A} ⟧dn unit ≡ S4.T
+  ⟦T²⟧≡T = refl
+
+  -- ∅ ⊢ x ∶ A ⊃ quo x ∶ x ∶ A
+  ⟦#4²⟧≡#4 : ∀ {x A} → ⟦ S4².#4 {x} {A} ⟧dn unit ≡ S4.#4
+  ⟦#4²⟧≡#4 = refl
