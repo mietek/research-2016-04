@@ -9,7 +9,7 @@ open import AltArtemov.Term
 open import AltArtemov.Term.Properties using () renaming (lev to tm-lev)
 open import AltArtemov.TermVector
 open import AltArtemov.Type
-open import AltArtemov.Type.Properties using (lower) renaming (lev to ty-lev)
+open import AltArtemov.Type.Properties using (lower) renaming (lev to ty-lev ; z<′lev-t∶A to z<′ty-lev-t∶A)
 open import Data.Nat.Missing
 
 
@@ -48,7 +48,7 @@ int (APP[ n ] {ts} {ss} d c) = APP[ suc n ] {ts = repr d ∷ ts} {ss = repr c �
 
 -- Necessitation is a special case of internalisation.
 nec : ∀ {A} → (d : ∅ ⊢ A) → ∅ ⊢ repr d ∶ A
-nec d = int d
+nec = int
 
 
 -- Internalising a derivation asserts its type.
@@ -78,3 +78,21 @@ z<′lev-int-d (APP[ n ] d c) rewrite lev-int-d≡suc-lev-d d | lev-int-d≡suc-
 -- The level of the type of an internalised derivation is greater than 0.
 z<′ty-lev-int-d : ∀ {Γ A} → (d : Γ ⊢ A) → zero <′ ty-lev (ty (int d))
 z<′ty-lev-int-d d = z<′sn
+
+
+-- Derivations of level greater than 0, and of type that is of level greater than 0, can be uninternalised.
+unint : ∀ {Γ A} → (d : Γ ⊢ A) → zero <′ lev d → (z<′tl : zero <′ ty-lev A) → Γ ⊢ lower A z<′tl
+unint (VAR[ zero ] i)                              ()   z<′tl
+unint (LAM[ zero ] d)                              ()   z<′tl
+unint (APP[ zero ] d c)                            ()   z<′tl
+unint (VAR[ suc n ] i)                             z<′l z<′tl = VAR[ n ] i
+unint (LAM[ suc n ] {t ∷ ts} {A} {B} d)            z<′l z<′tl =
+    LAM[ n ] {ts} (unint d (z<′sn⊓m⇒z<′m n z<′l) (z<′ty-lev-t∶A t (ts ∶ⁿ B)))
+unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} {A} {B} d c) z<′l z<′tl =
+    APP[ n ] {ts} {ss} (unint d (z<′sn⊓m⊓o⇒z<′m n (lev c) z<′l) (z<′ty-lev-t∶A t (ts ∶ⁿ (A ⊃ B))))
+                       (unint c (z<′sn⊓m⊓o⇒z<′o n (lev d) z<′l) (z<′ty-lev-t∶A s (ss ∶ⁿ A)))
+
+
+-- Unnecessitation is a special case of uninternalisation.
+unnec : ∀ {A} → (d : ∅ ⊢ A) → zero <′ lev d → (z<′tl : zero <′ ty-lev A) → ∅ ⊢ lower A z<′tl
+unnec = unint
