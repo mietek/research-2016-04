@@ -7,30 +7,30 @@ open import AltArtemov.TermVector
 open import AltArtemov.Type
 
 
-VAR_ : ∀ {A Γ}
+VAR : ∀ {A Γ}
     → Γ ∋ A
     → Γ ⊢ A
 VAR i = VAR[ 0 ] i
 
-LAM_ : ∀ {A B Γ}
+LAM : ∀ {A B Γ}
     → Γ , A ⊢ B
     → Γ ⊢ A ⊃ B
-LAM_ = LAM[ 0 ] {ts = []}
+LAM = LAM[ 0 ] {ts = []}
 
 APP : ∀ {A B Γ}
     → Γ ⊢ A ⊃ B    → Γ ⊢ A
     → Γ ⊢ B
 APP = APP[ 0 ] {ts = []} {ss = []}
 
-UP_ : ∀ {u A Γ}
+UP : ∀ {u A Γ}
     → Γ ⊢ u ∶ A
     → Γ ⊢ quo u ∶ u ∶ A
-UP_ = UP[ 0 ] {ts = []}
+UP = UP[ 0 ] {ts = []}
 
-DOWN_ : ∀ {u A Γ}
+DOWN : ∀ {u A Γ}
     → Γ ⊢ u ∶ A
     → Γ ⊢ A
-DOWN_ = DOWN[ 0 ] {ts = []}
+DOWN = DOWN[ 0 ] {ts = []}
 
 
 V0 : ∀ {Γ A} → Γ , A ⊢ A

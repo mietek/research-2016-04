@@ -3,19 +3,19 @@ module AltArtemov.Term.Notation.Level2 where
 open import AltArtemov.Term.Core
 
 
-var²_ : ∀ i → Tm
+var² : ∀ i → Tm
 var² i₂ = var[ 1 ] i₂
 
-lam²_ : ∀ t₂ → Tm
+lam² : ∀ t₂ → Tm
 lam² t₂ = lam[ 1 ] t₂
 
 app² : ∀ t₂ s₂ → Tm
 app² t₂ s₂ = app[ 1 ] t₂ s₂
 
-up²_ : ∀ t₂ → Tm
+up² : ∀ t₂ → Tm
 up² t₂ = up[ 1 ] t₂
 
-down²_ : ∀ t₂ → Tm
+down² : ∀ t₂ → Tm
 down² t₂ = down[ 1 ] t₂
 
 

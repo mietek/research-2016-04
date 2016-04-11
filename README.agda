@@ -12,10 +12,10 @@ module PL where
   I = LAM V0
 
   K : ∀ {A B} → ⊩ A ⊃ B ⊃ A
-  K = LAM LAM V1
+  K = LAM (LAM V1)
 
   S : ∀ {A B C} → ⊩ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C
-  S = LAM LAM LAM APP (APP V2 V0) (APP V1 V0)
+  S = LAM (LAM (LAM (APP (APP V2 V0) (APP V1 V0))))
 
 
 -- Some theorems of the λ-calculus.
@@ -25,12 +25,12 @@ module PL² where
   I = LAM² V0²
 
   -- □ (A ⊃ B ⊃ A)
-  K : ∀ {A B} → ⊩ lam lam v1 ∶ (A ⊃ B ⊃ A)
-  K = LAM² LAM² V1²
+  K : ∀ {A B} → ⊩ lam (lam v1) ∶ (A ⊃ B ⊃ A)
+  K = LAM² (LAM² V1²)
 
   -- □ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
-  S : ∀ {A B C} → ⊩ lam lam lam app (app v2 v0) (app v1 v0) ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
-  S = LAM² LAM² LAM² APP² (APP² V2² V0²) (APP² V1² V0²)
+  S : ∀ {A B C} → ⊩ lam (lam (lam (app (app v2 v0) (app v1 v0)))) ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
+  S = LAM² (LAM² (LAM² (APP² (APP² V2² V0²) (APP² V1² V0²))))
 
 
 -- Demonstration of the isomorphism between propositional logic and the λ-calculus.
@@ -58,30 +58,30 @@ module PLDemo where
 module S4 where
   -- □ (A ⊃ B) ⊃ □ A ⊃ □ B
   K : ∀ {f x A B} → ⊩ f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B
-  K = LAM LAM APP² V1 V0
+  K = LAM (LAM (APP² V1 V0))
 
   -- □ A ⊃ A
   T : ∀ {x A} → ⊩ x ∶ A ⊃ A
-  T = LAM DOWN V0
+  T = LAM (DOWN V0)
 
   -- □ A ⊃ □ □ A
   #4 : ∀ {x A} → ⊩ x ∶ A ⊃ quo x ∶ x ∶ A
-  #4 = LAM UP V0
+  #4 = LAM (UP V0)
 
 
 -- Some second-level realisations of theorems of the modal logic S4.
 module S4² where
   -- □ (□ (A ⊃ B) ⊃ □ A ⊃ □ B)
-  K : ∀ {f x A B} → ⊩ lam lam app² v1 v0 ∶ (f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B)
-  K = LAM² LAM² APP³ V1² V0²
+  K : ∀ {f x A B} → ⊩ lam (lam (app² v1 v0)) ∶ (f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B)
+  K = LAM² (LAM² (APP³ V1² V0²))
 
   -- □ (□ A ⊃ A)
-  T : ∀ {x A} → ⊩ lam down v0 ∶ (x ∶ A ⊃ A)
-  T = LAM² DOWN² V0²
+  T : ∀ {x A} → ⊩ lam (down v0) ∶ (x ∶ A ⊃ A)
+  T = LAM² (DOWN² V0²)
 
   -- □ (□ A ⊃ □ □ A)
-  #4 : ∀ {x A} → ⊩ lam up v0 ∶ (x ∶ A ⊃ quo x ∶ x ∶ A)
-  #4 = LAM² UP² V0²
+  #4 : ∀ {x A} → ⊩ lam (up v0) ∶ (x ∶ A ⊃ quo x ∶ x ∶ A)
+  #4 = LAM² (UP² V0²)
 
 
 -- Demonstration of the isomorphism between realisation levels one and two.
