@@ -100,11 +100,11 @@ unint (APP[ zero ] d c)                    ()   z<′tl
 unint (UP[ zero ] d)                       ()   z<′tl
 unint (DOWN[ zero ] d)                     ()   z<′tl
 unint (VAR[ suc n ] i)                     z<′l z<′tl = VAR[ n ] i
-unint (LAM[ suc n ] {t ∷ ts} d)            z<′l z<′tl = LAM[ n ] (unint d (z<′sn⊓m⇒z<′m n z<′l) z<′sn)
-unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} d c) z<′l z<′tl = APP[ n ] (unint d (z<′sn⊓m⊓o⇒z<′m n (lev c) z<′l) z<′sn)
-                                                                 (unint c (z<′sn⊓m⊓o⇒z<′o n (lev d) z<′l) z<′sn)
-unint (UP[ suc n ] {t ∷ ts} d)             z<′l z<′tl = UP[ n ] (unint d (z<′sn⊓m⇒z<′m n z<′l) z<′sn)
-unint (DOWN[ suc n ] {t ∷ ts} d)           z<′l z<′tl = DOWN[ n ] (unint d (z<′sn⊓m⇒z<′m n z<′l) z<′sn)
+unint (LAM[ suc n ] {t ∷ ts} d)            z<′l z<′tl = LAM[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
+unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} d c) z<′l z<′tl = APP[ n ] (unint d (z<′sm⊓n⊓o⇒z<′n (lev c) z<′l) z<′sn)
+                                                                 (unint c (z<′sm⊓n⊓o⇒z<′o (lev d) z<′l) z<′sn)
+unint (UP[ suc n ] {t ∷ ts} d)             z<′l z<′tl = UP[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
+unint (DOWN[ suc n ] {t ∷ ts} d)           z<′l z<′tl = DOWN[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
 
 
 -- Unnecessitation is a special case of uninternalisation.

@@ -25,7 +25,7 @@ n≤sn {zero}  = z≤n
 n≤sn {suc m} = s≤s n≤sn
 
 sm≤n⇒m≤n : ∀ {m n} → suc m ≤ n → m ≤ n
-sm≤n⇒m≤n sm≤n = ≤-trans n≤sn sm≤n
+sm≤n⇒m≤n = ≤-trans n≤sn
 
 
 _<?_ : Decidable _<_
@@ -97,23 +97,30 @@ m⊓pn⊓po≡p[sm⊓n⊓o] m (suc n) (suc o) = refl
 ≤′-idᴿ-⊓ {suc m} {suc n} sm≤′sn = cong suc (≤′-idᴿ-⊓ (≤′-pred sm≤′sn))
 
 ≰′-idᴸ-⊓ : ∀ {m n} → m ≰′ n → m ⊓ n ≡ n
-≰′-idᴸ-⊓ {m} {n} m≰′n rewrite ⊓-comm m n = ≤′-idᴿ-⊓ (≰′-excl m≰′n)
+≰′-idᴸ-⊓ {m} {n} rewrite ⊓-comm m n = ≤′-idᴿ-⊓ ∘ ≰′-excl
 
 
-k<′m⊓n⇒k<′n : ∀ m {n k} → k <′ m ⊓ n → k <′ n
+k<′m⊓n⇒k<′n : ∀ {k} m {n} → k <′ m ⊓ n → k <′ n
 k<′m⊓n⇒k<′n m {n} k<′m⊓n with m ≤′? n
 ...                     | yes m≤′n rewrite ≤′-idᴿ-⊓ m≤′n = ≤′-trans k<′m⊓n m≤′n
 ...                     | no  m≰′n rewrite ≰′-idᴸ-⊓ m≰′n = k<′m⊓n
 
-k<′m⊓n⇒k<′m : ∀ {m} n {k} → k <′ m ⊓ n → k <′ m
-k<′m⊓n⇒k<′m {m} n k<′m⊓n rewrite ⊓-comm m n = k<′m⊓n⇒k<′n n k<′m⊓n
+k<′m⊓n⇒k<′m : ∀ {k m} n → k <′ m ⊓ n → k <′ m
+k<′m⊓n⇒k<′m {k} {m} n rewrite ⊓-comm m n = k<′m⊓n⇒k<′n n
 
 
-z<′sn⊓m⇒z<′m : ∀ n {m} → zero <′ suc n ⊓ m → zero <′ m
-z<′sn⊓m⇒z<′m n z<′l = k<′m⊓n⇒k<′n (suc n) z<′l
+z<′sm⊓n⇒z<′n : ∀ {m n} → zero <′ suc m ⊓ n → zero <′ n
+z<′sm⊓n⇒z<′n {m} = k<′m⊓n⇒k<′n (suc m)
 
-z<′sn⊓m⊓o⇒z<′m : ∀ n {m} o → zero <′ suc n ⊓ m ⊓ o → zero <′ m
-z<′sn⊓m⊓o⇒z<′m n {m} o z<′l = k<′m⊓n⇒k<′n (suc n) (k<′m⊓n⇒k<′m o z<′l)
+z<′sm⊓n⊓o⇒z<′n : ∀ {m n} o → zero <′ suc m ⊓ n ⊓ o → zero <′ n
+z<′sm⊓n⊓o⇒z<′n {m} {n} o = k<′m⊓n⇒k<′n (suc m) ∘ k<′m⊓n⇒k<′m o
 
-z<′sn⊓m⊓o⇒z<′o : ∀ n m {o} → zero <′ suc n ⊓ m ⊓ o → zero <′ o
-z<′sn⊓m⊓o⇒z<′o n m {o} z<′l = k<′m⊓n⇒k<′n (suc n ⊓ m) z<′l
+z<′sm⊓n⊓o⇒z<′o : ∀ {m} n {o} → zero <′ suc m ⊓ n ⊓ o → zero <′ o
+z<′sm⊓n⊓o⇒z<′o {m} n {o} = k<′m⊓n⇒k<′n (suc m ⊓ n)
+
+m<′n⇒z<′sm⊓n : ∀ {m n} → m <′ n → zero <′ suc m ⊓ n
+m<′n⇒z<′sm⊓n {m} {zero}  ()
+m<′n⇒z<′sm⊓n {m} {suc n} m<′n = z<′sn
+
+n<′m⇒z<′sn⊓m⊓o : ∀ {n} m o → n <′ m ⊓ o → zero <′ suc n ⊓ m ⊓ o
+n<′m⇒z<′sn⊓m⊓o {n} m o rewrite ⊓-assoc (suc n) m o = m<′n⇒z<′sm⊓n

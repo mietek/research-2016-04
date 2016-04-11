@@ -37,8 +37,6 @@ postulate
   lam-lm : ∀ {Γ} n (ts : TmV (suc n)) {A B} (d : Γ , A ⊢ ts ∶ⁿ B) → suc n ≤′ dn-lev d
   app-lm : ∀ {Γ} n (ts ss : TmV (suc n)) {A B} (d : Γ ⊢ ts ∶ⁿ (A ⊃ B)) (c : Γ ⊢ ss ∶ⁿ A) → suc n ≤′ dn-lev d ⊓ dn-lev c
   up-down-lm : ∀ {Γ} n (ts : TmV (suc n)) {u A} (d : Γ ⊢ ts ∶ⁿ u ∶ A) → suc n ≤′ dn-lev d
-  ⊓-lm₁ : ∀ {n} m → suc n ≤′ m → zero <′ suc n ⊓ m
-  ⊓-lm₂ : ∀ {n} m o → suc n ≤′ m ⊓ o → zero <′ suc n ⊓ m ⊓ o
   weak : ∀ {Γ A} {i : Γ ∋ A} → ⟦ A ⟧ty (drop Γ i) → ⟦ A ⟧ty Γ
 
 
@@ -54,19 +52,19 @@ postulate
       z<′sn
 ⟦ LAM[ suc n ] {t ∷ ts} d ⟧dn γ =
     unint (LAM[ suc n ] {t ∷ ts} d)
-      (⊓-lm₁ (dn-lev d) (lam-lm n (t ∷ ts) d))
+      (m<′n⇒z<′sm⊓n (lam-lm n (t ∷ ts) d))
       z<′sn
 ⟦ APP[ suc n ] {t ∷ ts} {s ∷ ss} d c ⟧dn γ =
     unint (APP[ suc n ] {t ∷ ts} {s ∷ ss} d c)
-      (⊓-lm₂ (dn-lev d) (dn-lev c) (app-lm n (t ∷ ts) (s ∷ ss) d c))
+      (n<′m⇒z<′sn⊓m⊓o (dn-lev d) (dn-lev c) (app-lm n (t ∷ ts) (s ∷ ss) d c))
       z<′sn
 ⟦ UP[ suc n ] {t ∷ ts} d ⟧dn γ =
     unint (UP[ suc n ] {t ∷ ts} d)
-      (⊓-lm₁ (dn-lev d) (up-down-lm n (t ∷ ts) d))
+      (m<′n⇒z<′sm⊓n (up-down-lm n (t ∷ ts) d))
       z<′sn
 ⟦ DOWN[ suc n ] {t ∷ ts} d ⟧dn γ =
     unint (DOWN[ suc n ] {t ∷ ts} d)
-      (⊓-lm₁ (dn-lev d) (up-down-lm n (t ∷ ts) d))
+      (m<′n⇒z<′sm⊓n (up-down-lm n (t ∷ ts) d))
       z<′sn
 
 
