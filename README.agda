@@ -21,36 +21,45 @@ module PL where
 -- Some theorems of the λ-calculus.
 module PL² where
   -- □ (A ⊃ A)
-  I : ∀ {A} → ⊩ lam v0 ∶ (A ⊃ A)
-  I = LAM² V0²
+  I² : ∀ {A} → ⊩ lam v0 ∶ (A ⊃ A)
+  I² = LAM² V0²
 
   -- □ (A ⊃ B ⊃ A)
-  K : ∀ {A B} → ⊩ lam (lam v1) ∶ (A ⊃ B ⊃ A)
-  K = LAM² (LAM² V1²)
+  K² : ∀ {A B} → ⊩ lam (lam v1) ∶ (A ⊃ B ⊃ A)
+  K² = LAM² (LAM² V1²)
 
   -- □ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
-  S : ∀ {A B C} → ⊩ lam (lam (lam (app (app v2 v0) (app v1 v0)))) ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
-  S = LAM² (LAM² (LAM² (APP² (APP² V2² V0²) (APP² V1² V0²))))
+  S² : ∀ {A B C} → ⊩ lam (lam (lam (app (app v2 v0) (app v1 v0)))) ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
+  S² = LAM² (LAM² (LAM² (APP² (APP² V2² V0²) (APP² V1² V0²))))
 
 
 -- Demonstration of the isomorphism between propositional logic and the λ-calculus.
 module PLDemo where
-  nec-I≡I² : ∀ {A} → nec (PL.I {A}) ≡ PL².I
+  open PL
+  open PL²
+
+  nec-I≡I² : ∀ {A}
+      → nec (I {A}) ≡ I²
   nec-I≡I² = refl
 
-  nec-K≡K² : ∀ {A B} → nec (PL.K {A} {B}) ≡ PL².K
+  nec-K≡K² : ∀ {A B}
+      → nec (K {A} {B}) ≡ K²
   nec-K≡K² = refl
 
-  nec-S≡S² : ∀ {A B C} → nec (PL.S {A} {B} {C}) ≡ PL².S
+  nec-S≡S² : ∀ {A B C}
+      → nec (S {A} {B} {C}) ≡ S²
   nec-S≡S² = refl
 
-  unnec-I²≡I : ∀ {A} → unnec (PL².I {A}) ≤′-refl ≤′-refl ≡ PL.I
+  unnec-I²≡I : ∀ {A}
+      → unnec (I² {A}) ≤′-refl ≤′-refl ≡ I
   unnec-I²≡I = refl
 
-  unnec-K²≡K : ∀ {A B} → unnec (PL².K {A} {B}) ≤′-refl ≤′-refl ≡ PL.K
+  unnec-K²≡K : ∀ {A B}
+      → unnec (K² {A} {B}) ≤′-refl ≤′-refl ≡ K
   unnec-K²≡K = refl
 
-  unnec-S²≡S : ∀ {A B C} → unnec (PL².S {A} {B} {C}) ≤′-refl ≤′-refl ≡ PL.S
+  unnec-S²≡S : ∀ {A B C}
+      → unnec (S² {A} {B} {C}) ≤′-refl ≤′-refl ≡ S
   unnec-S²≡S = refl
 
 
@@ -72,34 +81,43 @@ module S4 where
 -- Some second-level realisations of theorems of the modal logic S4.
 module S4² where
   -- □ (□ (A ⊃ B) ⊃ □ A ⊃ □ B)
-  K : ∀ {f x A B} → ⊩ lam (lam (app² v1 v0)) ∶ (f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B)
-  K = LAM² (LAM² (APP³ V1² V0²))
+  K² : ∀ {f x A B} → ⊩ lam (lam (app² v1 v0)) ∶ (f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B)
+  K² = LAM² (LAM² (APP³ V1² V0²))
 
   -- □ (□ A ⊃ A)
-  T : ∀ {x A} → ⊩ lam (down v0) ∶ (x ∶ A ⊃ A)
-  T = LAM² (DOWN² V0²)
+  T² : ∀ {x A} → ⊩ lam (down v0) ∶ (x ∶ A ⊃ A)
+  T² = LAM² (DOWN² V0²)
 
   -- □ (□ A ⊃ □ □ A)
-  #4 : ∀ {x A} → ⊩ lam (up v0) ∶ (x ∶ A ⊃ quo x ∶ x ∶ A)
-  #4 = LAM² (UP² V0²)
+  #4² : ∀ {x A} → ⊩ lam (up v0) ∶ (x ∶ A ⊃ quo x ∶ x ∶ A)
+  #4² = LAM² (UP² V0²)
 
 
 -- Demonstration of the isomorphism between realisation levels one and two.
 module S4Demo where
-  nec-K≡K² : ∀ {f x A B} → nec (S4.K {f} {x} {A} {B}) ≡ S4².K
+  open S4
+  open S4²
+
+  nec-K≡K² : ∀ {f x A B}
+      → nec (K {f} {x} {A} {B}) ≡ K²
   nec-K≡K² = refl
 
-  nec-T≡T² : ∀ {x A} → nec (S4.T {x} {A}) ≡ S4².T
+  nec-T≡T² : ∀ {x A}
+      → nec (T {x} {A}) ≡ T²
   nec-T≡T² = refl
 
-  nec-#4≡#4² : ∀ {x A} → nec (S4.#4 {x} {A}) ≡ S4².#4
+  nec-#4≡#4² : ∀ {x A}
+      → nec (#4 {x} {A}) ≡ #4²
   nec-#4≡#4² = refl
 
-  unnec-K²≡K : ∀ {f x A B} → unnec (S4².K {f} {x} {A} {B}) ≤′-refl ≤′-refl ≡ S4.K
+  unnec-K²≡K : ∀ {f x A B}
+      → unnec (K² {f} {x} {A} {B}) ≤′-refl ≤′-refl ≡ K
   unnec-K²≡K = refl
 
-  unnec-T²≡T : ∀ {x A} → unnec (S4².T {x} {A}) ≤′-refl ≤′-refl ≡ S4.T
+  unnec-T²≡T : ∀ {x A}
+      → unnec (T² {x} {A}) ≤′-refl ≤′-refl ≡ T
   unnec-T²≡T = refl
 
-  unnec-#4²≡#4 : ∀ {x A} → unnec (S4².#4 {x} {A}) ≤′-refl ≤′-refl ≡ S4.#4
+  unnec-#4²≡#4 : ∀ {x A}
+      → unnec (#4² {x} {A}) ≤′-refl ≤′-refl ≡ #4
   unnec-#4²≡#4 = refl
