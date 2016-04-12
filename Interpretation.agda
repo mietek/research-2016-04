@@ -2,7 +2,7 @@ module Interpretation where
 
 open import Data.Empty using () renaming (⊥ to Empty ; ⊥-elim to expl)
 open import Data.Nat using (ℕ ; zero ; suc ; _≤′_ ; _<′_ ; _⊓_)
-open import Data.Product using (_,_ ; _×_)
+open import Data.Product using (_×_) renaming (_,_ to ⟨_,_⟩)
 open import Data.Unit using () renaming (⊤ to Unit ; tt to unit)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
@@ -29,8 +29,8 @@ drop (Γ , A) (pop i) = drop Γ i
 
 
 ⟦_⟧ix : ∀ {Γ A} (i : Γ ∋ A) (γ : ⟦ Γ ⟧cx) → ⟦ A ⟧ty (drop Γ i)
-⟦ top ⟧ix   (γ , a) = a
-⟦ pop i ⟧ix (γ , b) = ⟦ i ⟧ix γ
+⟦ top ⟧ix   ⟨ γ , a ⟩ = a
+⟦ pop i ⟧ix ⟨ γ , b ⟩ = ⟦ i ⟧ix γ
 
 
 postulate
@@ -69,39 +69,43 @@ postulate
 
 
 module AgPL where
-  I : ∀ {A} → ⟦ A ⟧ty ∅ → ⟦ A ⟧ty ∅
-  I = λ x → x
+  AgI : ∀ {A} → ⟦ A ⟧ty ∅ → ⟦ A ⟧ty ∅
+  AgI = λ x → x
 
-  K : ∀ {A B} → ⟦ A ⟧ty ∅ → ⟦ B ⟧ty ∅ → ⟦ A ⟧ty ∅
-  K = λ x y → x
+  AgK : ∀ {A B} → ⟦ A ⟧ty ∅ → ⟦ B ⟧ty ∅ → ⟦ A ⟧ty ∅
+  AgK = λ x y → x
 
-  S : ∀ {A B C} → (⟦ A ⟧ty ∅ → ⟦ B ⟧ty ∅ → ⟦ C ⟧ty ∅) → (⟦ A ⟧ty ∅ → ⟦ B ⟧ty ∅) → ⟦ A ⟧ty ∅ → ⟦ C ⟧ty ∅
-  S = λ f g x → (f x) (g x)
+  AgS : ∀ {A B C} → (⟦ A ⟧ty ∅ → ⟦ B ⟧ty ∅ → ⟦ C ⟧ty ∅) → (⟦ A ⟧ty ∅ → ⟦ B ⟧ty ∅) → ⟦ A ⟧ty ∅ → ⟦ C ⟧ty ∅
+  AgS = λ f g x → (f x) (g x)
 
 
 module PLDemo where
+  open AgPL
+  open PL
+  open PL²
+
   -- ⟦ A ⟧ty → ⟦ A ⟧ty
-  ⟦I⟧≡AgI : ∀ {A} → ⟦ PL.I {A} ⟧dn unit ≡ AgPL.I
+  ⟦I⟧≡AgI : ∀ {A} → ⟦ I {A} ⟧dn unit ≡ AgI
   ⟦I⟧≡AgI = refl
 
   -- ⟦ A ⟧ty → ⟦ B ⟧ty → ⟦ A ⟧ty
-  ⟦K⟧≡AgK : ∀ {A B} → ⟦ PL.K {A} {B} ⟧dn unit ≡ AgPL.K
+  ⟦K⟧≡AgK : ∀ {A B} → ⟦ K {A} {B} ⟧dn unit ≡ AgK
   ⟦K⟧≡AgK = refl
 
   -- (⟦ A ⟧ty → ⟦ B ⟧ty → ⟦ C ⟧ty) → (⟦ A ⟧ty → ⟦ B ⟧ty) → ⟦ A ⟧ty → ⟦ C ⟧ty
-  ⟦S⟧≡AgS : ∀ {A B C} → ⟦ PL.S {A} {B} {C} ⟧dn unit ≡ AgPL.S
+  ⟦S⟧≡AgS : ∀ {A B C} → ⟦ S {A} {B} {C} ⟧dn unit ≡ AgS
   ⟦S⟧≡AgS = refl
 
   -- ∅ ⊢ A ⊃ A
-  ⟦I²⟧≡I : ∀ {A} → ⟦ PL².I {A} ⟧dn unit ≡ PL.I
+  ⟦I²⟧≡I : ∀ {A} → ⟦ I² {A} ⟧dn unit ≡ I
   ⟦I²⟧≡I = refl
 
   -- ∅ ⊢ A ⊃ B ⊃ A
-  ⟦K²⟧≡I : ∀ {A B} → ⟦ PL².K {A} {B} ⟧dn unit ≡ PL.K
+  ⟦K²⟧≡I : ∀ {A B} → ⟦ K² {A} {B} ⟧dn unit ≡ K
   ⟦K²⟧≡I = refl
 
   -- ∅ ⊢ (A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C
-  ⟦S²⟧≡I : ∀ {A B C} → ⟦ PL².S {A} {B} {C} ⟧dn unit ≡ PL.S
+  ⟦S²⟧≡I : ∀ {A B C} → ⟦ S² {A} {B} {C} ⟧dn unit ≡ S
   ⟦S²⟧≡I = refl
 
 
@@ -110,37 +114,41 @@ postulate
 
 
 module AgS4 where
-  K : ∀ {A B} → (f : ∅ ⊢ A ⊃ B) → (x : ∅ ⊢ A) → ∅ ⊢ B
-  K = λ f x → wat ((⟦ f ⟧dn unit) (⟦ x ⟧dn unit))
+  AgK : ∀ {A B} → (f : ∅ ⊢ A ⊃ B) → (x : ∅ ⊢ A) → ∅ ⊢ B
+  AgK = λ f x → wat ((⟦ f ⟧dn unit) (⟦ x ⟧dn unit))
 
-  T : ∀ {A} → (x : ∅ ⊢ A) → ⟦ A ⟧ty ∅
-  T = λ x → ⟦ x ⟧dn unit
+  AgT : ∀ {A} → (x : ∅ ⊢ A) → ⟦ A ⟧ty ∅
+  AgT = λ x → ⟦ x ⟧dn unit
 
-  #4 : ∀ {A} → (x : ∅ ⊢ A) → ∅ ⊢ repr x ∶ A
-  #4 = λ x → nec x
+  Ag#4 : ∀ {A} → (x : ∅ ⊢ A) → ∅ ⊢ repr x ∶ A
+  Ag#4 = λ x → nec x
 
 
 module S4Demo where
+  open AgS4
+  open S4
+  open S4²
+
   -- ∅ ⊢ A ⊃ B → ∅ ⊢ A → ∅ ⊢ B
-  ⟦K⟧≡AgK : ∀ {f x A B} → ⟦ S4.K {f} {x} {A} {B} ⟧dn unit ≡ AgS4.K
+  ⟦K⟧≡AgK : ∀ {f x A B} → ⟦ K {f} {x} {A} {B} ⟧dn unit ≡ AgK
   ⟦K⟧≡AgK = refl
 
   -- ∅ ⊢ A → ⟦ A ⟧ty
-  ⟦T⟧≡AgT : ∀ {x A} → ⟦ S4.T {x} {A} ⟧dn unit ≡ AgS4.T
+  ⟦T⟧≡AgT : ∀ {x A} → ⟦ T {x} {A} ⟧dn unit ≡ AgT
   ⟦T⟧≡AgT = refl
 
   -- ∅ ⊢ A → ∅ ⊢ x ∶ A
-  ⟦#4⟧≡Ag#4 : ∀ {x A} → ⟦ S4.#4 {x} {A} ⟧dn unit ≡ {!AgS4.#4!}
+  ⟦#4⟧≡Ag#4 : ∀ {x A} → ⟦ #4 {x} {A} ⟧dn unit ≡ {!Ag#4!}
   ⟦#4⟧≡Ag#4 = refl
 
   -- ∅ ⊢ f ∶ (A ⊃ B) ⊃ x ∶ A ⊃ app f x ∶ B
-  ⟦K²⟧≡K : ∀ {f x A B} → ⟦ S4².K {f} {x} {A} {B} ⟧dn unit ≡ S4.K
+  ⟦K²⟧≡K : ∀ {f x A B} → ⟦ K² {f} {x} {A} {B} ⟧dn unit ≡ K
   ⟦K²⟧≡K = refl
 
   -- ∅ ⊢ x ∶ A ⊃ A
-  ⟦T²⟧≡T : ∀ {x A} → ⟦ S4².T {x} {A} ⟧dn unit ≡ S4.T
+  ⟦T²⟧≡T : ∀ {x A} → ⟦ T² {x} {A} ⟧dn unit ≡ T
   ⟦T²⟧≡T = refl
 
   -- ∅ ⊢ x ∶ A ⊃ quo x ∶ x ∶ A
-  ⟦#4²⟧≡#4 : ∀ {x A} → ⟦ S4².#4 {x} {A} ⟧dn unit ≡ S4.#4
+  ⟦#4²⟧≡#4 : ∀ {x A} → ⟦ #4² {x} {A} ⟧dn unit ≡ #4
   ⟦#4²⟧≡#4 = refl
