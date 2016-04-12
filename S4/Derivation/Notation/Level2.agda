@@ -9,7 +9,7 @@ open import S4.Type
 infixr 0 ⊩_∶_
 
 ⊩_∶_ : ∀ (t : Tm) (A : Ty) → Set
-⊩ t ∶ A = ∀ {Δ Γ} → Δ ∙ Γ ⊢ t ∶ A
+⊩ t ∶ A = ∅ ∙ ∅ ⊢ t ∶ A
 
 
 V0² : ∀ {Δ Γ A} → Δ ∙ Γ , A ⊢ v0 ∶ A

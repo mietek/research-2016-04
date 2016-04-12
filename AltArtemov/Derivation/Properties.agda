@@ -1,7 +1,7 @@
 module AltArtemov.Derivation.Properties where
 
 open import Data.Nat using (ℕ ; zero ; suc ; _<′_ ; _⊓_)
-open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; sym)
 
 open import AltArtemov.Context
 open import AltArtemov.Derivation.Core
@@ -54,9 +54,18 @@ int (UP[ n ] {ts} d)         = UP[ suc n ] {ts = repr d ∷ ts} (int d)
 int (DOWN[ n ] {ts} d)       = DOWN[ suc n ] {ts = repr d ∷ ts} (int d)
 
 
+-- Weakening a context preserves derivations from the context.
+weak-dn : ∀ Γ Δ {A} (d : ∅ ++ Γ ⊢ A) → Δ ++ Γ ⊢ A
+weak-dn Γ Δ (VAR[ n ] i)         rewrite sym (ix-weak-cx≡ix Γ i) = VAR[ n ] (weak-ix Γ Δ i)
+weak-dn Γ Δ (LAM[ n ] {A = A} d) = LAM[ n ] (weak-dn (Γ , A) Δ d)
+weak-dn Γ Δ (APP[ n ] d c)       = APP[ n ] (weak-dn Γ Δ d) (weak-dn Γ Δ c)
+weak-dn Γ Δ (UP[ n ] d)          = UP[ n ] (weak-dn Γ Δ d)
+weak-dn Γ Δ (DOWN[ n ] d)        = DOWN[ n ] (weak-dn Γ Δ d)
+
+
 -- Necessitation is a special case of internalisation.
-nec : ∀ {A} (d : ∅ ⊢ A) → ∅ ⊢ repr d ∶ A
-nec = int
+nec : ∀ {Γ A} (d : ∅ ⊢ A) → Γ ⊢ repr d ∶ A
+nec {Γ} d = weak-dn ∅ Γ (int d)
 
 
 -- Internalising a derivation asserts its type.

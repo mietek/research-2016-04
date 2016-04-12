@@ -9,7 +9,7 @@ open import S4.Type
 infixr 0 ⊩_
 
 ⊩_ : ∀ (A : Ty) → Set
-⊩ A = ∀ {Δ Γ} → Δ ∙ Γ ⊢ A
+⊩ A = ∅ ∙ ∅ ⊢ A
 
 
 V0 : ∀ {Δ Γ A} → Δ ∙ Γ , A ⊢ A

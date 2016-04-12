@@ -11,4 +11,4 @@ open import AltArtemov.Type
 infixr 0 ⊩_
 
 ⊩_ : ∀ (A : Ty) → Set
-⊩ A = ∀ {Γ} → Γ ⊢ A
+⊩ A = ∅ ⊢ A
