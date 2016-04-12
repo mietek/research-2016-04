@@ -1,5 +1,6 @@
 module AltArtemov.Derivation.Notation where
 
+open import AltArtemov.Context
 open import AltArtemov.Derivation.Core
 open import AltArtemov.Derivation.Notation.Level1 public
 open import AltArtemov.Derivation.Notation.Level2 public
