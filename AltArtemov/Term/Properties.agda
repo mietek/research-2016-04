@@ -108,44 +108,44 @@ quo-unquo-t≡t (down[ suc n ] t)  z<′l rewrite quo-unquo-t≡t t (z<′sm⊓n
 
 -- Term equality is decidable.
 _≟_ : Decidable {A = Tm} _≡_
-var[_] n i   ≟ var[_] n′ i′    with n ℕ≟ n′ | i ℕ≟ i′
-var[_] n i   ≟ var[_] .n .i    | yes refl | yes refl = yes refl
-var[_] n i   ≟ var[_] .n i′    | yes refl | no  i≢i′ = no (i≢i′ ∘ var-inv-i)
+var[ n ] i   ≟ var[ n′ ] i′    with n ℕ≟ n′ | i ℕ≟ i′
+var[ n ] i   ≟ var[ .n ] .i    | yes refl | yes refl = yes refl
 ...                            | no  n≢n′ | _        = no (n≢n′ ∘ var-inv-n)
-var[_] n i   ≟ lam[_] n′ t′    = no λ ()
-var[_] n i   ≟ app[_] n′ t′ s′ = no λ ()
-var[_] n i   ≟ up[_] n′ t′     = no λ ()
-var[_] n i   ≟ down[_] n′ t′   = no λ ()
-lam[_] n t   ≟ var[_] n′ i′    = no λ ()
-lam[_] n t   ≟ lam[_] n′ t′    with n ℕ≟ n′ | t ≟ t′
-lam[_] n t   ≟ lam[_] .n .t    | yes refl | yes refl = yes refl
-lam[_] n t   ≟ lam[_] .n t′    | yes refl | no  t≢t′ = no (t≢t′ ∘ lam-inv-t)
+...                            | _        | no  i≢i′ = no (i≢i′ ∘ var-inv-i)
+var[ _ ] i   ≟ lam[ _ ] t′    = no λ ()
+var[ _ ] i   ≟ app[ _ ] t′ s′ = no λ ()
+var[ _ ] i   ≟ up[ _ ] t′     = no λ ()
+var[ _ ] i   ≟ down[ _ ] t′   = no λ ()
+lam[ _ ] t   ≟ var[ _ ] i′    = no λ ()
+lam[ n ] t   ≟ lam[ n′ ] t′    with n ℕ≟ n′ | t ≟ t′
+lam[ n ] t   ≟ lam[ .n ] .t    | yes refl | yes refl = yes refl
 ...                            | no  n≢n′ | _        = no (n≢n′ ∘ lam-inv-n)
-lam[_] n t   ≟ app[_] n′ t′ s′ = no λ ()
-lam[_] n t   ≟ up[_] n′ t′     = no λ ()
-lam[_] n t   ≟ down[_] n′ t′   = no λ ()
-app[_] n t s ≟ var[_] n′ i′    = no λ ()
-app[_] n t s ≟ lam[_] n′ t′    = no λ ()
-app[_] n t s ≟ app[_] n′ t′ s′ with n ℕ≟ n′ | t ≟ t′ | s ≟ s′
-app[_] n t s ≟ app[_] .n .t .s | yes refl | yes refl | yes refl = yes refl
-app[_] n t s ≟ app[_] .n .t s′ | yes refl | yes refl | no  s≢s′ = no (s≢s′ ∘ app-inv-s)
-app[_] n t s ≟ app[_] .n t′ s′ | yes refl | no  t≢t′ | _        = no (t≢t′ ∘ app-inv-t)
+...                            | _        | no  t≢t′ = no (t≢t′ ∘ lam-inv-t)
+lam[ _ ] t   ≟ app[ _ ] t′ s′ = no λ ()
+lam[ _ ] t   ≟ up[ _ ] t′     = no λ ()
+lam[ _ ] t   ≟ down[ _ ] t′   = no λ ()
+app[ _ ] t s ≟ var[ _ ] i′    = no λ ()
+app[ _ ] t s ≟ lam[ _ ] t′    = no λ ()
+app[ n ] t s ≟ app[ n′ ] t′ s′ with n ℕ≟ n′ | t ≟ t′ | s ≟ s′
+app[ n ] t s ≟ app[ .n ] .t .s | yes refl | yes refl | yes refl = yes refl
 ...                            | no  n≢n′ | _        | _        = no (n≢n′ ∘ app-inv-n)
-app[_] n t s ≟ up[_] n′ t′     = no λ ()
-app[_] n t s ≟ down[_] n′ t′   = no λ ()
-up[_] n t    ≟ var[_] n′ i′    = no λ ()
-up[_] n t    ≟ lam[_] n′ t′    = no λ ()
-up[_] n t    ≟ app[_] n′ t′ s′ = no λ ()
-up[_] n t    ≟ up[_] n′ t′     with n ℕ≟ n′ | t ≟ t′
-up[_] n t    ≟ up[_] .n .t     | yes refl | yes refl = yes refl
-up[_] n t    ≟ up[_] .n t′     | yes refl | no  t≢t′ = no (t≢t′ ∘ up-inv-t)
+...                            | _        | no  t≢t′ | _        = no (t≢t′ ∘ app-inv-t)
+...                            | _        | _        | no  s≢s′ = no (s≢s′ ∘ app-inv-s)
+app[ _ ] t s ≟ up[ _ ] t′     = no λ ()
+app[ _ ] t s ≟ down[ _ ] t′   = no λ ()
+up[ _ ] t    ≟ var[ _ ] i′    = no λ ()
+up[ _ ] t    ≟ lam[ _ ] t′    = no λ ()
+up[ _ ] t    ≟ app[ _ ] t′ s′ = no λ ()
+up[ n ] t    ≟ up[ n′ ] t′     with n ℕ≟ n′ | t ≟ t′
+up[ n ] t    ≟ up[ .n ] .t     | yes refl | yes refl = yes refl
 ...                            | no  n≢n′ | _        = no (n≢n′ ∘ up-inv-n)
-up[_] n t    ≟ down[_] n′ t′   = no λ ()
-down[_] n t  ≟ var[_] n′ i′    = no λ ()
-down[_] n t  ≟ lam[_] n′ t′    = no λ ()
-down[_] n t  ≟ app[_] n′ t′ s′ = no λ ()
-down[_] n t  ≟ up[_] n′ t′     = no λ ()
-down[_] n t  ≟ down[_] n′ t′   with n ℕ≟ n′ | t ≟ t′
-down[_] n t  ≟ down[_] .n .t   | yes refl | yes refl = yes refl
-down[_] n t  ≟ down[_] .n t′   | yes refl | no  t≢t′ = no (t≢t′ ∘ down-inv-t)
+...                            | _        | no  t≢t′ = no (t≢t′ ∘ up-inv-t)
+up[ _ ] t    ≟ down[ _ ] t′   = no λ ()
+down[ _ ] t  ≟ var[ _ ] i′    = no λ ()
+down[ _ ] t  ≟ lam[ _ ] t′    = no λ ()
+down[ _ ] t  ≟ app[ _ ] t′ s′ = no λ ()
+down[ _ ] t  ≟ up[ _ ] t′     = no λ ()
+down[ n ] t  ≟ down[ n′ ] t′   with n ℕ≟ n′ | t ≟ t′
+down[ n ] t  ≟ down[ .n ] .t   | yes refl | yes refl = yes refl
 ...                            | no  n≢n′ | _        = no (n≢n′ ∘ down-inv-n)
+...                            | _        | no  t≢t′ = no (t≢t′ ∘ down-inv-t)

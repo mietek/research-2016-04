@@ -44,17 +44,17 @@ lower-t∶A≡A = refl
 -- Type equality is decidable.
 _≟_ : Decidable {A = Ty} _≡_
 ⊥      ≟ ⊥        = yes refl
-⊥      ≟ (A′ ⊃ B′) = no λ ()
-⊥      ≟ (t′ ∶ A′) = no λ ()
-(A ⊃ B) ≟ ⊥        = no λ ()
+⊥      ≟ (_ ⊃ _)   = no λ ()
+⊥      ≟ (_ ∶ _)   = no λ ()
+(_ ⊃ _) ≟ ⊥        = no λ ()
 (A ⊃ B) ≟ (A′ ⊃ B′) with A ≟ A′ | B ≟ B′
 (A ⊃ B) ≟ (.A ⊃ .B) | yes refl | yes refl = yes refl
-(A ⊃ B) ≟ (.A ⊃ B′) | yes refl | no  B≢B′ = no (B≢B′ ∘ ⊃-inv-B)
 ...                 | no  A≢A′ | _        = no (A≢A′ ∘ ⊃-inv-A)
-(A ⊃ B) ≟ (t′ ∶ A′) = no λ ()
-(t ∶ A) ≟ ⊥        = no λ ()
-(t ∶ A) ≟ (A′ ⊃ B′) = no λ ()
+...                 | _        | no  B≢B′ = no (B≢B′ ∘ ⊃-inv-B)
+(_ ⊃ _) ≟ (_ ∶ _)   = no λ ()
+(_ ∶ _) ≟ ⊥        = no λ ()
+(_ ∶ _) ≟ (_ ⊃ _)   = no λ ()
 (t ∶ A) ≟ (t′ ∶ A′) with t Tm≟ t′ | A ≟ A′
 (t ∶ A) ≟ (.t ∶ .A) | yes refl | yes refl = yes refl
-(t ∶ A) ≟ (.t ∶ A′) | yes refl | no  A≢A′ = no (A≢A′ ∘ ∶-inv-A)
 ...                 | no  t≢t′ | _        = no (t≢t′ ∘ ∶-inv-t)
+...                 | _        | no  A≢A′ = no (A≢A′ ∘ ∶-inv-A)
