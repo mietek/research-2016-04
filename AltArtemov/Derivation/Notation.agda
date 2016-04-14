@@ -5,6 +5,7 @@ open import AltArtemov.Derivation.Core
 open import AltArtemov.Derivation.Notation.Level1 public
 open import AltArtemov.Derivation.Notation.Level2 public
 open import AltArtemov.Derivation.Notation.Level3 public
+open import AltArtemov.Derivation.Notation.Level4 public
 open import AltArtemov.Type
 
 
