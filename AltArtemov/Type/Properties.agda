@@ -6,7 +6,7 @@ open import Relation.Binary using (Decidable)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov.Term.Properties using () renaming (_≟_ to _Tm≟_)
+open import AltArtemov.Term
 open import AltArtemov.Type.Core
 open import AltArtemov.Type.Inversions
 open import Data.Nat.Missing
@@ -20,8 +20,8 @@ lev (t ∶ A) = suc (lev A)
 
 
 -- Asserting a type increments its level.
-lev-t∶A≡suc-lev-A : ∀ {t A} → lev (t ∶ A) ≡ suc (lev A)
-lev-t∶A≡suc-lev-A = refl
+lev-t∶A≡suc-lev-A : ∀ t A → lev (t ∶ A) ≡ suc (lev A)
+lev-t∶A≡suc-lev-A t A = refl
 
 
 -- The level of a type assertion is greater than 0.
@@ -30,15 +30,15 @@ z<′lev-t∶A t A = z<′sn
 
 
 -- Types of level greater than 0 can be lowered.
-lower : ∀ A → zero <′ lev A → Ty
+lower : ∀ A (z<′l : zero <′ lev A) → Ty
 lower ⊥      ()
 lower (A ⊃ B) ()
 lower (t ∶ A) z<′l = A
 
 
 -- Lowering a type assertion gives the asserted type.
-lower-t∶A≡A : ∀ {t A} → lower (t ∶ A) (z<′lev-t∶A t A) ≡ A
-lower-t∶A≡A = refl
+lower-t∶A≡A : ∀ t A → lower (t ∶ A) (z<′lev-t∶A t A) ≡ A
+lower-t∶A≡A t A = refl
 
 
 -- Type equality is decidable.

@@ -48,7 +48,7 @@ z<′lev-quo-t (down[ n ] t)  rewrite lev-quo-t≡suc-lev-t t = z<′sn
 
 
 -- Terms of level greater than 0 can be unquoted.
-unquo : ∀ t → zero <′ lev t → Tm
+unquo : ∀ t (z<′l : zero <′ lev t) → Tm
 unquo (var[ zero ] i)    ()
 unquo (lam[ zero ] t)    ()
 unquo (app[ zero ] t s)  ()
@@ -75,7 +75,6 @@ lev-unquo-t≡pred-lev-t (app[ suc n ] t s) z<′l rewrite lev-unquo-t≡pred-le
                                                      | lev-unquo-t≡pred-lev-t s (z<′sm⊓n⊓o⇒z<′o (lev t) z<′l) = m⊓pn⊓po≡p[sm⊓n⊓o] n (lev t) (lev s)
 lev-unquo-t≡pred-lev-t (up[ suc n ] t)    z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⇒z<′n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
 lev-unquo-t≡pred-lev-t (down[ suc n ] t)  z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⇒z<′n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
-
 
 
 -- Unquoting after quoting is identity.

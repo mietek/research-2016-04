@@ -6,10 +6,8 @@ open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; sym)
 open import AltArtemov.Context
 open import AltArtemov.Derivation.Core
 open import AltArtemov.Term
-open import AltArtemov.Term.Properties using () renaming (lev to tm-lev)
 open import AltArtemov.TermVector
 open import AltArtemov.Type
-open import AltArtemov.Type.Properties using (lower) renaming (lev to ty-lev)
 open import Data.Nat.Missing
 
 
@@ -28,30 +26,30 @@ lev (DOWN[ n ] d)   = n ⊓ lev d
 
 
 -- Derivations can be represented as terms.
-repr : ∀ {Γ A} (d : Γ ⊢ A) → Tm
-repr (VAR[ n ] i)   = var[ n ] (ix i)
-repr (LAM[ n ] d)   = lam[ n ] (repr d)
-repr (APP[ n ] d c) = app[ n ] (repr d) (repr c)
-repr (UP[ n ] d)    = up[ n ] (repr d)
-repr (DOWN[ n ] d)  = down[ n ] (repr d)
+rep : ∀ {Γ A} (d : Γ ⊢ A) → Tm
+rep (VAR[ n ] i)   = var[ n ] (ix i)
+rep (LAM[ n ] d)   = lam[ n ] (rep d)
+rep (APP[ n ] d c) = app[ n ] (rep d) (rep c)
+rep (UP[ n ] d)    = up[ n ] (rep d)
+rep (DOWN[ n ] d)  = down[ n ] (rep d)
 
 
 -- Representing a derivation preserves its level.
-tm-lev-repr-d≡lev-d : ∀ {Γ A} (d : Γ ⊢ A) → tm-lev (repr d) ≡ lev d
-tm-lev-repr-d≡lev-d (VAR[ n ] i)   = refl
-tm-lev-repr-d≡lev-d (LAM[ n ] d)   rewrite tm-lev-repr-d≡lev-d d = refl
-tm-lev-repr-d≡lev-d (APP[ n ] d c) rewrite tm-lev-repr-d≡lev-d d | tm-lev-repr-d≡lev-d c = refl
-tm-lev-repr-d≡lev-d (UP[ n ] d)    rewrite tm-lev-repr-d≡lev-d d = refl
-tm-lev-repr-d≡lev-d (DOWN[ n ] d)  rewrite tm-lev-repr-d≡lev-d d = refl
+tm-lev-rep-d≡lev-d : ∀ {Γ A} (d : Γ ⊢ A) → tm-lev (rep d) ≡ lev d
+tm-lev-rep-d≡lev-d (VAR[ n ] i)   = refl
+tm-lev-rep-d≡lev-d (LAM[ n ] d)   rewrite tm-lev-rep-d≡lev-d d = refl
+tm-lev-rep-d≡lev-d (APP[ n ] d c) rewrite tm-lev-rep-d≡lev-d d | tm-lev-rep-d≡lev-d c = refl
+tm-lev-rep-d≡lev-d (UP[ n ] d)    rewrite tm-lev-rep-d≡lev-d d = refl
+tm-lev-rep-d≡lev-d (DOWN[ n ] d)  rewrite tm-lev-rep-d≡lev-d d = refl
 
 
 -- Derivations can be internalised.
-int : ∀ {Γ A} (d : Γ ⊢ A) → Γ ⊢ repr d ∶ A
+int : ∀ {Γ A} (d : Γ ⊢ A) → Γ ⊢ rep d ∶ A
 int (VAR[ n ] i)             = VAR[ suc n ] i
-int (LAM[ n ] {ts} d)        = LAM[ suc n ] {ts = repr d ∷ ts} (int d)
-int (APP[ n ] {ts} {ss} d c) = APP[ suc n ] {ts = repr d ∷ ts} {ss = repr c ∷ ss} (int d) (int c)
-int (UP[ n ] {ts} d)         = UP[ suc n ] {ts = repr d ∷ ts} (int d)
-int (DOWN[ n ] {ts} d)       = DOWN[ suc n ] {ts = repr d ∷ ts} (int d)
+int (LAM[ n ] {ts} d)        = LAM[ suc n ] {ts = rep d ∷ ts} (int d)
+int (APP[ n ] {ts} {ss} d c) = APP[ suc n ] {ts = rep d ∷ ts} {ss = rep c ∷ ss} (int d) (int c)
+int (UP[ n ] {ts} d)         = UP[ suc n ] {ts = rep d ∷ ts} (int d)
+int (DOWN[ n ] {ts} d)       = DOWN[ suc n ] {ts = rep d ∷ ts} (int d)
 
 
 -- Weakening a context preserves derivations from the context.
@@ -64,13 +62,13 @@ weak-dn Γ Δ (DOWN[ n ] d)        = DOWN[ n ] (weak-dn Γ Δ d)
 
 
 -- Necessitation is a special case of internalisation.
-nec : ∀ {Γ A} (d : ∅ ⊢ A) → Γ ⊢ repr d ∶ A
+nec : ∀ {Γ A} (d : ∅ ⊢ A) → Γ ⊢ rep d ∶ A
 nec {Γ} d = weak-dn ∅ Γ (int d)
 
 
 -- Internalising a derivation asserts its type.
-ty-int-d≡repr-d∶ty-d : ∀ {Γ A} (d : Γ ⊢ A) → ty (int d) ≡ repr d ∶ A
-ty-int-d≡repr-d∶ty-d d = refl
+ty-int-d≡rep-d∶ty-d : ∀ {Γ A} (d : Γ ⊢ A) → ty (int d) ≡ rep d ∶ A
+ty-int-d≡rep-d∶ty-d d = refl
 
 
 -- Internalising a derivation increments its level.
@@ -102,7 +100,7 @@ z<′ty-lev-int-d d = z<′sn
 
 
 -- Derivations of level greater than 0, and of type that is of level greater than 0, can be uninternalised.
-unint : ∀ {Γ A} (d : Γ ⊢ A) → zero <′ lev d → (z<′tl : zero <′ ty-lev A) → Γ ⊢ lower A z<′tl
+unint : ∀ {Γ A} (d : Γ ⊢ A) (z<′l : zero <′ lev d) (z<′tl : zero <′ ty-lev A) → Γ ⊢ lower A z<′tl
 unint (VAR[ zero ] i)                      ()   z<′tl
 unint (LAM[ zero ] d)                      ()   z<′tl
 unint (APP[ zero ] d c)                    ()   z<′tl
@@ -117,5 +115,5 @@ unint (DOWN[ suc n ] {t ∷ ts} d)           z<′l z<′tl = DOWN[ n ] (unint d
 
 
 -- Unnecessitation is a special case of uninternalisation.
-unnec : ∀ {A} (d : ∅ ⊢ A) → zero <′ lev d → (z<′tl : zero <′ ty-lev A) → ∅ ⊢ lower A z<′tl
+unnec : ∀ {A} (d : ∅ ⊢ A) (z<′l : zero <′ lev d) (z<′tl : zero <′ ty-lev A) → ∅ ⊢ lower A z<′tl
 unnec = unint
