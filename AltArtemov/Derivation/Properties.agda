@@ -16,6 +16,11 @@ ty : ∀ {Γ A} (d : Γ ⊢ A) → Ty
 ty {A = A} d = A
 
 
+-- Derivations of type that is of level greater than 0 have terms.
+tm : ∀ {Γ A} (d : Γ ⊢ A) (z<′tl : zero <′ ty-lev A) → Tm
+tm d z<′tl = ty-tm (ty d) z<′tl
+
+
 -- Derivations have levels.
 lev : ∀ {Γ A} (d : Γ ⊢ A) → ℕ
 lev (VAR[ n ] i)    = n

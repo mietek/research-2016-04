@@ -41,6 +41,13 @@ lower-t∶A≡A : ∀ t A → lower (t ∶ A) (z<′lev-t∶A t A) ≡ A
 lower-t∶A≡A t A = refl
 
 
+-- Types of level greater than 0 have terms.
+tm : ∀ A (z<′l : zero <′ lev A) → Tm
+tm ⊥      ()
+tm (t ⊃ s) ()
+tm (t ∶ A) z<′l = t
+
+
 -- Type equality is decidable.
 _≟_ : Decidable {A = Ty} _≡_
 ⊥      ≟ ⊥        = yes refl
