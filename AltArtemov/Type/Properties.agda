@@ -1,6 +1,9 @@
 module AltArtemov.Type.Properties where
 
-open import Data.Nat using (ℕ ; zero ; suc ; _<′_)
+open import Data.Empty using () renaming (⊥ to Empty)
+open import Data.Nat using (ℕ ; zero ; suc ; _<′_) renaming (_≟_ to _ℕ≟_)
+open import Data.Maybe using (Maybe ; nothing ; just)
+open import Data.Unit using () renaming (⊤ to Unit)
 open import Function using (_∘_)
 open import Relation.Binary using (Decidable)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
@@ -65,3 +68,21 @@ _≟_ : Decidable {A = Ty} _≡_
 (t ∶ A) ≟ (.t ∶ .A) | yes refl | yes refl = yes refl
 ...                 | no  t≢t′ | _        = no (t≢t′ ∘ ∶-inv-t)
 ...                 | _        | no  A≢A′ = no (A≢A′ ∘ ∶-inv-A)
+
+
+-- TODO
+
+can-lower : ∀ A → Maybe Ty
+can-lower ⊥      = nothing
+can-lower (A ⊃ B) = nothing
+can-lower (t ∶ A) = just A
+
+HighTy : ∀ A → Set
+HighTy A with can-lower A
+...      | just A′ = Unit
+...      | _       = Empty
+
+lower′ : ∀ A {HA : HighTy A} → Ty
+lower′ A {HA} with can-lower A
+lower′ A {HA} | just A′ = A′
+lower′ A {()} | nothing

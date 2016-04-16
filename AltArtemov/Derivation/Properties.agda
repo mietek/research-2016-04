@@ -1,7 +1,11 @@
 module AltArtemov.Derivation.Properties where
 
-open import Data.Nat using (ℕ ; zero ; suc ; _<′_ ; _⊓_)
-open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; sym)
+open import Data.Empty using () renaming (⊥ to Empty)
+open import Data.Nat using (ℕ ; zero ; suc ; _<′_ ; _⊓_) renaming (_≟_ to _ℕ≟_)
+open import Data.Maybe using (Maybe ; nothing ; just)
+open import Data.Unit using () renaming (⊤ to Unit)
+open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; subst ; sym)
+open import Relation.Nullary using (yes ; no)
 
 open import AltArtemov.Context
 open import AltArtemov.Derivation.Core
@@ -122,3 +126,40 @@ unint (DOWN[ suc n ] {t ∷ ts} d)           z<′l z<′tl = DOWN[ n ] (unint d
 -- Unnecessitation is a special case of uninternalisation.
 unnec : ∀ {A} (d : ∅ ⊢ A) (z<′l : zero <′ lev d) (z<′tl : zero <′ ty-lev A) → ∅ ⊢ lower A z<′tl
 unnec = unint
+
+
+-- TODO
+
+unint2 : ∀ {Γ A} (d : Γ ⊢ A) (z<′l : zero <′ lev d) {HA : HighTy A} → Γ ⊢ lower′ A {HA}
+unint2 (VAR[ zero ] i)                      ()
+unint2 (LAM[ zero ] d)                      ()
+unint2 (APP[ zero ] d c)                    ()
+unint2 (UP[ zero ] d)                       ()
+unint2 (DOWN[ zero ] d)                     ()
+unint2 (VAR[ suc n ] i)                     z<′l = VAR[ n ] i
+unint2 (LAM[ suc n ] {t ∷ ts} d)            z<′l = LAM[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
+unint2 (APP[ suc n ] {t ∷ ts} {s ∷ ss} d c) z<′l = APP[ n ] (unint2 d (z<′sm⊓n⊓o⇒z<′n (lev c) z<′l))
+                                                            (unint2 c (z<′sm⊓n⊓o⇒z<′o (lev d) z<′l))
+unint2 (UP[ suc n ] {t ∷ ts} d)             z<′l = UP[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
+unint2 (DOWN[ suc n ] {t ∷ ts} d)           z<′l = DOWN[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
+
+
+can-unint : ∀ {Γ A} (d : Γ ⊢ A) {HA : HighTy A} → Maybe (Γ ⊢ lower′ A {HA})
+can-unint d with lev d
+...           | zero  = nothing
+...           | suc n with suc n ℕ≟ lev d
+...                   | no  sn≢l = nothing
+...                   | yes sn≡l = just (unint2 d (subst (λ n → zero <′ n) sn≡l z<′sn))
+
+HighDn : ∀ {A} (d : ∅ ⊢ A) {HA : HighTy A} → Set
+HighDn d {HA} with can-unint d {HA}
+...         | just d′ = Unit
+...         | _       = Empty
+
+unint′ : ∀ {A} (d : ∅ ⊢ A) {HA : HighTy A} {Hd : HighDn d {HA}} → ∅ ⊢ lower′ A {HA}
+unint′ d {HA} {Hd} with can-unint d {HA}
+unint′ d {HA} {Hd} | just d′ = d′
+unint′ d {HA} {()} | nothing
+
+unnec′ : ∀ {A} (d : ∅ ⊢ A) {HA : HighTy A} {Hd : HighDn d {HA}} → ∅ ⊢ lower′ A {HA}
+unnec′ = unint′

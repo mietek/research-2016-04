@@ -1,9 +1,12 @@
 module AltArtemov.Term.Properties where
 
+open import Data.Empty using () renaming (⊥ to Empty)
 open import Data.Nat using (ℕ ; zero ; suc ; _⊓_ ; _<′_ ; pred) renaming (_≟_ to _ℕ≟_)
+open import Data.Maybe using (Maybe ; nothing ; just)
+open import Data.Unit using () renaming (⊤ to Unit)
 open import Function using (_∘_)
 open import Relation.Binary using (Decidable)
-open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; subst)
 open import Relation.Nullary using (yes ; no)
 
 open import AltArtemov.Term.Core
@@ -148,3 +151,23 @@ down[ n ] t  ≟ down[ n′ ] t′   with n ℕ≟ n′ | t ≟ t′
 down[ n ] t  ≟ down[ .n ] .t   | yes refl | yes refl = yes refl
 ...                            | no  n≢n′ | _        = no (n≢n′ ∘ down-inv-n)
 ...                            | _        | no  t≢t′ = no (t≢t′ ∘ down-inv-t)
+
+
+-- TODO
+
+can-unquo : ∀ t → Maybe Tm
+can-unquo t with lev t
+...           | zero  = nothing
+...           | suc n with suc n ℕ≟ lev t
+...                   | no  sn≢l = nothing
+...                   | yes sn≡l = just (unquo t (subst (λ n → zero <′ n) sn≡l z<′sn))
+
+HighTm : ∀ t → Set
+HighTm t with can-unquo t
+...      | just t′ = Unit
+...      | _       = Empty
+
+unquo′ : ∀ t {Ht : HighTm t} → Tm
+unquo′ t {Ht} with can-unquo t
+unquo′ t {Ht} | just t′ = t′
+unquo′ t {()} | nothing
