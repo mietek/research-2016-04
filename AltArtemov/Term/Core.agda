@@ -16,5 +16,5 @@ data Tm : Set where
   -- Reification.
   up[_] : ∀ (n : ℕ) (t : Tm) → Tm
 
-  -- Reflection
+  -- Reflection.
   down[_] : ∀ (n : ℕ) (t : Tm) → Tm
