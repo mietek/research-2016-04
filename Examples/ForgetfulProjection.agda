@@ -4,7 +4,6 @@ open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
 open import AltArtemov
 open import Examples.AltArtemov
-open import ForgetfulProjection
 import Examples.S4 as S4
 import S4
 
