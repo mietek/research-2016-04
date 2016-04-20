@@ -7,6 +7,6 @@ open import AltArtemov.Term
 
 infixr 5 _∷_
 
-data TmV : ∀ (n : ℕ) → Set where
-  [] : TmV zero
-  _∷_ : ∀ {n} (t : Tm) (ts : TmV n) → TmV (suc n)
+data Tms : ∀ (n : ℕ) → Set where
+  [] : Tms zero
+  _∷_ : ∀ {n} (t : Tm) (ts : Tms n) → Tms (suc n)

@@ -11,63 +11,63 @@ infixr 0 ⊩_
 ⊩ A = ∅ ∙ ∅ ⊢ A
 
 
-V0 : ∀ {Δ Γ A} → Δ ∙ Γ , A ⊢ A
-V0 = VAR IX0
+v0 : ∀ {Δ Γ A} → Δ ∙ Γ , A ⊢ A
+v0 = var ix0
 
-V1 : ∀ {Δ Γ A B} → Δ ∙ Γ , A , B ⊢ A
-V1 = VAR IX1
+v1 : ∀ {Δ Γ A B} → Δ ∙ Γ , A , B ⊢ A
+v1 = var ix1
 
-V2 : ∀ {Δ Γ A B C} → Δ ∙ Γ , A , B , C ⊢ A
-V2 = VAR IX2
+v2 : ∀ {Δ Γ A B C} → Δ ∙ Γ , A , B , C ⊢ A
+v2 = var ix2
 
-V3 : ∀ {Δ Γ A B C D} → Δ ∙ Γ , A , B , C , D ⊢ A
-V3 = VAR IX3
+v3 : ∀ {Δ Γ A B C D} → Δ ∙ Γ , A , B , C , D ⊢ A
+v3 = var ix3
 
-V4 : ∀ {Δ Γ A B C D E} → Δ ∙ Γ , A , B , C , D , E ⊢ A
-V4 = VAR IX4
+v4 : ∀ {Δ Γ A B C D E} → Δ ∙ Γ , A , B , C , D , E ⊢ A
+v4 = var ix4
 
-V5 : ∀ {Δ Γ A B C D E F} → Δ ∙ Γ , A , B , C , D , E , F ⊢ A
-V5 = VAR IX5
+v5 : ∀ {Δ Γ A B C D E F} → Δ ∙ Γ , A , B , C , D , E , F ⊢ A
+v5 = var ix5
 
-V6 : ∀ {Δ Γ A B C D E F G} → Δ ∙ Γ , A , B , C , D , E , F , G ⊢ A
-V6 = VAR IX6
+v6 : ∀ {Δ Γ A B C D E F G} → Δ ∙ Γ , A , B , C , D , E , F , G ⊢ A
+v6 = var ix6
 
-V7 : ∀ {Δ Γ A B C D E F G H} → Δ ∙ Γ , A , B , C , D , E , F , G , H ⊢ A
-V7 = VAR IX7
+v7 : ∀ {Δ Γ A B C D E F G H} → Δ ∙ Γ , A , B , C , D , E , F , G , H ⊢ A
+v7 = var ix7
 
-V8 : ∀ {Δ Γ A B C D E F G H I} → Δ ∙ Γ , A , B , C , D , E , F , G , H , I ⊢ A
-V8 = VAR IX8
+v8 : ∀ {Δ Γ A B C D E F G H I} → Δ ∙ Γ , A , B , C , D , E , F , G , H , I ⊢ A
+v8 = var ix8
 
-V9 : ∀ {Δ Γ A B C D E F G H I J} → Δ ∙ Γ , A , B , C , D , E , F , G , H , I , J ⊢ A
-V9 = VAR IX9
+v9 : ∀ {Δ Γ A B C D E F G H I J} → Δ ∙ Γ , A , B , C , D , E , F , G , H , I , J ⊢ A
+v9 = var ix9
 
 
-V0* : ∀ {Δ Γ A} → Δ , A ∙ Γ ⊢ A
-V0* = VAR* IX0
+v0* : ∀ {Δ Γ A} → Δ , A ∙ Γ ⊢ A
+v0* = var* ix0
 
-V1* : ∀ {Δ Γ A B} → Δ , A , B ∙ Γ ⊢ A
-V1* = VAR* IX1
+v1* : ∀ {Δ Γ A B} → Δ , A , B ∙ Γ ⊢ A
+v1* = var* ix1
 
-V2* : ∀ {Δ Γ A B C} → Δ , A , B , C ∙ Γ ⊢ A
-V2* = VAR* IX2
+v2* : ∀ {Δ Γ A B C} → Δ , A , B , C ∙ Γ ⊢ A
+v2* = var* ix2
 
-V3* : ∀ {Δ Γ A B C D} → Δ , A , B , C , D ∙ Γ ⊢ A
-V3* = VAR* IX3
+v3* : ∀ {Δ Γ A B C D} → Δ , A , B , C , D ∙ Γ ⊢ A
+v3* = var* ix3
 
-V4* : ∀ {Δ Γ A B C D E} → Δ , A , B , C , D , E ∙ Γ ⊢ A
-V4* = VAR* IX4
+v4* : ∀ {Δ Γ A B C D E} → Δ , A , B , C , D , E ∙ Γ ⊢ A
+v4* = var* ix4
 
-V5* : ∀ {Δ Γ A B C D E F} → Δ , A , B , C , D , E , F ∙ Γ ⊢ A
-V5* = VAR* IX5
+v5* : ∀ {Δ Γ A B C D E F} → Δ , A , B , C , D , E , F ∙ Γ ⊢ A
+v5* = var* ix5
 
-V6* : ∀ {Δ Γ A B C D E F G} → Δ , A , B , C , D , E , F , G ∙ Γ ⊢ A
-V6* = VAR* IX6
+v6* : ∀ {Δ Γ A B C D E F G} → Δ , A , B , C , D , E , F , G ∙ Γ ⊢ A
+v6* = var* ix6
 
-V7* : ∀ {Δ Γ A B C D E F G H} → Δ , A , B , C , D , E , F , G , H ∙ Γ ⊢ A
-V7* = VAR* IX7
+v7* : ∀ {Δ Γ A B C D E F G H} → Δ , A , B , C , D , E , F , G , H ∙ Γ ⊢ A
+v7* = var* ix7
 
-V8* : ∀ {Δ Γ A B C D E F G H I} → Δ , A , B , C , D , E , F , G , H , I ∙ Γ ⊢ A
-V8* = VAR* IX8
+v8* : ∀ {Δ Γ A B C D E F G H I} → Δ , A , B , C , D , E , F , G , H , I ∙ Γ ⊢ A
+v8* = var* ix8
 
-V9* : ∀ {Δ Γ A B C D E F G H I J} → Δ , A , B , C , D , E , F , G , H , I , J ∙ Γ ⊢ A
-V9* = VAR* IX9
+v9* : ∀ {Δ Γ A B C D E F G H I J} → Δ , A , B , C , D , E , F , G , H , I , J ∙ Γ ⊢ A
+v9* = var* ix9

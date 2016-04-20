@@ -6,31 +6,31 @@ open import AltArtemov.Term
 open import AltArtemov.TermVector.Core
 
 
--- var x ∶ var x ∶ ⋯ ∶ var x
-varⁿ[_] : ∀ n (i : ℕ) → TmV n
-varⁿ[ zero ]  i = []
-varⁿ[ suc n ] i = var[ n ] i ∷ varⁿ[ n ] i
+-- VAR x ∶ VAR x ∶ ⋯ ∶ VAR x
+VARs[_] : ∀ n (i : ℕ) → Tms n
+VARs[ zero ]  i = []
+VARs[ suc n ] i = VAR[ n ] i ∷ VARs[ n ] i
 
 
--- lamⁿ tₙ ∶ lamⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ lam t
-lamⁿ[_] : ∀ n (ts : TmV n) → TmV n
-lamⁿ[ zero ]  []       = []
-lamⁿ[ suc n ] (t ∷ ts) = lam[ n ] t ∷ lamⁿ[ n ] ts
+-- LAMⁿ tₙ ∶ LAMⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ LAM t
+LAMs[_] : ∀ n (ts : Tms n) → Tms n
+LAMs[ zero ]  []       = []
+LAMs[ suc n ] (t ∷ ts) = LAM[ n ] t ∷ LAMs[ n ] ts
 
 
--- tₙ appⁿ sₙ ∶ tₙ₋₁ appⁿ⁻¹ ∶ sₙ₋₁ ∶ ⋯ ∶ t app s
-appⁿ[_] : ∀ n (ts ss : TmV n) → TmV n
-appⁿ[ zero ]  []       []       = []
-appⁿ[ suc n ] (t ∷ ts) (s ∷ ss) = app[ n ] t s ∷ appⁿ[ n ] ts ss
+-- APPⁿ tₙ sₙ ∶ APPⁿ⁻¹ tₙ₋₁ sₙ₋₁ ∶ ⋯ ∶ APP t s
+APPs[_] : ∀ n (ts ss : Tms n) → Tms n
+APPs[ zero ]  []       []       = []
+APPs[ suc n ] (t ∷ ts) (s ∷ ss) = APP[ n ] t s ∷ APPs[ n ] ts ss
 
 
--- upⁿ tₙ ∶ upⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ up t
-upⁿ[_] : ∀ n (ts : TmV n) → TmV n
-upⁿ[ zero ]  []       = []
-upⁿ[ suc n ] (t ∷ ts) = up[ n ] t ∷ upⁿ[ n ] ts
+-- UPⁿ tₙ ∶ UPⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ UP t
+UPs[_] : ∀ n (ts : Tms n) → Tms n
+UPs[ zero ]  []       = []
+UPs[ suc n ] (t ∷ ts) = UP[ n ] t ∷ UPs[ n ] ts
 
 
--- downⁿ tₙ ∶ downⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ down t
-downⁿ[_] : ∀ n (ts : TmV n) → TmV n
-downⁿ[ zero ]  []       = []
-downⁿ[ suc n ] (t ∷ ts) = down[ n ] t ∷ downⁿ[ n ] ts
+-- DOWNⁿ tₙ ∶ DOWNⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ DOWN t
+DOWNs[_] : ∀ n (ts : Tms n) → Tms n
+DOWNs[ zero ]  []       = []
+DOWNs[ suc n ] (t ∷ ts) = DOWN[ n ] t ∷ DOWNs[ n ] ts

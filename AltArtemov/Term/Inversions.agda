@@ -5,39 +5,39 @@ open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import AltArtemov.Term.Core
 
 
-var-inv-n : ∀ {n i n′ i′} → var[ n ] i ≡ var[ n′ ] i′ → n ≡ n′
-var-inv-n refl = refl
+VAR-inv-n : ∀ {n i n′ i′} → VAR[ n ] i ≡ VAR[ n′ ] i′ → n ≡ n′
+VAR-inv-n refl = refl
 
-var-inv-i : ∀ {n i n′ i′} → var[ n ] i ≡ var[ n′ ] i′ → i ≡ i′
-var-inv-i refl = refl
-
-
-lam-inv-n : ∀ {n t n′ t′} → lam[ n ] t ≡ lam[ n′ ] t′ → n ≡ n′
-lam-inv-n refl = refl
-
-lam-inv-t : ∀ {n t n′ t′} → lam[ n ] t ≡ lam[ n′ ] t′ → t ≡ t′
-lam-inv-t refl = refl
+VAR-inv-i : ∀ {n i n′ i′} → VAR[ n ] i ≡ VAR[ n′ ] i′ → i ≡ i′
+VAR-inv-i refl = refl
 
 
-app-inv-n : ∀ {n t s n′ t′ s′} → app[ n ] t s ≡ app[ n′ ] t′ s′ → n ≡ n′
-app-inv-n refl = refl
+LAM-inv-n : ∀ {n t n′ t′} → LAM[ n ] t ≡ LAM[ n′ ] t′ → n ≡ n′
+LAM-inv-n refl = refl
 
-app-inv-t : ∀ {n t s n′ t′ s′} → app[ n ] t s ≡ app[ n′ ] t′ s′ → t ≡ t′
-app-inv-t refl = refl
-
-app-inv-s : ∀ {n t s n′ t′ s′} → app[ n ] t s ≡ app[ n′ ] t′ s′ → s ≡ s′
-app-inv-s refl = refl
+LAM-inv-t : ∀ {n t n′ t′} → LAM[ n ] t ≡ LAM[ n′ ] t′ → t ≡ t′
+LAM-inv-t refl = refl
 
 
-up-inv-n : ∀ {n t n′ t′} → up[ n ] t ≡ up[ n′ ] t′ → n ≡ n′
-up-inv-n refl = refl
+APP-inv-n : ∀ {n t s n′ t′ s′} → APP[ n ] t s ≡ APP[ n′ ] t′ s′ → n ≡ n′
+APP-inv-n refl = refl
 
-up-inv-t : ∀ {n t n′ t′} → up[ n ] t ≡ up[ n′ ] t′ → t ≡ t′
-up-inv-t refl = refl
+APP-inv-t : ∀ {n t s n′ t′ s′} → APP[ n ] t s ≡ APP[ n′ ] t′ s′ → t ≡ t′
+APP-inv-t refl = refl
+
+APP-inv-s : ∀ {n t s n′ t′ s′} → APP[ n ] t s ≡ APP[ n′ ] t′ s′ → s ≡ s′
+APP-inv-s refl = refl
 
 
-down-inv-n : ∀ {n t n′ t′} → down[ n ] t ≡ down[ n′ ] t′ → n ≡ n′
-down-inv-n refl = refl
+UP-inv-n : ∀ {n t n′ t′} → UP[ n ] t ≡ UP[ n′ ] t′ → n ≡ n′
+UP-inv-n refl = refl
 
-down-inv-t : ∀ {n t n′ t′} → down[ n ] t ≡ down[ n′ ] t′ → t ≡ t′
-down-inv-t refl = refl
+UP-inv-t : ∀ {n t n′ t′} → UP[ n ] t ≡ UP[ n′ ] t′ → t ≡ t′
+UP-inv-t refl = refl
+
+
+DOWN-inv-n : ∀ {n t n′ t′} → DOWN[ n ] t ≡ DOWN[ n′ ] t′ → n ≡ n′
+DOWN-inv-n refl = refl
+
+DOWN-inv-t : ∀ {n t n′ t′} → DOWN[ n ] t ≡ DOWN[ n′ ] t′ → t ≡ t′
+DOWN-inv-t refl = refl

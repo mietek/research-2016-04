@@ -3,48 +3,48 @@ module AltArtemov.Term.Notation.Level1 where
 open import AltArtemov.Term.Core
 
 
-var : ∀ i → Tm
-var i = var[ 0 ] i
+VAR : ∀ i → Tm
+VAR i = VAR[ 0 ] i
 
-lam : ∀ t → Tm
-lam t = lam[ 0 ] t
+LAM : ∀ t → Tm
+LAM t = LAM[ 0 ] t
 
-app : ∀ t s → Tm
-app t s = app[ 0 ] t s
+APP : ∀ t s → Tm
+APP t s = APP[ 0 ] t s
 
-up : ∀ t → Tm
-up t = up[ 0 ] t
+UP : ∀ t → Tm
+UP t = UP[ 0 ] t
 
-down : ∀ t → Tm
-down t = down[ 0 ] t
+DOWN : ∀ t → Tm
+DOWN t = DOWN[ 0 ] t
 
 
-v0 : Tm
-v0 = var 0
+V0 : Tm
+V0 = VAR 0
 
-v1 : Tm
-v1 = var 1
+V1 : Tm
+V1 = VAR 1
 
-v2 : Tm
-v2 = var 2
+V2 : Tm
+V2 = VAR 2
 
-v3 : Tm
-v3 = var 3
+V3 : Tm
+V3 = VAR 3
 
-v4 : Tm
-v4 = var 4
+V4 : Tm
+V4 = VAR 4
 
-v5 : Tm
-v5 = var 5
+V5 : Tm
+V5 = VAR 5
 
-v6 : Tm
-v6 = var 6
+V6 : Tm
+V6 = VAR 6
 
-v7 : Tm
-v7 = var 7
+V7 : Tm
+V7 = VAR 7
 
-v8 : Tm
-v8 = var 8
+V8 : Tm
+V8 = VAR 8
 
-v9 : Tm
-v9 = var 9
+V9 : Tm
+V9 = VAR 9

@@ -7,58 +7,58 @@ open import AltArtemov.TermVector
 open import AltArtemov.Type
 
 
-VAR : ∀ {A Γ}
+var : ∀ {A Γ}
     → Γ ∋ A
     → Γ ⊢ A
-VAR i = VAR[ 0 ] i
+var i = var[ 0 ] i
 
-LAM : ∀ {A B Γ}
+lam : ∀ {A B Γ}
     → Γ , A ⊢ B
     → Γ ⊢ A ⊃ B
-LAM = LAM[ 0 ] {ts = []}
+lam = lam[ 0 ] {ts = []}
 
-APP : ∀ {A B Γ}
+app : ∀ {A B Γ}
     → Γ ⊢ A ⊃ B    → Γ ⊢ A
     → Γ ⊢ B
-APP = APP[ 0 ] {ts = []} {ss = []}
+app = app[ 0 ] {ts = []} {ss = []}
 
-UP : ∀ {u A Γ}
+up : ∀ {u A Γ}
     → Γ ⊢ u ∶ A
     → Γ ⊢ quo u ∶ u ∶ A
-UP = UP[ 0 ] {ts = []}
+up = up[ 0 ] {ts = []}
 
-DOWN : ∀ {u A Γ}
+down : ∀ {u A Γ}
     → Γ ⊢ u ∶ A
     → Γ ⊢ A
-DOWN = DOWN[ 0 ] {ts = []}
+down = down[ 0 ] {ts = []}
 
 
-V0 : ∀ {Γ A} → Γ , A ⊢ A
-V0 = VAR IX0
+v0 : ∀ {Γ A} → Γ , A ⊢ A
+v0 = var ix0
 
-V1 : ∀ {Γ A B} → Γ , A , B ⊢ A
-V1 = VAR IX1
+v1 : ∀ {Γ A B} → Γ , A , B ⊢ A
+v1 = var ix1
 
-V2 : ∀ {Γ A B C} → Γ , A , B , C ⊢ A
-V2 = VAR IX2
+v2 : ∀ {Γ A B C} → Γ , A , B , C ⊢ A
+v2 = var ix2
 
-V3 : ∀ {Γ A B C D} → Γ , A , B , C , D ⊢ A
-V3 = VAR IX3
+v3 : ∀ {Γ A B C D} → Γ , A , B , C , D ⊢ A
+v3 = var ix3
 
-V4 : ∀ {Γ A B C D E} → Γ , A , B , C , D , E ⊢ A
-V4 = VAR IX4
+v4 : ∀ {Γ A B C D E} → Γ , A , B , C , D , E ⊢ A
+v4 = var ix4
 
-V5 : ∀ {Γ A B C D E F} → Γ , A , B , C , D , E , F ⊢ A
-V5 = VAR IX5
+v5 : ∀ {Γ A B C D E F} → Γ , A , B , C , D , E , F ⊢ A
+v5 = var ix5
 
-V6 : ∀ {Γ A B C D E F G} → Γ , A , B , C , D , E , F , G ⊢ A
-V6 = VAR IX6
+v6 : ∀ {Γ A B C D E F G} → Γ , A , B , C , D , E , F , G ⊢ A
+v6 = var ix6
 
-V7 : ∀ {Γ A B C D E F G H} → Γ , A , B , C , D , E , F , G , H ⊢ A
-V7 = VAR IX7
+v7 : ∀ {Γ A B C D E F G H} → Γ , A , B , C , D , E , F , G , H ⊢ A
+v7 = var ix7
 
-V8 : ∀ {Γ A B C D E F G H I} → Γ , A , B , C , D , E , F , G , H , I ⊢ A
-V8 = VAR IX8
+v8 : ∀ {Γ A B C D E F G H I} → Γ , A , B , C , D , E , F , G , H , I ⊢ A
+v8 = var ix8
 
-V9 : ∀ {Γ A B C D E F G H I J} → Γ , A , B , C , D , E , F , G , H , I , J ⊢ A
-V9 = VAR IX9
+v9 : ∀ {Γ A B C D E F G H I J} → Γ , A , B , C , D , E , F , G , H , I , J ⊢ A
+v9 = var ix9

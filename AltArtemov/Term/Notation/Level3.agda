@@ -3,48 +3,48 @@ module AltArtemov.Term.Notation.Level3 where
 open import AltArtemov.Term.Core
 
 
-var³ : ∀ i → Tm
-var³ i₃ = var[ 2 ] i₃
+VAR³ : ∀ i → Tm
+VAR³ i₃ = VAR[ 2 ] i₃
 
-lam³ : ∀ t₃ → Tm
-lam³ t₃ = lam[ 2 ] t₃
+LAM³ : ∀ t₃ → Tm
+LAM³ t₃ = LAM[ 2 ] t₃
 
-app³ : ∀ t₃ s₃ → Tm
-app³ t₃ s₃ = app[ 2 ] t₃ s₃
+APP³ : ∀ t₃ s₃ → Tm
+APP³ t₃ s₃ = APP[ 2 ] t₃ s₃
 
-up³ : ∀ t₃ → Tm
-up³ t₃ = up[ 2 ] t₃
+UP³ : ∀ t₃ → Tm
+UP³ t₃ = UP[ 2 ] t₃
 
-down³ : ∀ t₃ → Tm
-down³ t₃ = down[ 2 ] t₃
+DOWN³ : ∀ t₃ → Tm
+DOWN³ t₃ = DOWN[ 2 ] t₃
 
 
-v0³ : Tm
-v0³ = var³ 0
+V0³ : Tm
+V0³ = VAR³ 0
 
-v1³ : Tm
-v1³ = var³ 1
+V1³ : Tm
+V1³ = VAR³ 1
 
-v2³ : Tm
-v2³ = var³ 2
+V2³ : Tm
+V2³ = VAR³ 2
 
-v3³ : Tm
-v3³ = var³ 3
+V3³ : Tm
+V3³ = VAR³ 3
 
-v4³ : Tm
-v4³ = var³ 4
+V4³ : Tm
+V4³ = VAR³ 4
 
-v5³ : Tm
-v5³ = var³ 5
+V5³ : Tm
+V5³ = VAR³ 5
 
-v6³ : Tm
-v6³ = var³ 6
+V6³ : Tm
+V6³ = VAR³ 6
 
-v7³ : Tm
-v7³ = var³ 7
+V7³ : Tm
+V7³ = VAR³ 7
 
-v8³ : Tm
-v8³ = var³ 8
+V8³ : Tm
+V8³ = VAR³ 8
 
-v9³ : Tm
-v9³ = var³ 9
+V9³ : Tm
+V9³ = VAR³ 9

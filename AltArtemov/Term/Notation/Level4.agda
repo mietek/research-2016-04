@@ -3,48 +3,48 @@ module AltArtemov.Term.Notation.Level4 where
 open import AltArtemov.Term.Core
 
 
-var⁴ : ∀ i → Tm
-var⁴ i₄ = var[ 3 ] i₄
+VAR⁴ : ∀ i → Tm
+VAR⁴ i₄ = VAR[ 3 ] i₄
 
-lam⁴ : ∀ t₄ → Tm
-lam⁴ t₄ = lam[ 3 ] t₄
+LAM⁴ : ∀ t₄ → Tm
+LAM⁴ t₄ = LAM[ 3 ] t₄
 
-app⁴ : ∀ t₄ s₄ → Tm
-app⁴ t₄ s₄ = app[ 3 ] t₄ s₄
+APP⁴ : ∀ t₄ s₄ → Tm
+APP⁴ t₄ s₄ = APP[ 3 ] t₄ s₄
 
-up⁴ : ∀ t₄ → Tm
-up⁴ t₄ = up[ 3 ] t₄
+UP⁴ : ∀ t₄ → Tm
+UP⁴ t₄ = UP[ 3 ] t₄
 
-down⁴ : ∀ t₄ → Tm
-down⁴ t₄ = down[ 3 ] t₄
+DOWN⁴ : ∀ t₄ → Tm
+DOWN⁴ t₄ = DOWN[ 3 ] t₄
 
 
-v0⁴ : Tm
-v0⁴ = var⁴ 0
+V0⁴ : Tm
+V0⁴ = VAR⁴ 0
 
-v1⁴ : Tm
-v1⁴ = var⁴ 1
+V1⁴ : Tm
+V1⁴ = VAR⁴ 1
 
-v2⁴ : Tm
-v2⁴ = var⁴ 2
+V2⁴ : Tm
+V2⁴ = VAR⁴ 2
 
-v3⁴ : Tm
-v3⁴ = var⁴ 3
+V3⁴ : Tm
+V3⁴ = VAR⁴ 3
 
-v4⁴ : Tm
-v4⁴ = var⁴ 4
+V4⁴ : Tm
+V4⁴ = VAR⁴ 4
 
-v5⁴ : Tm
-v5⁴ = var⁴ 5
+V5⁴ : Tm
+V5⁴ = VAR⁴ 5
 
-v6⁴ : Tm
-v6⁴ = var⁴ 6
+V6⁴ : Tm
+V6⁴ = VAR⁴ 6
 
-v7⁴ : Tm
-v7⁴ = var⁴ 7
+V7⁴ : Tm
+V7⁴ = VAR⁴ 7
 
-v8⁴ : Tm
-v8⁴ = var⁴ 8
+V8⁴ : Tm
+V8⁴ = VAR⁴ 8
 
-v9⁴ : Tm
-v9⁴ = var⁴ 9
+V9⁴ : Tm
+V9⁴ = VAR⁴ 9
