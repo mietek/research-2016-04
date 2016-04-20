@@ -1,7 +1,6 @@
 module S4.Derivation.Core where
 
 open import S4.Context
-open import S4.Term
 open import S4.Type
 
 

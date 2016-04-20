@@ -2,7 +2,6 @@ module S4.Derivation.Notation where
 
 open import S4.Derivation.Core
 open import S4.Context
-open import S4.Term
 open import S4.Type
 
 
