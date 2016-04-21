@@ -1,4 +1,4 @@
-module Examples.Shallow where
+module Experiments.Examples.Shallow where
 
 open import Experiments.Shallow
 

@@ -1,4 +1,4 @@
-module Examples.FishAndChips where
+module Experiments.Examples.FishAndChips where
 
 open import Relation.Binary.PropositionalEquality using (refl)
 
