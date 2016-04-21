@@ -38,3 +38,9 @@ data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
   boom[_] : ∀ n {ts : Tms n} {A}
       → (d : Γ ⊢ ts ∶⋯∶ ⊥)
       → Γ ⊢ BOOMs[ n ] ts ∶⋯∶ A
+
+
+infixr 0 ⊩_
+
+⊩_ : ∀ (A : Ty) → Set
+⊩ A = ∅ ⊢ A

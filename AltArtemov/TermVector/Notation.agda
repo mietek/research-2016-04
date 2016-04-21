@@ -4,6 +4,15 @@ open import Data.Nat using (ℕ ; zero ; suc)
 
 open import AltArtemov.Term
 open import AltArtemov.TermVector.Core
+open import AltArtemov.Type
+
+
+infixr 5 _∶⋯∶_
+
+-- tₙ ∶ tₙ₋₁ ∶ ⋯ ∶ t ∶ A
+_∶⋯∶_ : ∀ {n} (ts : Tms n) (A : Ty) → Ty
+[]       ∶⋯∶ A = A
+(t ∷ ts) ∶⋯∶ A = t ∶ ts ∶⋯∶ A
 
 
 -- VAR x ∶ VAR x ∶ ⋯ ∶ VAR x

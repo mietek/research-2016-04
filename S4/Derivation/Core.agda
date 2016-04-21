@@ -36,3 +36,13 @@ data _∙_⊢_ (Δ Γ : Cx) : ∀ (A : Ty) → Set where
   unbox : ∀ {A C}
       → (d : Δ ∙ Γ ⊢ □ A)    → (c : Δ , A ∙ Γ ⊢ C)
       → Δ ∙ Γ ⊢ C
+
+
+infixr 0 ⊩_
+
+⊩_ : ∀ (A : Ty) → Set
+⊩ A = ∅ ∙ ∅ ⊢ A
+
+
+ty : ∀ {Δ Γ A} (d : Δ ∙ Γ ⊢ A) → Ty
+ty {A = A} d = A

@@ -8,6 +8,11 @@ open import S4 using (_∙_⊢_)
 import Examples.S4 as S4
 
 
+°[_] : ∀ A → S4.Ty
+°[ ⊥ ]    = S4.⊥
+°[ A ⊃ B ] = °[ A ] S4.⊃ °[ B ]
+°[ t ∶ A ] = S4.□ °[ A ]
+
 _°≡_ : ∀ {Γ A Δ′ Γ′ A′} (d : Γ ⊢ A) (d′ : Δ′ ∙ Γ′ ⊢ A′) → Set
 d °≡ d′ = °[ ty d ] ≡ S4.ty d′
 

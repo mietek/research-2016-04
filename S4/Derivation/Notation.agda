@@ -2,13 +2,6 @@ module S4.Derivation.Notation where
 
 open import S4.Derivation.Core
 open import S4.Context
-open import S4.Type
-
-
-infixr 0 ⊩_
-
-⊩_ : ∀ (A : Ty) → Set
-⊩ A = ∅ ∙ ∅ ⊢ A
 
 
 v0 : ∀ {Δ Γ A} → Δ ∙ Γ , A ⊢ A

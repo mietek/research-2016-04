@@ -1,7 +1,6 @@
 module AltArtemov.Type.Core where
 
 open import AltArtemov.Term
-import S4
 
 
 infixr 2 _⊃_
@@ -21,9 +20,3 @@ data Ty : Set where
 -- Negation.
 ¬_ : Ty → Ty
 ¬ A = A ⊃ ⊥
-
-
-°[_] : ∀ A → S4.Ty
-°[ ⊥ ]    = S4.⊥
-°[ A ⊃ B ] = °[ A ] S4.⊃ °[ B ]
-°[ t ∶ A ] = S4.□ °[ A ]
