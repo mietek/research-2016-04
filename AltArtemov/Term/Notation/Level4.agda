@@ -18,6 +18,9 @@ UP⁴ t₄ = UP[ 3 ] t₄
 DOWN⁴ : ∀ t₄ → Tm
 DOWN⁴ t₄ = DOWN[ 3 ] t₄
 
+BOOM⁴ : ∀ t₄ → Tm
+BOOM⁴ t₄ = BOOM[ 3 ] t₄
+
 
 V0⁴ : Tm
 V0⁴ = VAR⁴ 0

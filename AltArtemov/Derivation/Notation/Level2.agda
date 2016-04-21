@@ -32,6 +32,11 @@ down² : ∀ {t u A Γ}
     → Γ ⊢ DOWN t ∶ A
 down² {t} = down[ 1 ] {ts = t ∷ []}
 
+boom² : ∀ {t A Γ}
+    → Γ ⊢ t ∶ ⊥
+    → Γ ⊢ BOOM t ∶ A
+boom² {t} = boom[ 1 ] {ts = t ∷ []}
+
 
 v0² : ∀ {Γ A} → Γ , A ⊢ V0 ∶ A
 v0² = var² ix0

@@ -18,6 +18,9 @@ UP³ t₃ = UP[ 2 ] t₃
 DOWN³ : ∀ t₃ → Tm
 DOWN³ t₃ = DOWN[ 2 ] t₃
 
+BOOM³ : ∀ t₃ → Tm
+BOOM³ t₃ = BOOM[ 2 ] t₃
+
 
 V0³ : Tm
 V0³ = VAR³ 0

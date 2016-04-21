@@ -18,6 +18,11 @@ data Ty : Set where
   _∶_ : (t : Tm) → (A : Ty) → Ty
 
 
+-- Negation.
+¬_ : Ty → Ty
+¬ A = A ⊃ ⊥
+
+
 °[_] : ∀ A → S4.Ty
 °[ ⊥ ]    = S4.⊥
 °[ A ⊃ B ] = °[ A ] S4.⊃ °[ B ]

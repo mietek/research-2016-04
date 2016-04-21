@@ -18,6 +18,9 @@ UP t = UP[ 0 ] t
 DOWN : ∀ t → Tm
 DOWN t = DOWN[ 0 ] t
 
+BOOM : ∀ t → Tm
+BOOM t = BOOM[ 0 ] t
+
 
 V0 : Tm
 V0 = VAR 0

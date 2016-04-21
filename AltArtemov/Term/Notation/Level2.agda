@@ -18,6 +18,9 @@ UP² t₂ = UP[ 1 ] t₂
 DOWN² : ∀ t₂ → Tm
 DOWN² t₂ = DOWN[ 1 ] t₂
 
+BOOM² : ∀ t₂ → Tm
+BOOM² t₂ = BOOM[ 1 ] t₂
+
 
 V0² : Tm
 V0² = VAR² 0

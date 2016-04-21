@@ -27,11 +27,12 @@ tm d z<′tl = ty-tm (ty d) z<′tl
 
 -- Derivations have levels.
 lev : ∀ {Γ A} (d : Γ ⊢ A) → ℕ
-lev (var[ n ] i)    = n
-lev (lam[ n ] d)    = n ⊓ lev d
-lev (app[ n ] d c)  = n ⊓ lev d ⊓ lev c
-lev (up[ n ] d)     = n ⊓ lev d
-lev (down[ n ] d)   = n ⊓ lev d
+lev (var[ n ] i)   = n
+lev (lam[ n ] d)   = n ⊓ lev d
+lev (app[ n ] d c) = n ⊓ lev d ⊓ lev c
+lev (up[ n ] d)    = n ⊓ lev d
+lev (down[ n ] d)  = n ⊓ lev d
+lev (boom[ n ] d)  = n ⊓ lev d
 
 
 -- Derivations can be represented as terms.
@@ -41,6 +42,7 @@ rep (lam[ n ] d)   = LAM[ n ] (rep d)
 rep (app[ n ] d c) = APP[ n ] (rep d) (rep c)
 rep (up[ n ] d)    = UP[ n ] (rep d)
 rep (down[ n ] d)  = DOWN[ n ] (rep d)
+rep (boom[ n ] d)  = BOOM[ n ] (rep d)
 
 
 -- Representing a derivation preserves its level.
@@ -50,6 +52,7 @@ tm-lev-rep-d≡lev-d (lam[ n ] d)   rewrite tm-lev-rep-d≡lev-d d = refl
 tm-lev-rep-d≡lev-d (app[ n ] d c) rewrite tm-lev-rep-d≡lev-d d | tm-lev-rep-d≡lev-d c = refl
 tm-lev-rep-d≡lev-d (up[ n ] d)    rewrite tm-lev-rep-d≡lev-d d = refl
 tm-lev-rep-d≡lev-d (down[ n ] d)  rewrite tm-lev-rep-d≡lev-d d = refl
+tm-lev-rep-d≡lev-d (boom[ n ] d)  rewrite tm-lev-rep-d≡lev-d d = refl
 
 
 -- Derivations can be internalised.
@@ -59,6 +62,7 @@ int (lam[ n ] {ts} d)        = lam[ suc n ] {ts = rep d ∷ ts} (int d)
 int (app[ n ] {ts} {ss} d c) = app[ suc n ] {ts = rep d ∷ ts} {ss = rep c ∷ ss} (int d) (int c)
 int (up[ n ] {ts} d)         = up[ suc n ] {ts = rep d ∷ ts} (int d)
 int (down[ n ] {ts} d)       = down[ suc n ] {ts = rep d ∷ ts} (int d)
+int (boom[ n ] {ts} d)       = boom[ suc n ] {ts = rep d ∷ ts} (int d)
 
 
 -- Weakening a context preserves derivations from the context.
@@ -68,6 +72,7 @@ weak-dn Γ Δ (lam[ n ] {A = A} d) = lam[ n ] (weak-dn (Γ , A) Δ d)
 weak-dn Γ Δ (app[ n ] d c)       = app[ n ] (weak-dn Γ Δ d) (weak-dn Γ Δ c)
 weak-dn Γ Δ (up[ n ] d)          = up[ n ] (weak-dn Γ Δ d)
 weak-dn Γ Δ (down[ n ] d)        = down[ n ] (weak-dn Γ Δ d)
+weak-dn Γ Δ (boom[ n ] d)        = boom[ n ] (weak-dn Γ Δ d)
 
 
 -- Necessitation is a special case of internalisation.
@@ -87,6 +92,7 @@ lev-int-d≡suc-lev-d (lam[ n ] d)   rewrite lev-int-d≡suc-lev-d d = refl
 lev-int-d≡suc-lev-d (app[ n ] d c) rewrite lev-int-d≡suc-lev-d d | lev-int-d≡suc-lev-d c = refl
 lev-int-d≡suc-lev-d (up[ n ] d)    rewrite lev-int-d≡suc-lev-d d = refl
 lev-int-d≡suc-lev-d (down[ n ] d)  rewrite lev-int-d≡suc-lev-d d = refl
+lev-int-d≡suc-lev-d (boom[ n ] d)  rewrite lev-int-d≡suc-lev-d d = refl
 
 
 -- Internalising a derivation increments the level of its type.
@@ -101,6 +107,7 @@ z<′lev-int-d (lam[ n ] d)   rewrite lev-int-d≡suc-lev-d d = z<′sn
 z<′lev-int-d (app[ n ] d c) rewrite lev-int-d≡suc-lev-d d | lev-int-d≡suc-lev-d c = z<′sn
 z<′lev-int-d (up[ n ] d)    rewrite lev-int-d≡suc-lev-d d = z<′sn
 z<′lev-int-d (down[ n ] d)  rewrite lev-int-d≡suc-lev-d d = z<′sn
+z<′lev-int-d (boom[ n ] d)  rewrite lev-int-d≡suc-lev-d d = z<′sn
 
 
 -- The level of the type of an internalised derivation is greater than 0.
@@ -115,12 +122,14 @@ unint (lam[ zero ] d)                      ()   z<′tl
 unint (app[ zero ] d c)                    ()   z<′tl
 unint (up[ zero ] d)                       ()   z<′tl
 unint (down[ zero ] d)                     ()   z<′tl
+unint (boom[ zero ] d)                     ()   z<′tl
 unint (var[ suc n ] i)                     z<′l z<′tl = var[ n ] i
 unint (lam[ suc n ] {t ∷ ts} d)            z<′l z<′tl = lam[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
 unint (app[ suc n ] {t ∷ ts} {s ∷ ss} d c) z<′l z<′tl = app[ n ] (unint d (z<′sm⊓n⊓o⇒z<′n (lev c) z<′l) z<′sn)
                                                                  (unint c (z<′sm⊓n⊓o⇒z<′o (lev d) z<′l) z<′sn)
 unint (up[ suc n ] {t ∷ ts} d)             z<′l z<′tl = up[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
 unint (down[ suc n ] {t ∷ ts} d)           z<′l z<′tl = down[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
+unint (boom[ suc n ] {t ∷ ts} d)           z<′l z<′tl = boom[ n ] (unint d (z<′sm⊓n⇒z<′n z<′l) z<′sn)
 
 
 -- Unnecessitation is a special case of uninternalisation.
@@ -136,12 +145,14 @@ unint2 (lam[ zero ] d)                      ()
 unint2 (app[ zero ] d c)                    ()
 unint2 (up[ zero ] d)                       ()
 unint2 (down[ zero ] d)                     ()
+unint2 (boom[ zero ] d)                     ()
 unint2 (var[ suc n ] i)                     z<′l = var[ n ] i
 unint2 (lam[ suc n ] {t ∷ ts} d)            z<′l = lam[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
 unint2 (app[ suc n ] {t ∷ ts} {s ∷ ss} d c) z<′l = app[ n ] (unint2 d (z<′sm⊓n⊓o⇒z<′n (lev c) z<′l))
                                                             (unint2 c (z<′sm⊓n⊓o⇒z<′o (lev d) z<′l))
 unint2 (up[ suc n ] {t ∷ ts} d)             z<′l = up[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
 unint2 (down[ suc n ] {t ∷ ts} d)           z<′l = down[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
+unint2 (boom[ suc n ] {t ∷ ts} d)           z<′l = boom[ n ] (unint2 d (z<′sm⊓n⇒z<′n z<′l))
 
 
 can-unint : ∀ {Γ A} (d : Γ ⊢ A) {HA : HighTy A} → Maybe (Γ ⊢ lower′ A {HA})

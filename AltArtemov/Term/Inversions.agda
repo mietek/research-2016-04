@@ -41,3 +41,10 @@ DOWN-inv-n refl = refl
 
 DOWN-inv-t : ∀ {n t n′ t′} → DOWN[ n ] t ≡ DOWN[ n′ ] t′ → t ≡ t′
 DOWN-inv-t refl = refl
+
+
+BOOM-inv-n : ∀ {n t n′ t′} → BOOM[ n ] t ≡ BOOM[ n′ ] t′ → n ≡ n′
+BOOM-inv-n refl = refl
+
+BOOM-inv-t : ∀ {n t n′ t′} → BOOM[ n ] t ≡ BOOM[ n′ ] t′ → t ≡ t′
+BOOM-inv-t refl = refl

@@ -33,3 +33,8 @@ data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
   down[_] : ∀ n {ts : Tms n} {u A}
       → (d : Γ ⊢ ts ∶⋯∶ u ∶ A)
       → Γ ⊢ DOWNs[ n ] ts ∶⋯∶ A
+
+  -- Explosion. (⊥E)
+  boom[_] : ∀ n {ts : Tms n} {A}
+      → (d : Γ ⊢ ts ∶⋯∶ ⊥)
+      → Γ ⊢ BOOMs[ n ] ts ∶⋯∶ A

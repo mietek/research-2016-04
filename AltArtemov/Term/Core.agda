@@ -18,3 +18,6 @@ data Tm : Set where
 
   -- Reflection.
   DOWN[_] : ∀ (n : ℕ) (t : Tm) → Tm
+
+  -- Explosion. (⊥E)
+  BOOM[_] : ∀ (n : ℕ) (t : Tm) → Tm

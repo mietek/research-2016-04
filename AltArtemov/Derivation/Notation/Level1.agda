@@ -32,6 +32,11 @@ down : ∀ {u A Γ}
     → Γ ⊢ A
 down = down[ 0 ] {ts = []}
 
+boom : ∀ {A Γ}
+    → Γ ⊢ ⊥
+    → Γ ⊢ A
+boom = boom[ 0 ] {ts = []}
+
 
 v0 : ∀ {Γ A} → Γ , A ⊢ A
 v0 = var ix0

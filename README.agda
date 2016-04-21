@@ -15,3 +15,6 @@ import Examples.ForgetfulProjection
 -- λ-calculus, and between first- and second-level realisations of theorems
 -- of the modal logic S4.
 import Examples.Isomorphism
+
+-- Some examples of reasoning with negation and principle of explosion.
+import Examples.Negation

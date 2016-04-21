@@ -34,3 +34,9 @@ UPs[ suc n ] (t ∷ ts) = UP[ n ] t ∷ UPs[ n ] ts
 DOWNs[_] : ∀ n (ts : Tms n) → Tms n
 DOWNs[ zero ]  []       = []
 DOWNs[ suc n ] (t ∷ ts) = DOWN[ n ] t ∷ DOWNs[ n ] ts
+
+
+-- BOOMⁿ tₙ ∶ BOOMⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ BOOM t
+BOOMs[_] : ∀ n (ts : Tms n) → Tms n
+BOOMs[ zero ]  []       = []
+BOOMs[ suc n ] (t ∷ ts) = BOOM[ n ] t ∷ BOOMs[ n ] ts
