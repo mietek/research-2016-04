@@ -1,6 +1,6 @@
-module Examples.Shallow.AltArtemov where
+module Examples.Shallow where
 
-open import Shallow.AltArtemov
+open import Experiments.Shallow
 
 
 -- Some theorems of propositional logic.

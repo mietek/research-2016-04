@@ -1,4 +1,4 @@
-module Shallow.AltArtemov where
+module Experiments.Shallow where
 
 
 -- Truth.
@@ -11,10 +11,10 @@ open import Data.Unit using (⊤) renaming (tt to unit) public
 open import Data.Empty using (⊥) renaming (⊥-elim to void) public
 
 
--- Explicit provability.
+-- TODO: Explicit provability.
 
 infixl 5 _▷_
-data _▷_ (A : Set) : A → Set where
+data _▷_ (A : Set) : A → Set where    -- TODO: This is wrong.
   [_] : ∀ (t : A) → A ▷ t
 
 up : ∀ {A : Set} {t : A} (d : A ▷ t) → A ▷ t ▷ [ t ]
