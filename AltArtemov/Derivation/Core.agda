@@ -43,4 +43,4 @@ data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
 infixr 0 ⊩_
 
 ⊩_ : ∀ (A : Ty) → Set
-⊩ A = ∅ ⊢ A
+⊩ A = ∀ {{Γ : Cx}} → Γ ⊢ A

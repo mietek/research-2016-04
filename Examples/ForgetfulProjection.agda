@@ -13,7 +13,7 @@ import Examples.S4 as S4
 °[ A ⊃ B ] = °[ A ] S4.⊃ °[ B ]
 °[ t ∶ A ] = S4.□ °[ A ]
 
-_°≡_ : ∀ {Γ A Δ′ Γ′ A′} (d : Γ ⊢ A) (d′ : Δ′ ∙ Γ′ ⊢ A′) → Set
+_°≡_ : ∀ {{Γ Δ′ Γ′}} {A A′} (d : Γ ⊢ A) (d′ : Δ′ ∙ Γ′ ⊢ A′) → Set
 d °≡ d′ = °[ ty d ] ≡ S4.ty d′
 
 
