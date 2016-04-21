@@ -88,8 +88,11 @@ _+⊐_ : Cx → List Ty → List Ty
 
 -- TODO
 
+_≡_+_ : Cx → Cx → List Ty → Set
+Δ ≡ Γ + As = Δ +⊐ [] ≡ Γ +⊐ As
+
 _≡_+_∣_ : ∀ Δ Γ (As : List Ty)
-    → Δ +⊐ [] ≡ Γ +⊐ As
+    → Δ ≡ Γ + As
     → Γ ⊂+ As ≡ Δ
 Δ ≡ Γ , A + As         ∣ q    = Δ ≡ Γ + A ∷ As ∣ q
 Δ ≡ ∅     + .(Δ +⊐ []) ∣ refl = aux Δ []
@@ -99,24 +102,20 @@ _≡_+_∣_ : ∀ Δ Γ (As : List Ty)
     aux (Δ , A) As = aux Δ (A ∷ As)
 
 
-_≡_+_ : Cx → Cx → List Ty → Set
-Δ ≡ Γ + As = Δ +⊐ [] ≡ Γ +⊐ As
-
-
 lam*[_] : ∀ n {ts : Tms n} {A B Γ}
-    → ((∀ {Δ} {As} (q : Δ ≡ Γ + (A ∷ As))
+    → ((∀ {Δ} {As} {{q : Δ ≡ Γ + (A ∷ As)}}
             → Δ ⊢ VARs[ n ] (wix As top) ∶⋯∶ A)
         → Γ , A ⊢ ts ∶⋯∶ B)
     → Γ ⊢ LAMs[ n ] ts ∶⋯∶ (A ⊃ B)
 lam*[ n ] {A = A} {Γ = Γ} f =
-    lam[ n ] (f (λ {Δ} {As} q
+    lam[ n ] (f (λ {Δ} {As} {{q}}
         → subst (λ Γ → Γ ⊢ VARs[ n ] (wix As top) ∶⋯∶ A)
                  (Δ ≡ Γ + A ∷ As ∣ q)
                  (var[ n ] (weak As top))))
 
 
 lam* : ∀ {A B Γ}
-    → ((∀ {Δ} {As} (q : Δ ≡ Γ + (A ∷ As))
+    → ((∀ {Δ} {As} {{q : Δ ≡ Γ + (A ∷ As)}}
             → Δ ⊢ A)
         → Γ , A ⊢ B)
     → Γ ⊢ A ⊃ B
@@ -126,7 +125,7 @@ syntax lam* (λ x → y) = fun x ⇒ y
 
 
 lam*² : ∀ {t A B Γ}
-    → ((∀ {Δ} {As} (q : Δ ≡ Γ + (A ∷ As))
+    → ((∀ {Δ} {As} {{q : Δ ≡ Γ + (A ∷ As)}}
             → Δ ⊢ VAR (wix As top) ∶ A)
         → Γ , A ⊢ t ∶ B)
     → Γ ⊢ LAM t ∶ (A ⊃ B)
@@ -136,7 +135,7 @@ syntax lam*² (λ x → y) = fun² x ⇒ y
 
 
 lam*³ : ∀ {t₂ t A B Γ}
-    → ((∀ {Δ} {As} (q : Δ ≡ Γ + (A ∷ As))
+    → ((∀ {Δ} {As} {{q : Δ ≡ Γ + (A ∷ As)}}
             → Δ ⊢ VAR² (wix As top) ∶ VAR (wix As top) ∶ A)
         → Γ , A ⊢ t₂ ∶ t ∶ B)
     → Γ ⊢ LAM² t₂ ∶ LAM t ∶ (A ⊃ B)
@@ -146,7 +145,7 @@ syntax lam*³ (λ x → y) = fun³ x ⇒ y
 
 
 lam*⁴ : ∀ {t₃ t₂ t A B Γ}
-    → ((∀ {Δ} {As} (q : Δ ≡ Γ + (A ∷ As))
+    → ((∀ {Δ} {As} {{q : Δ ≡ Γ + (A ∷ As)}}
             → Δ ⊢ VAR³ (wix As top) ∶ VAR² (wix As top) ∶ VAR (wix As top) ∶ A)
         → Γ , A ⊢ t₃ ∶ t₂ ∶ t ∶ B)
     → Γ ⊢ LAM³ t₃ ∶ LAM² t₂ ∶ LAM t ∶ (A ⊃ B)
