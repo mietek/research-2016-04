@@ -14,12 +14,12 @@ data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
       → (i : Γ ∋ A)
       → Γ ⊢ VARs[ n ] (ix i) ∶⋯∶ A
 
-  -- Lambda abstraction.
+  -- Lambda abstraction. (⊃I)
   lam[_] : ∀ n {ts : Tms n} {A B}
       → (d : Γ , A ⊢ ts ∶⋯∶ B)
       → Γ ⊢ LAMs[ n ] ts ∶⋯∶ (A ⊃ B)
 
-  -- Function application.
+  -- Function application. (⊃E)
   app[_] : ∀ n {ts ss : Tms n} {A B}
       → (d : Γ ⊢ ts ∶⋯∶ (A ⊃ B))    → (c : Γ ⊢ ss ∶⋯∶ A)
       → Γ ⊢ APPs[ n ] ts ss ∶⋯∶ B

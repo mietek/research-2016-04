@@ -7,10 +7,10 @@ data Tm : Set where
   -- Variable reference.
   VAR[_] : ∀ (n i : ℕ) → Tm
 
-  -- Lambda abstraction.
+  -- Lambda abstraction. (⊃I)
   LAM[_] : ∀ (n : ℕ) (t : Tm) → Tm
 
-  -- Function application.
+  -- Function application. (⊃E)
   APP[_] : ∀ (n : ℕ) (t s : Tm) → Tm
 
   -- Reification.

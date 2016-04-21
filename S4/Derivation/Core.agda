@@ -12,12 +12,12 @@ data _∙_⊢_ (Δ Γ : Cx) : ∀ (A : Ty) → Set where
       → (i : Γ ∋ A)
       → Δ ∙ Γ ⊢ A
 
-  -- Lambda abstraction.
+  -- Lambda abstraction. (⊃I)
   lam : ∀ {A B}
       → (d : Δ ∙ Γ , A ⊢ B)
       → Δ ∙ Γ ⊢ A ⊃ B
 
-  -- Function application.
+  -- Function application. (⊃E)
   app : ∀ {A B}
       → (d : Δ ∙ Γ ⊢ A ⊃ B)    → (c : Δ ∙ Γ ⊢ A)
       → Δ ∙ Γ ⊢ B
@@ -27,12 +27,12 @@ data _∙_⊢_ (Δ Γ : Cx) : ∀ (A : Ty) → Set where
       → (i : Δ ∋ A)
       → Δ ∙ Γ ⊢ A
 
-  -- Modality introduction.
+  -- Modality introduction. (□I)
   box : ∀ {A}
       → (d : Δ ∙ ∅ ⊢ A)
       → Δ ∙ Γ ⊢ □ A
 
-  -- Modality elimination.
+  -- Modality elimination. (□E)
   unbox : ∀ {A C}
       → (d : Δ ∙ Γ ⊢ □ A)    → (c : Δ , A ∙ Γ ⊢ C)
       → Δ ∙ Γ ⊢ C
