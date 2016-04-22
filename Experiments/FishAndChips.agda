@@ -87,10 +87,10 @@ _+⊐_ : Cx → List Ty → List Ty
 
 -- TODO
 
-This_Is_Plus : Cx → Cx → List Ty → Set
-This_Is_Plus Δ Γ As = Δ +⊐ [] ≡ Γ +⊐ As
+THIS_IS_PLUS : Cx → Cx → List Ty → Set
+THIS_IS_PLUS Δ Γ As = Δ +⊐ [] ≡ Γ +⊐ As
 
-this_is_plus : ∀ Δ Γ (As : List Ty) {{q : This Δ Is Γ Plus As}} → Γ ⊂+ As ≡ Δ
+this_is_plus : ∀ Δ Γ (As : List Ty) {{q : THIS Δ IS Γ PLUS As}} → Γ ⊂+ As ≡ Δ
 this_is_plus Δ (Γ , A) As         {{q}}    = this Δ is Γ plus (A ∷ As) {{q}}
 this_is_plus Δ ∅       .(Δ +⊐ []) {{refl}} = aux Δ []
   where
@@ -100,7 +100,7 @@ this_is_plus Δ ∅       .(Δ +⊐ []) {{refl}} = aux Δ []
 
 
 lam*[_] : ∀ n {ts : Tms n} {A B Γ}
-    → ((∀ {Δ} {As} {{q : This Δ Is Γ Plus (A ∷ As)}}
+    → ((∀ {Δ} {As} {{q : THIS Δ IS Γ PLUS (A ∷ As)}}
             → Δ ⊢ VARs[ n ] (wix As top) ∶⋯∶ A)
         → Γ , A ⊢ ts ∶⋯∶ B)
     → Γ ⊢ LAMs[ n ] ts ∶⋯∶ (A ⊃ B)
@@ -112,7 +112,7 @@ lam*[ n ] {A = A} {Γ = Γ} f =
 
 
 lam* : ∀ {A B Γ}
-    → ((∀ {Δ} {As} {{q : This Δ Is Γ Plus (A ∷ As)}} → Δ ⊢ A) → Γ , A ⊢ B)
+    → ((∀ {Δ} {As} {{q : THIS Δ IS Γ PLUS (A ∷ As)}} → Δ ⊢ A) → Γ , A ⊢ B)
     → Γ ⊢ A ⊃ B
 lam* = lam*[ 0 ] {[]}
 
@@ -120,7 +120,7 @@ syntax lam* (λ x → y) = fun x ⇒ y
 
 
 lam*² : ∀ {t A B Γ}
-    → ((∀ {Δ} {As} {{q : This Δ Is Γ Plus (A ∷ As)}}
+    → ((∀ {Δ} {As} {{q : THIS Δ IS Γ PLUS (A ∷ As)}}
             → Δ ⊢ VAR (wix As top) ∶ A)
         → Γ , A ⊢ t ∶ B)
     → Γ ⊢ LAM t ∶ (A ⊃ B)
@@ -130,7 +130,7 @@ syntax lam*² (λ x → y) = fun² x ⇒ y
 
 
 lam*³ : ∀ {t₂ t A B Γ}
-    → ((∀ {Δ} {As} {{q : This Δ Is Γ Plus (A ∷ As)}}
+    → ((∀ {Δ} {As} {{q : THIS Δ IS Γ PLUS (A ∷ As)}}
             → Δ ⊢ VAR² (wix As top) ∶ VAR (wix As top) ∶ A)
         → Γ , A ⊢ t₂ ∶ t ∶ B)
     → Γ ⊢ LAM² t₂ ∶ LAM t ∶ (A ⊃ B)
@@ -140,7 +140,7 @@ syntax lam*³ (λ x → y) = fun³ x ⇒ y
 
 
 lam*⁴ : ∀ {t₃ t₂ t A B Γ}
-    → ((∀ {Δ} {As} {{q : This Δ Is Γ Plus (A ∷ As)}}
+    → ((∀ {Δ} {As} {{q : THIS Δ IS Γ PLUS (A ∷ As)}}
             → Δ ⊢ VAR³ (wix As top) ∶ VAR² (wix As top) ∶ VAR (wix As top) ∶ A)
         → Γ , A ⊢ t₃ ∶ t₂ ∶ t ∶ B)
     → Γ ⊢ LAM³ t₃ ∶ LAM² t₂ ∶ LAM t ∶ (A ⊃ B)
