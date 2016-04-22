@@ -8,9 +8,9 @@ open import AltArtemov
 S. Artemov (2006) “On two models of provability”, pp. 36-38
 
 
-3.8. Applications
+3.8.  Applications
 
-4. Reflection in typed combinatory logic and λ-calculus
+4.  Reflection in typed combinatory logic and λ-calculus
 
 Typed λ-calculi and Combinatory Logic are mathematical prototypes of
 functional programming languages with types (cf., for example,
@@ -29,13 +29,13 @@ combinators  d,  o,  and  c.   The principles of RCL are:
 -}
 
 
--- A1. t ∶ A → A
+-- A1.  t ∶ A → A
 
 A1 : ∀ {t A} → ⊩ t ∶ A ⊃ A
 A1 = lam (down v0)
 
 
--- A2. k ∶ (A → (B → A))
+-- A2.  k ∶ (A → (B → A))
 
 k : Tm
 k = LAM (LAM V1)
@@ -44,7 +44,7 @@ A2 : ∀ {A B} → ⊩ k ∶ (A ⊃ B ⊃ A)
 A2 = lam² (lam² v1²)
 
 
--- A3. s ∶ ((A → (B → C)) → ((A → B) → (A → C)))
+-- A3.  s ∶ ((A → (B → C)) → ((A → B) → (A → C)))
 
 s : Tm
 s = LAM (LAM (LAM (APP (APP V2 V0) (APP V1 V0))))
@@ -53,7 +53,7 @@ A3 : ∀ {A B C} → ⊩ s ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
 A3 = lam² (lam² (lam² (app² (app² v2² v0²) (app² v1² v0²))))
 
 
--- A4. d ∶ (t ∶ A → A)
+-- A4.  d ∶ (t ∶ A → A)
 
 d : Tm
 d = LAM (DOWN V0)
@@ -62,7 +62,7 @@ A4 : ∀ {t A} → ⊩ d ∶ (t ∶ A ⊃ A)
 A4 = lam² (down² v0²)
 
 
--- A5. o ∶ (u ∶ (A → B) → (v ∶ A → (u ∙ v) ∶ B))
+-- A5.  o ∶ (u ∶ (A → B) → (v ∶ A → (u ∙ v) ∶ B))
 
 o : Tm
 o = LAM (LAM (APP² V1 V0))
@@ -71,7 +71,7 @@ A5 : ∀ {u v A B} → ⊩ o ∶ (u ∶ (A ⊃ B) ⊃ v ∶ A ⊃ (APP u v) ∶ 
 A5 = lam² (lam² (app³ v1² v0²))
 
 
--- A6. c ∶ (t ∶ A → ! t ∶ (t ∶ A))
+-- A6.  c ∶ (t ∶ A → ! t ∶ (t ∶ A))
 
 c : Tm
 c = LAM (UP V0)
@@ -80,12 +80,10 @@ A6 : ∀ {t A} → ⊩ c ∶ (t ∶ A ⊃ quo t ∶ t ∶ A)
 A6 = lam² (up² v0²)
 
 
-{-
-Rule modus ponens,
-                        A → B    A
-                        -----------.
-                             B
--}
+-- Rule modus ponens,
+--                         A → B    A
+--                         -----------.
+--                              B
 
 MP : ∀ {A B} → ⊩ A ⊃ B → ⊩ A → ⊩ B
 MP f x = app f x

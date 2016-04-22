@@ -8,7 +8,7 @@ open import AltArtemov
 S. Artemov (2006) “On two models of provability”, pp. 33-34
 
 
-3.7. The logic of single conclusion proofs
+3.7.  The logic of single conclusion proofs
 
 By definition, each single conclusion proof, also known as _functional
 proofs_, proves a unique formula.  In the functional logic of proofs,
@@ -51,28 +51,28 @@ such that  A = B (mod Sc).
 -}
 
 
--- A0. Axioms and rules of classical propositional logic
+-- A0.  Axioms and rules of classical propositional logic
 
 
--- A1. t ∶ (F → G) → (s ∶ F → (t ∙ s) ∶ G)
+-- A1.  t ∶ (F → G) → (s ∶ F → (t ∙ s) ∶ G)
 
 A1 : ∀ {t s F G} → ⊩ t ∶ (F ⊃ G) ⊃ s ∶ F ⊃ (APP t s) ∶ G
 A1 = lam (lam (app² v1 v0))
 
 
--- A2. t ∶ F → F
+-- A2.  t ∶ F → F
 
 A2 : ∀ {t F} → ⊩ t ∶ F ⊃ F
 A2 = lam (down v0)
 
 
--- A3. t ∶ F → ! t ∶ (t ∶ F)
+-- A3.  t ∶ F → ! t ∶ (t ∶ F)
 
 A3 : ∀ {t F} → ⊩ t ∶ F ⊃ quo t ∶ t ∶ F
 A3 = lam (up v0)
 
 
--- A4. Unification axiom
+-- A4.  Unification axiom
 
 -- TODO
 

@@ -13,7 +13,7 @@ intuitionistic logic: current developments”, pp. 221-224
 
 Systems of combinatory logic are usually more compact than their
 corresponding λ-calculi.  Reflexive λ-calculus is no exception.
-    Below a reflexive combinatory logic RCL→ with rigit typing based
+    Below a reflexive combinatory logic RCL→ with rigid typing based
 on the Hilbert-style calculus for the implicative intuitionistic logic
 is formulated.  Terms in RCL→ are built from rigidly typed variables
 and constants.
@@ -107,7 +107,7 @@ rule,
 
 The notation  Γ ⊢ F  means that there exists a derivation from the
 hypotheses  Γ  containing  F.
-    RCL→  has a natural semantics inherited from LP, namely the
+    RCL→ has a natural semantics inherited from LP, namely the
 provability semantics.  Combinatory terms stand for proofs in, say, PA
 or in intuitionistic arithmetic HA.  The formulae  t ∶ F  are
 interpreted as arithmetical statements about provability,
