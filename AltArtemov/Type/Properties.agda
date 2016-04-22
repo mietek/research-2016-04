@@ -47,7 +47,7 @@ lower-t∶A≡A t A = refl
 -- Types of level greater than 0 have terms.
 tm : ∀ A (z<′l : zero <′ lev A) → Tm
 tm ⊥      ()
-tm (t ⊃ s) ()
+tm (A ⊃ B) ()
 tm (t ∶ A) z<′l = t
 
 

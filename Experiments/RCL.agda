@@ -145,7 +145,7 @@ has an unrestricted internalization property.
 
   [1]  J. Alt, S. Artemov (2001) “Reflective λ-calculus”
  [17]  S. Artemov (2004) “Kolmogorov and Gödel’s approach to
-       intu itionistic logic: current developments”
+       intuitionistic logic: current developments”
  [62]  R. Constable (1998) “Types in logic, mathematics and
        programming”
 [109]  N. Krupski (2006) “Some algorithmic questions in formal
