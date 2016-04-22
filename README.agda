@@ -1,5 +1,6 @@
 module README where
 
+
 -- Some theorems of propositional logic and the λ-calculus, and some first-
 -- and second-level realisations of theorems of the modal logic S4.
 import Examples.AltArtemov
@@ -18,3 +19,13 @@ import Examples.Isomorphism
 
 -- Some examples of reasoning with negation and principle of explosion.
 import Examples.Negation
+
+
+-- Descriptions of the reflective λ-calculus (λ∞) and reflective combinatory
+-- logic (RCL).
+import Notes.Artemov2004.AA
+import Notes.Artemov2004.RCL
+
+-- Descriptions of the logic of functional proofs (FLP) and RCL.
+import Notes.Artemov2006.FLP
+import Notes.Artemov2006.RCL
