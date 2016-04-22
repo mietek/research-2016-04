@@ -111,7 +111,7 @@ hypotheses  Γ  containing  F.
 provability semantics.  Combinatory terms stand for proofs in, say, PA
 or in intuitionistic arithmetic HA.  The formulae  t ∶ F  are
 interpreted as arithmetical statements about provability,
-Proof(t, F),  and the combinators  k, s, d, o, c  denote terms
+Proof(t, F),  and the combinators  k,  s,  d,  o,  c  denote terms
 corresponding to proofs of arithmetical translations of axioms in
 A2-A6.
     Terminology of formulae in RCL→ can be translated into the usual
@@ -198,7 +198,7 @@ that is, a type is a set and the implication type  U → V  is a set of
 functions from  U  to  V.  Some elements of a given type may be
 constructive objects which have _names_, that is, computational
 programs.  Terms of RCL→ are names of constructive objects, which are
-either specific (for example, combinators  k, s, d, o,  or  c)  or
+either specific (for example, combinators  k,  s,  d,  o,  or  c)  or
 variable.  The type  t ∶ F  is interpreted as a set consisting of the
 object corresponding to the term  t.  Basic combinators of RCL→ are
 understood as follows:

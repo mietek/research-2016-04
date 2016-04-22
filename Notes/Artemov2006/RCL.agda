@@ -91,8 +91,8 @@ MP f x = app f x
 
 {-
 
-RCL has a natural provability semantics inherited from LP.  Combi-
-natory terms stand for proofs in PA or in intuitionistic arithmetic
+RCL has a natural provability semantics inherited from LP.
+Combinatory terms stand for proofs in PA or in intuitionistic arithmetic
 HA.  Formulas  t ∶ F  are interpreted as arithmetical statements about
 provability,  Proof(t , F),  combinators  k,  s,  d,  o,  and  c
 denote terms corresponding to proofs of arithmetical translations of
