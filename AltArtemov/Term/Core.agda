@@ -30,3 +30,6 @@ data Tm : Set where
 
   -- Explosion. (⊥E)
   BOOM[_] : ∀ (n : ℕ) (t : Tm) → Tm
+
+  -- Type equality. (≑I)
+  EQ[_] : ∀ (n : ℕ) (t s : Tm) → Tm

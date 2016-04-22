@@ -74,7 +74,18 @@ A3 = lam (up v0)
 
 -- A4.  Unification axiom
 
--- TODO
+A4 : ∀ {t F G} → ⊩ t ∶ F ⊃ t ∶ G ⊃ F ≑ G
+A4 = lam (lam (eq v1 v0))
+
+
+id² : ∀ {A} → ⊩ LAM V0 ∶ (A ⊃ A)
+id² = lam² v0²
+
+test : ∀ {A B} → ⊩ (A ≠ (B ⊃ B)) ⊃ (LAM V0 ∶ A) ⊃ ⊥
+test = lam (lam (app v1 (eq v0 id²)))
+
+test² : ∀ {A B} → ⊩ LAM (LAM (APP V1 (EQ V0 (LAM² V0²)))) ∶ ((A ≠ (B ⊃ B)) ⊃ (LAM V0 ∶ A) ⊃ ⊥)
+test² = nec test
 
 
 {-

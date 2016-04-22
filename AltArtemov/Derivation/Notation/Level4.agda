@@ -52,6 +52,11 @@ boom⁴ : ∀ {t₃ t₂ t A Γ}
     → Γ ⊢ BOOM³ t₃ ∶ BOOM² t₂ ∶ BOOM t ∶ A
 boom⁴ {t₃} {t₂} {t} = boom[ 3 ] {ts = t₃ ∷ t₂ ∷ t ∷ []}
 
+eq⁴ : ∀ {t₃ t₂ t s₃ s₂ s u A B Γ}
+    → Γ ⊢ t₃ ∶ t₂ ∶ t ∶ u ∶ A    → Γ ⊢ s₃ ∶ s₂ ∶ s ∶ u ∶ B
+    → Γ ⊢ EQ³ t₃ s₃ ∶ EQ² t₂ s₂ ∶ EQ t s ∶ (A ≑ B)
+eq⁴ {t₃} {t₂} {t} {s₃} {s₂} {s} = eq[ 3 ] {ts = t₃ ∷ t₂ ∷ t ∷ []} {ss = s₃ ∷ s₂ ∷ s ∷ []}
+
 
 v0⁴ : ∀ {Γ A} → Γ , A ⊢ V0³ ∶ V0² ∶ V0 ∶ A
 v0⁴ = var⁴ ix0

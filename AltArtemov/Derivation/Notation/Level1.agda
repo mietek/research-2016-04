@@ -52,6 +52,11 @@ boom : ∀ {A Γ}
     → Γ ⊢ A
 boom = boom[ 0 ] {ts = []}
 
+eq : ∀ {u A B Γ}
+    → Γ ⊢ u ∶ A    → Γ ⊢ u ∶ B
+    → Γ ⊢ A ≑ B
+eq = eq[ 0 ] {ts = []} {ss = []}
+
 
 v0 : ∀ {Γ A} → Γ , A ⊢ A
 v0 = var ix0

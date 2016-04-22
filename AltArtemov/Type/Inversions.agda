@@ -24,3 +24,10 @@ open import AltArtemov.Type.Core
 
 ∶-inv-A : ∀ {t A t′ A′} → (t ∶ A) ≡ (t′ ∶ A′) → A ≡ A′
 ∶-inv-A refl = refl
+
+
+≑-inv-A : ∀ {A B A′ B′} → (A ≑ B) ≡ (A′ ≑ B′) → A ≡ A′
+≑-inv-A refl = refl
+
+≑-inv-B : ∀ {A B A′ B′} → (A ≑ B) ≡ (A′ ≑ B′) → B ≡ B′
+≑-inv-B refl = refl

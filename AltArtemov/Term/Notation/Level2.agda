@@ -30,6 +30,9 @@ DOWN² t₂ = DOWN[ 1 ] t₂
 BOOM² : ∀ t₂ → Tm
 BOOM² t₂ = BOOM[ 1 ] t₂
 
+EQ² : ∀ t₂ s₂ → Tm
+EQ² t₂ s₂ = EQ[ 1 ] t₂ s₂
+
 
 V0² : Tm
 V0² = VAR² 0

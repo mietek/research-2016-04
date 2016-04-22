@@ -72,3 +72,13 @@ BOOM-inv-n refl = refl
 
 BOOM-inv-t : ∀ {n t n′ t′} → BOOM[ n ] t ≡ BOOM[ n′ ] t′ → t ≡ t′
 BOOM-inv-t refl = refl
+
+
+EQ-inv-n : ∀ {n t s n′ t′ s′} → EQ[ n ] t s ≡ EQ[ n′ ] t′ s′ → n ≡ n′
+EQ-inv-n refl = refl
+
+EQ-inv-t : ∀ {n t s n′ t′ s′} → EQ[ n ] t s ≡ EQ[ n′ ] t′ s′ → t ≡ t′
+EQ-inv-t refl = refl
+
+EQ-inv-s : ∀ {n t s n′ t′ s′} → EQ[ n ] t s ≡ EQ[ n′ ] t′ s′ → s ≡ s′
+EQ-inv-s refl = refl

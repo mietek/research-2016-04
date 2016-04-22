@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module Experiments.FishAndChips where
 
 open import Data.List using (List ; [] ; _∷_)
@@ -46,6 +48,7 @@ Shub Γ Δ = ∀ As → Sub (Γ ⊂+ As) (Δ ⊂+ As)
 [ θ / up[ n ] t ]      = up[ n ] [ θ / t ]
 [ θ / down[ n ] t ]    = down[ n ] [ θ / t ]
 [ θ / boom[ n ] t ]    = boom[ n ] [ θ / t ]
+[ θ / eq[ n ] t s ]    = {!eq[ n ] [ θ / t s ]!}
 
 
 -- Any simultaneous renaming can be shiftable.

@@ -8,11 +8,17 @@ open import S4 using (_∙_⊢_)
 import Examples.S4 as S4
 
 
+-- TODO
+
+postulate
+  ignore-≑ : S4.Ty
+
 °[_] : ∀ A → S4.Ty
 °[ ⊥ ]    = S4.⊥
 °[ A ⊃ B ] = °[ A ] S4.⊃ °[ B ]
 °[ A ∧ B ] = °[ A ] S4.∧ °[ B ]
 °[ t ∶ A ] = S4.□ °[ A ]
+°[ A ≑ B ] = ignore-≑
 
 _°≡_ : ∀ {{Γ Δ′ Γ′}} {A A′} (d : Γ ⊢ A) (d′ : Δ′ ∙ Γ′ ⊢ A′) → Set
 d °≡ d′ = °[ ty d ] ≡ S4.ty d′

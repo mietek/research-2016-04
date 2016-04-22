@@ -30,6 +30,9 @@ DOWN t = DOWN[ 0 ] t
 BOOM : ∀ t → Tm
 BOOM t = BOOM[ 0 ] t
 
+EQ : ∀ t s → Tm
+EQ t s = EQ[ 0 ] t s
+
 
 V0 : Tm
 V0 = VAR 0

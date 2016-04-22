@@ -25,6 +25,7 @@ lev (SND[ n ] t)    = n ⊓ lev t
 lev (UP[ n ] t)     = n ⊓ lev t
 lev (DOWN[ n ] t)   = n ⊓ lev t
 lev (BOOM[ n ] t)   = n ⊓ lev t
+lev (EQ[ n ] t s)   = n ⊓ lev t ⊓ lev s
 
 
 -- Terms can be quoted.
@@ -38,6 +39,7 @@ quo (SND[ n ] t)    = SND[ suc n ] (quo t)
 quo (UP[ n ] t)     = UP[ suc n ] (quo t)
 quo (DOWN[ n ] t)   = DOWN[ suc n ] (quo t)
 quo (BOOM[ n ] t)   = BOOM[ suc n ] (quo t)
+quo (EQ[ n ] t s)   = EQ[ suc n ] (quo t) (quo s)
 
 
 -- Quoting a term increments its level.
@@ -51,6 +53,7 @@ lev-quo-t≡suc-lev-t (SND[ n ] t)    rewrite lev-quo-t≡suc-lev-t t = refl
 lev-quo-t≡suc-lev-t (UP[ n ] t)     rewrite lev-quo-t≡suc-lev-t t = refl
 lev-quo-t≡suc-lev-t (DOWN[ n ] t)   rewrite lev-quo-t≡suc-lev-t t = refl
 lev-quo-t≡suc-lev-t (BOOM[ n ] t)   rewrite lev-quo-t≡suc-lev-t t = refl
+lev-quo-t≡suc-lev-t (EQ[ n ] t s)   rewrite lev-quo-t≡suc-lev-t t | lev-quo-t≡suc-lev-t s = refl
 
 
 -- The level of a quoted term is greater than 0.
@@ -64,6 +67,7 @@ z<′lev-quo-t (SND[ n ] t)    rewrite lev-quo-t≡suc-lev-t t = z<′sn
 z<′lev-quo-t (UP[ n ] t)     rewrite lev-quo-t≡suc-lev-t t = z<′sn
 z<′lev-quo-t (DOWN[ n ] t)   rewrite lev-quo-t≡suc-lev-t t = z<′sn
 z<′lev-quo-t (BOOM[ n ] t)   rewrite lev-quo-t≡suc-lev-t t = z<′sn
+z<′lev-quo-t (EQ[ n ] t s)   rewrite lev-quo-t≡suc-lev-t t | lev-quo-t≡suc-lev-t s = z<′sn
 
 
 -- Terms of level greater than 0 can be unquoted.
@@ -77,6 +81,7 @@ unquo (SND[ zero ] t)     ()
 unquo (UP[ zero ] t)      ()
 unquo (DOWN[ zero ] t)    ()
 unquo (BOOM[ zero ] t)    ()
+unquo (EQ[ zero ] t s)    ()
 unquo (VAR[ suc n ] i)    z<′l = VAR[ n ] i
 unquo (LAM[ suc n ] t)    z<′l = LAM[ n ] (unquo t (z<′sm⊓n⇒z<′n z<′l))
 unquo (APP[ suc n ] t s)  z<′l = APP[ n ] (unquo t (z<′sm⊓n⊓o⇒z<′n (lev s) z<′l))
@@ -88,6 +93,8 @@ unquo (SND[ suc n ] t)    z<′l = SND[ n ] (unquo t (z<′sm⊓n⇒z<′n z<′
 unquo (UP[ suc n ] t)     z<′l = UP[ n ] (unquo t (z<′sm⊓n⇒z<′n z<′l))
 unquo (DOWN[ suc n ] t)   z<′l = DOWN[ n ] (unquo t (z<′sm⊓n⇒z<′n z<′l))
 unquo (BOOM[ suc n ] t)   z<′l = BOOM[ n ] (unquo t (z<′sm⊓n⇒z<′n z<′l))
+unquo (EQ[ suc n ] t s)   z<′l = EQ[ n ] (unquo t (z<′sm⊓n⊓o⇒z<′n (lev s) z<′l))
+                                         (unquo s (z<′sm⊓n⊓o⇒z<′o (lev t) z<′l))
 
 
 -- Unquoting a term decrements its level.
@@ -101,6 +108,7 @@ lev-unquo-t≡pred-lev-t (SND[ zero ] t)     ()
 lev-unquo-t≡pred-lev-t (UP[ zero ] t)      ()
 lev-unquo-t≡pred-lev-t (DOWN[ zero ] t)    ()
 lev-unquo-t≡pred-lev-t (BOOM[ zero ] t)    ()
+lev-unquo-t≡pred-lev-t (EQ[ zero ] t s)    ()
 lev-unquo-t≡pred-lev-t (VAR[ suc n ] i)    z<′l = refl
 lev-unquo-t≡pred-lev-t (LAM[ suc n ] t)    z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⇒z<′n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
 lev-unquo-t≡pred-lev-t (APP[ suc n ] t s)  z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⊓o⇒z<′n (lev s) z<′l)
@@ -112,6 +120,8 @@ lev-unquo-t≡pred-lev-t (SND[ suc n ] t)    z<′l rewrite lev-unquo-t≡pred-l
 lev-unquo-t≡pred-lev-t (UP[ suc n ] t)     z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⇒z<′n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
 lev-unquo-t≡pred-lev-t (DOWN[ suc n ] t)   z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⇒z<′n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
 lev-unquo-t≡pred-lev-t (BOOM[ suc n ] t)   z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⇒z<′n z<′l) = m⊓pn≡p[sm⊓n] n (lev t)
+lev-unquo-t≡pred-lev-t (EQ[ suc n ] t s)   z<′l rewrite lev-unquo-t≡pred-lev-t t (z<′sm⊓n⊓o⇒z<′n (lev s) z<′l)
+                                                      | lev-unquo-t≡pred-lev-t s (z<′sm⊓n⊓o⇒z<′o (lev t) z<′l) = m⊓pn⊓po≡p[sm⊓n⊓o] n (lev t) (lev s)
 
 
 -- Unquoting after quoting is identity.
@@ -130,6 +140,8 @@ unquo-quo-t≡t t = aux t (z<′lev-quo-t t)
     aux (UP[ n ] t)     z<′l rewrite aux t (z<′sm⊓n⇒z<′n z<′l) = refl
     aux (DOWN[ n ] t)   z<′l rewrite aux t (z<′sm⊓n⇒z<′n z<′l) = refl
     aux (BOOM[ n ] t)   z<′l rewrite aux t (z<′sm⊓n⇒z<′n z<′l) = refl
+    aux (EQ[ n ] t s)   z<′l rewrite aux t (z<′sm⊓n⊓o⇒z<′n (lev (quo s)) z<′l)
+                                   | aux s (z<′sm⊓n⊓o⇒z<′o (lev (quo t)) z<′l) = refl
 
 
 -- Quoting after unquoting is identity.
@@ -154,6 +166,9 @@ quo-unquo-t≡t (SND[ suc n ] t)    z<′l rewrite quo-unquo-t≡t t (z<′sm⊓
 quo-unquo-t≡t (UP[ suc n ] t)     z<′l rewrite quo-unquo-t≡t t (z<′sm⊓n⇒z<′n z<′l) = refl
 quo-unquo-t≡t (DOWN[ suc n ] t)   z<′l rewrite quo-unquo-t≡t t (z<′sm⊓n⇒z<′n z<′l) = refl
 quo-unquo-t≡t (BOOM[ suc n ] t)   z<′l rewrite quo-unquo-t≡t t (z<′sm⊓n⇒z<′n z<′l) = refl
+quo-unquo-t≡t (EQ[ zero ] t s)    ()
+quo-unquo-t≡t (EQ[ suc n ] t s)   z<′l rewrite quo-unquo-t≡t t (z<′sm⊓n⊓o⇒z<′n (lev s) z<′l)
+                                             | quo-unquo-t≡t s (z<′sm⊓n⊓o⇒z<′o (lev t) z<′l) = refl
 
 
 -- Term equality is decidable.
@@ -170,6 +185,7 @@ VAR[ _ ] _    ≟ SND[ _ ] _       = no λ ()
 VAR[ _ ] _    ≟ UP[ _ ] _        = no λ ()
 VAR[ _ ] _    ≟ DOWN[ _ ] _      = no λ ()
 VAR[ _ ] _    ≟ BOOM[ _ ] _      = no λ ()
+VAR[ _ ] _    ≟ EQ[ _ ] _ _      = no λ ()
 LAM[ _ ] _    ≟ VAR[ _ ] _       = no λ ()
 LAM[ n ] t    ≟ LAM[ n′ ] t′     with n ℕ≟ n′ | t ≟ t′
 LAM[ n ] t    ≟ LAM[ .n ] .t     | yes refl | yes refl = yes refl
@@ -182,6 +198,7 @@ LAM[ _ ] _    ≟ SND[ _ ] _       = no λ ()
 LAM[ _ ] _    ≟ UP[ _ ] _        = no λ ()
 LAM[ _ ] _    ≟ DOWN[ _ ] _      = no λ ()
 LAM[ _ ] _    ≟ BOOM[ _ ] _      = no λ ()
+LAM[ _ ] _    ≟ EQ[ _ ] _ _      = no λ ()
 APP[ _ ] _ _  ≟ VAR[ _ ] _       = no λ ()
 APP[ _ ] _ _  ≟ LAM[ _ ] _       = no λ ()
 APP[ n ] t s  ≟ APP[ n′ ] t′ s′  with n ℕ≟ n′ | t ≟ t′ | s ≟ s′
@@ -195,6 +212,7 @@ APP[ _ ] _ _  ≟ SND[ _ ] _       = no λ ()
 APP[ _ ] _ _  ≟ UP[ _ ] _        = no λ ()
 APP[ _ ] _ _  ≟ DOWN[ _ ] _      = no λ ()
 APP[ _ ] _ _  ≟ BOOM[ _ ] _      = no λ ()
+APP[ _ ] _ _  ≟ EQ[ _ ] _ _      = no λ ()
 PAIR[ _ ] _ _ ≟ VAR[ _ ] _       = no λ ()
 PAIR[ _ ] _ _ ≟ LAM[ _ ] _       = no λ ()
 PAIR[ _ ] _ _ ≟ APP[ _ ] _ _     = no λ ()
@@ -208,6 +226,7 @@ PAIR[ _ ] _ _ ≟ SND[ _ ] _       = no λ ()
 PAIR[ _ ] _ _ ≟ UP[ _ ] _        = no λ ()
 PAIR[ _ ] _ _ ≟ DOWN[ _ ] _      = no λ ()
 PAIR[ _ ] _ _ ≟ BOOM[ _ ] _      = no λ ()
+PAIR[ _ ] _ _ ≟ EQ[ _ ] _ _      = no λ ()
 FST[ _ ] _    ≟ VAR[ _ ] _       = no λ ()
 FST[ _ ] _    ≟ LAM[ _ ] _       = no λ ()
 FST[ _ ] _    ≟ APP[ _ ] _ _     = no λ ()
@@ -220,6 +239,7 @@ FST[ _ ] _    ≟ SND[ _ ] _       = no λ ()
 FST[ _ ] _    ≟ UP[ _ ] _        = no λ ()
 FST[ _ ] _    ≟ DOWN[ _ ] _      = no λ ()
 FST[ _ ] _    ≟ BOOM[ _ ] _      = no λ ()
+FST[ _ ] _    ≟ EQ[ _ ] _ _      = no λ ()
 SND[ _ ] _    ≟ VAR[ _ ] _       = no λ ()
 SND[ _ ] _    ≟ LAM[ _ ] _       = no λ ()
 SND[ _ ] _    ≟ APP[ _ ] _ _     = no λ ()
@@ -232,6 +252,7 @@ SND[ n ] t    ≟ SND[ .n ] .t     | yes refl | yes refl = yes refl
 SND[ _ ] _    ≟ UP[ _ ] _        = no λ ()
 SND[ _ ] _    ≟ DOWN[ _ ] _      = no λ ()
 SND[ _ ] _    ≟ BOOM[ _ ] _      = no λ ()
+SND[ _ ] _    ≟ EQ[ _ ] _ _      = no λ ()
 UP[ _ ] _     ≟ VAR[ _ ] _       = no λ ()
 UP[ _ ] _     ≟ LAM[ _ ] _       = no λ ()
 UP[ _ ] _     ≟ APP[ _ ] _ _     = no λ ()
@@ -244,6 +265,7 @@ UP[ n ] t     ≟ UP[ .n ] .t      | yes refl | yes refl = yes refl
 ...                              | _        | no  t≢t′ = no (t≢t′ ∘ UP-inv-t)
 UP[ _ ] _     ≟ DOWN[ _ ] _      = no λ ()
 UP[ _ ] _     ≟ BOOM[ _ ] _      = no λ ()
+UP[ _ ] _     ≟ EQ[ _ ] _ _      = no λ ()
 DOWN[ _ ] _   ≟ VAR[ _ ] _       = no λ ()
 DOWN[ _ ] _   ≟ LAM[ _ ] _       = no λ ()
 DOWN[ _ ] _   ≟ APP[ _ ] _ _     = no λ ()
@@ -256,6 +278,7 @@ DOWN[ n ] t   ≟ DOWN[ .n ] .t    | yes refl | yes refl = yes refl
 ...                              | no  n≢n′ | _        = no (n≢n′ ∘ DOWN-inv-n)
 ...                              | _        | no  t≢t′ = no (t≢t′ ∘ DOWN-inv-t)
 DOWN[ _ ] _   ≟ BOOM[ _ ] _      = no λ ()
+DOWN[ _ ] _   ≟ EQ[ _ ] _ _      = no λ ()
 BOOM[ _ ] _   ≟ VAR[ _ ] _       = no λ ()
 BOOM[ _ ] _   ≟ LAM[ _ ] _       = no λ ()
 BOOM[ _ ] _   ≟ APP[ _ ] _ _     = no λ ()
@@ -268,6 +291,21 @@ BOOM[ n ] t   ≟ BOOM[ n′ ] t′    with n ℕ≟ n′ | t ≟ t′
 BOOM[ n ] t   ≟ BOOM[ .n ] .t    | yes refl | yes refl = yes refl
 ...                              | no  n≢n′ | _        = no (n≢n′ ∘ BOOM-inv-n)
 ...                              | _        | no  t≢t′ = no (t≢t′ ∘ BOOM-inv-t)
+BOOM[ _ ] _   ≟ EQ[ _ ] _ _      = no λ ()
+EQ[ _ ] _ _   ≟ VAR[ _ ] _       = no λ ()
+EQ[ _ ] _ _   ≟ LAM[ _ ] _       = no λ ()
+EQ[ _ ] _ _   ≟ APP[ _ ] _ _     = no λ ()
+EQ[ _ ] _ _   ≟ PAIR[ _ ] _ _    = no λ ()
+EQ[ _ ] _ _   ≟ FST[ _ ] _       = no λ ()
+EQ[ _ ] _ _   ≟ SND[ _ ] _       = no λ ()
+EQ[ _ ] _ _   ≟ UP[ _ ] _        = no λ ()
+EQ[ _ ] _ _   ≟ DOWN[ _ ] _      = no λ ()
+EQ[ _ ] _ _   ≟ BOOM[ _ ] _      = no λ ()
+EQ[ n ] t s   ≟ EQ[ n′ ] t′ s′   with n ℕ≟ n′ | t ≟ t′ | s ≟ s′
+EQ[ n ] t s   ≟ EQ[ .n ] .t .s   | yes refl | yes refl | yes refl = yes refl
+...                              | no  n≢n′ | _        | _        = no (n≢n′ ∘ EQ-inv-n)
+...                              | _        | no  t≢t′ | _        = no (t≢t′ ∘ EQ-inv-t)
+...                              | _        | _        | no  s≢s′ = no (s≢s′ ∘ EQ-inv-s)
 
 
 -- TODO

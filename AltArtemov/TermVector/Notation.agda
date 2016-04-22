@@ -67,3 +67,9 @@ DOWNs[ suc n ] (t ∷ ts) = DOWN[ n ] t ∷ DOWNs[ n ] ts
 BOOMs[_] : ∀ n (ts : Tms n) → Tms n
 BOOMs[ zero ]  []       = []
 BOOMs[ suc n ] (t ∷ ts) = BOOM[ n ] t ∷ BOOMs[ n ] ts
+
+
+-- EQⁿ tₙ sₙ ∶ EQⁿ⁻¹ tₙ₋₁ sₙ₋₁ ∶ ⋯ ∶ EQ t s
+EQs[_] : ∀ n (ts ss : Tms n) → Tms n
+EQs[ zero ]  []       []       = []
+EQs[ suc n ] (t ∷ ts) (s ∷ ss) = EQ[ n ] t s ∷ EQs[ n ] ts ss

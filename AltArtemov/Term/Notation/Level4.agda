@@ -30,6 +30,9 @@ DOWN⁴ t₄ = DOWN[ 3 ] t₄
 BOOM⁴ : ∀ t₄ → Tm
 BOOM⁴ t₄ = BOOM[ 3 ] t₄
 
+EQ⁴ : ∀ t₄ s₄ → Tm
+EQ⁴ t₄ s₄ = EQ[ 3 ] t₄ s₄
+
 
 V0⁴ : Tm
 V0⁴ = VAR⁴ 0

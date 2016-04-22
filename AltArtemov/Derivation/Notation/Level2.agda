@@ -52,6 +52,11 @@ boom² : ∀ {t A Γ}
     → Γ ⊢ BOOM t ∶ A
 boom² {t} = boom[ 1 ] {ts = t ∷ []}
 
+eq² : ∀ {t s u A B Γ}
+    → Γ ⊢ t ∶ u ∶ A    → Γ ⊢ s ∶ u ∶ B
+    → Γ ⊢ EQ t s ∶ (A ≑ B)
+eq² {t} {s} =  eq[ 1 ] {ts = t ∷ []} {ss = s ∷ []}
+
 
 v0² : ∀ {Γ A} → Γ , A ⊢ V0 ∶ A
 v0² = var² ix0
