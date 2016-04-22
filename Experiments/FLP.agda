@@ -1,0 +1,106 @@
+module Experiments.FLP where
+
+open import AltArtemov
+
+
+{-
+
+S. Artemov (2006) “On two models of provability”, pp. 33-34
+
+
+3.7. The logic of single conclusion proofs
+
+By definition, each single conclusion proof, also known as _functional
+proofs_, proves a unique formula.  In the functional logic of proofs,
+a formula  t ∶ F  still has the meaning  ‘t  is a proof of formula  F,’
+but the class of its interpretations is limited to functional proof
+systems only.  It is easy to see that single conclusion proofs lead
+to modal identities inconsistent with any normal modal logic, e.g.,
+x ∶ ⊤ → ¬ x ∶ (⊤ ∧ ⊤)  is a valid principle of the functional proofs
+which, however, has the forgetful projection  □ ⊤ → ¬ □ (⊤ ∧ ⊤)
+which is incompatible with any normal modal logic.
+    The mathematical problem here was to give a full axiomatization
+of all resulting tautologies in the language of LP (without the
+operation ‘+,’ which does not work on functional proofs); this problem
+was solved by V. Krupski in [112].
+    The functionality property of proofs, which states that if
+p ∶ F ∧ p ∶ G,  then  F  and  G  must coincide syntactically, does not
+look like a propositional condition, since it operates with the strong
+notion of syntactic coincidence.  An adequate propositional description
+of this property was found in [29] using so-called _conditional
+unification._  It was then generalized in [112, 113] to the full
+language of the logic of proofs.
+    Each formula  C  of type  t₁ ∶ F₁ ∧ … ∧ tₙ ∶ Fₙ  generates a set
+of quasi-equations of type  Sc ≔ { t₁ = tⱼ ⇒ Fᵢ = Fⱼ ∣ 1 ≤ i, j ≤ n }.
+A _unifier_  σ  of  Sc  is a substitution  σ  such that either
+tᵢ σ ≢ tⱼ σ  or  Fᵢ σ ≡ Fⱼ σ  holds for any  i, j.  Here and below
+‘X ≡ Y’  denotes the syntactic equality of  X  and  Y.  A = B (mod S)
+means that for each unifier  σ  of system  S,  the property  A σ ≡ B σ
+holds.  This conditional unification was shown to be decidable in the
+cases under consideration (cf. [29, 112, 113]).  By _Unification Axiom_
+we understand the schema
+
+                 t₁ ∶ F₁ ∧ … ∧ tₙ ∶ Fₙ → (A ↔ B)
+
+for each condition  C  of type  t₁ ∶ F₁ ∧ … ∧ tₙ ∶ Fₙ  and each  A, B
+such that  A = B (mod Sc).
+    The Logic of Functional Proofs FLP was introduced by V. Krupski in
+[112].  The language of FLP is the language of LP without the operation
+‘+’ and without proof constants.  The axioms and rules of FLP are:
+
+-}
+
+
+-- A0. Axioms and rules of classical propositional logic
+
+
+-- A1. t ∶ (F → G) → (s ∶ F → (t ∙ s) ∶ G)
+
+A1 : ∀ {t s F G} → ⊩ t ∶ (F ⊃ G) ⊃ s ∶ F ⊃ (APP t s) ∶ G
+A1 = lam (lam (app² v1 v0))
+
+
+-- A2. t ∶ F → F
+
+A2 : ∀ {t F} → ⊩ t ∶ F ⊃ F
+A2 = lam (down v0)
+
+
+-- A3. t ∶ F → ! t ∶ (t ∶ F)
+
+A3 : ∀ {t F} → ⊩ t ∶ F ⊃ quo t ∶ t ∶ F
+A3 = lam (up v0)
+
+
+-- A4. Unification axiom
+
+-- TODO
+
+
+{-
+
+    Theorem 3.7 (V. Krupski, [112, 113]).  The logic FLP is decidable,
+sound, and complete with respect to the arithmetical provability
+interpretation based on functional proof predicates.
+
+    The logic of functional proofs was further developed in [114],
+where its extension with references FLPref was introduced.  System
+FLPref extends FLP with second-order variables which denote the
+operation of reconstructing an object from its reference, e.g.,
+determining a formula proven by a given derivation.  FLPref may be
+also viewed as a natural formal system for admissible inference rules
+in arithmetic.  See also follow-up articles [156, 187].
+
+
+ [29]  S. Artemov, T. Strassen (1992) “The basic logic of proofs”
+[112]  V. Krupski (1997) “Operational logic of proofs with
+       functionality condition on proof predicate”
+[113]  V. Krupski (2001) “The single-conclusion proof logic and
+       inference rules specification”
+[114]  V. Krupski (2006) “Referential logic of proofs”
+[156]  T. Yavorskaya (Sidon), N. Rubtsova (2007) “Operations on proofs
+       and labels”
+[187]  T. Yavorskaya (Sidon) (2005) “Negative operations on proofs
+       and labels”
+
+-}
