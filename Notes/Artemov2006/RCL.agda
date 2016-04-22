@@ -1,4 +1,4 @@
-module Experiments.RCL where
+module Notes.Artemov2006.RCL where
 
 open import AltArtemov
 
@@ -106,11 +106,27 @@ application rule
                     ---------------------.
                          (u ∙ v) ∶ B
 
+-}
+
+X1 : ∀ {u v A B} → ⊩ u ∶ (A ⊃ B) ⊃ v ∶ A ⊃ (APP u v) ∶ B
+X1 = lam (lam (app² v1 v0))
+
+
+{-
+
 Furthermore, RCL enjoys the internalization property ([17]): if
 A₁, …, Aₙ ⊢ B  then for any set of variables  x₁, …, xₙ  of respective
 types, it is possible to construct a term  t (x₁, …, xₙ)  such that
 
           x₁ ∶ A₁, …, xₙ ∶ Aₙ ⊢ t (x₁, …, xₙ) ∶ B.
+
+-}
+
+X2 : ∀ {Γ B} (d : Γ ⊢ B) → Γ ⊢ rep d ∶ B
+X2 = int
+
+
+{-
 
 It is interesting to consider the following natural (though so far
 informal) computational semantics for combinators of RCL.  This

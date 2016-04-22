@@ -1,4 +1,4 @@
-module Experiments.FLP where
+module Notes.Artemov2006.FLP where
 
 open import AltArtemov
 
