@@ -38,7 +38,7 @@ pop i ≈?ⁱ pop .(wkⁱ i j) | diff .i j = diff (pop i) (pop j)
 
 
 wkᵗ : ∀ {g} → (i : ◌∈ g) → (g ∖ᵍ i) ⊢◌ → g ⊢◌
-wkᵗ i (VAR[ n ] v)    = VAR[ n ] (wkⁱ i v)
+wkᵗ i (VAR[ n ] j)    = VAR[ n ] (wkⁱ i j)
 wkᵗ i (LAM[ n ] t)    = LAM[ n ] (wkᵗ (pop i) t)
 wkᵗ i (APP[ n ] t u)  = APP[ n ] (wkᵗ i t) (wkᵗ i u)
 wkᵗ i (PAIR[ n ] t u) = PAIR[ n ] (wkᵗ i t) (wkᵗ i u)
@@ -56,13 +56,13 @@ wkᵛ i (t ∷ ts) = wkᵗ i t ∷ wkᵛ i ts
 
 
 substⁱ : ∀ {g} → ℕ → ◌∈ g → (i : ◌∈ g) → (g ∖ᵍ i) ⊢◌ → (g ∖ᵍ i) ⊢◌
-substⁱ n v          i  s with i ≈?ⁱ v
-substⁱ n v          .v s | same = s
-substⁱ n .(wkⁱ v i) v  s | diff .v i = VAR[ n ] i
+substⁱ n j          i  s with i ≈?ⁱ j
+substⁱ n i          .i s | same = s
+substⁱ n .(wkⁱ i j) i  s | diff .i j = VAR[ n ] j
 
 
 substᵗ : ∀ {g} → g ⊢◌ → (i : ◌∈ g) → (g ∖ᵍ i) ⊢◌ → (g ∖ᵍ i) ⊢◌
-substᵗ (VAR[ n ] v)    i s = substⁱ n v i s
+substᵗ (VAR[ n ] j)    i s = substⁱ n j i s
 substᵗ (LAM[ n ] t)    i s = LAM[ n ] (substᵗ t (pop i) (wkᵗ top s))
 substᵗ (APP[ n ] t u)  i s = APP[ n ] (substᵗ t i s) (substᵗ u i s)
 substᵗ (PAIR[ n ] t u) i s = PAIR[ n ] (substᵗ t i s) (substᵗ u i s)
