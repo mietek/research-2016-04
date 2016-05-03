@@ -41,6 +41,4 @@ open import AltArtemov.Term.Substitution
 
 open import AltArtemov.WIP.TmRSubst#
 open import AltArtemov.WIP.TySubst#
-open import AltArtemov.WIP.TmSubst
-open import AltArtemov.WIP.TmSubstLem
-open import AltArtemov.WIP.TmSubst#
+--open import AltArtemov.WIP.TmSubstLem
