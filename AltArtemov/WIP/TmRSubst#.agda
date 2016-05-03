@@ -3,9 +3,11 @@ module AltArtemov.WIP.TmRSubst# where
 open import Data.Nat using (suc)
 open import Data.Fin using (Fin ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; cong)
+open import Relation.Nullary using (yes ; no)
 
 open import AltArtemov.Context.Representation
 open import AltArtemov.Term.Representation.Core
+open import AltArtemov.Term.Representation.Equality
 open import AltArtemov.Term.Representation.Substitution
 open import AltArtemov.Variable.Representation
 open import Data.Fin.Missing
@@ -76,3 +78,18 @@ wkᵗ# (i ∷ is) t = wkᵗ i (wkᵗ# is t)
 
 wkᵗ* : ∀ {g} → ∅ ⊢◌ → g ⊢◌
 wkᵗ* {g} rewrite g ↦∅ᵍ = wkᵗ# (topsᵍ g)
+
+wk* {g} t ≡ wkᵗ {g} i (wkᵗ* {g ∖ᵍ i} t)
+
+wkTm : ∀ {σ Γ τ} → (x : Var Γ σ) → Tm (Γ - x) τ → Tm Γ τ
+wkTm* : ∀ {Γ τ} → Tm ε τ → Tm Γ τ
+
+oops : ∀ {σ Γ τ} → {t : Tm ∅ τ} → (x : Var Γ σ) → wkTm* t ≡ wkTm x (wkTm* t)
+
+wkv : ∀ {Γ σ τ} → (x : Var Γ σ) → Var (Γ - x) τ → Var Γ τ
+
+-- help : ∀ {g} → (t : ∅ ⊢◌) → (i : ◌∈ g) → wkᵗ* {g} t ≡ wkᵗ {g} i (wkᵗ* {g ∖ᵍ i} t)
+-- help {∅} t ()
+-- help {g ,◌} t i with wkᵗ* {g ,◌} t ≟ᵗ wkᵗ {g ,◌} i (wkᵗ* {(g ,◌) ∖ᵍ i} t)
+-- help {g ,◌} t i | yes p = {!!}
+-- help {g ,◌} t i | no ¬p = {!!}

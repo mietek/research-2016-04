@@ -1,7 +1,8 @@
 module AltArtemov.WIP.TmSubstLem where
 
-open import Data.Nat using (zero ; suc)
-open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; sym ; cong)
+open import Data.Nat using (ℕ ; zero ; suc)
+open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; sym ; cong ; subst)
+open import Relation.Nullary using (yes ; no)
 
 open import AltArtemov.Context
 open import AltArtemov.Type
@@ -32,6 +33,12 @@ wkᵛ′ x rewrite ∖-dist x = wkᵛ ⌊ x ⌋ˣ
 
 wkᴬ′ : ∀ {Γ X} → (x : X ∈ Γ) → Ty ⌊ Γ ∖ᴳ x ⌋ᴳ → Ty ⌊ Γ ⌋ᴳ
 wkᴬ′ x rewrite ∖-dist x = wkᴬ ⌊ x ⌋ˣ
+
+substᴬ′ : ∀ {Γ X} → Ty ⌊ Γ ⌋ᴳ → (x : X ∈ Γ) → ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌ → Ty ⌊ Γ ∖ᴳ x ⌋ᴳ
+substᴬ′ A x rewrite ∖-dist x = substᴬ A ⌊ x ⌋ˣ
+
+substᵛ′ : ∀ {Γ n X} → Vec ⌊ Γ ⌋ᴳ n → (x : X ∈ Γ) → ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌ → Vec ⌊ Γ ∖ᴳ x ⌋ᴳ n
+substᵛ′ ts x rewrite ∖-dist x = substᵛ ts ⌊ x ⌋ˣ
 
 
 postulate
@@ -142,42 +149,116 @@ wk-dist-vec′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ∖ᴳ x
 wk-dist-vec′ x rewrite ∖-dist x = wk-dist-vec ⌊ x ⌋ˣ
 
 
+
+
+
 wkᵈ : ∀ {Γ X} → (x : X ∈ Γ) → {A : Ty ⌊ Γ ∖ᴳ x ⌋ᴳ} → {A′ : Ty ⌊ Γ ⌋ᴳ}
     → (Γ ∖ᴳ x) ⊢ A
     → {{_ : wkᴬ′ x A ≡ A′}}
     → Γ ⊢ A′
 
-wkᵈ x (var[ n ] {A} y {{refl}}) {{refl}} =
+wkᵈ x (var[ n ] y {{refl}}) {{refl}} =
     var[ n ] (wkˣ x y) {{wk-dist-VAR‴ {n = n} x y}}
 
-wkᵈ x (lam[ n ] {A} {ts} {B} d {{refl}}) {{refl}} =
+wkᵈ x (lam[ n ] {ts = ts} d {{refl}}) {{refl}} =
     lam[ n ] (wkᵈ (pop x) d {{wk-dist-vec′ (pop x) ts}}) {{wk-dist-LAM′ x ts}}
 
-wkᵈ x (app[ n ] {ts} {us} {A} {B} d e {{refl}}) {{refl}} =
+wkᵈ x (app[ n ] {ts} {us} d e {{refl}}) {{refl}} =
     app[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) (wkᵈ x e {{wk-dist-vec′ x us}}) {{wk-dist-APP′ x ts us}}
 
-wkᵈ x (pair[ n ] {ts} {us} {A} {B} d e {{refl}}) {{refl}} =
+wkᵈ x (pair[ n ] {ts} {us} d e {{refl}}) {{refl}} =
     pair[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) (wkᵈ x e {{wk-dist-vec′ x us}}) {{wk-dist-PAIR′ x ts us}}
 
-wkᵈ x (fst[ n ] {ts} {A} {B} d {{refl}}) {{refl}} =
+wkᵈ x (fst[ n ] {ts} d {{refl}}) {{refl}} =
     fst[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) {{wk-dist-FST′ x ts}}
 
-wkᵈ x (snd[ n ] {ts} {A} {B} d {{refl}}) {{refl}} =
+wkᵈ x (snd[ n ] {ts} d {{refl}}) {{refl}} =
     snd[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) {{wk-dist-SND′ x ts}}
 
-wkᵈ x (up[ n ] {ts} {s} {A} d {{refl}}) {{refl}} =
+wkᵈ x (up[ n ] {ts} d {{refl}}) {{refl}} =
     up[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) {{wk-dist-UP′ x ts}}
 
-wkᵈ x (down[ n ] {ts} {s} {A} d {{refl}}) {{refl}} =
+wkᵈ x (down[ n ] {ts} d {{refl}}) {{refl}} =
     down[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) {{wk-dist-DOWN′ x ts}}
 
-wkᵈ x (boom[ n ] {ts} {A} d {{refl}}) {{refl}} =
+wkᵈ x (boom[ n ] {ts} d {{refl}}) {{refl}} =
     boom[ n ] (wkᵈ x d {{wk-dist-vec′ x ts}}) {{wk-dist-BOOM′ x ts}}
 
 
--- substˣ : ∀ {Γ X A} → ℕ → A ∈ Γ → (x : X ∈ Γ) → (Γ ∖ᴳ x) ⊢ {!!} → (Γ ∖ᴳ x) ⊢ {!!}
--- substˣ = {!!}
+
+-- postulate
+--   subst-dist-vec′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → substᴬ′ (ts ∴ A) x s ≡ substᵛ′ ts x s ∴ A
 
 
--- substᵈ : ∀ {Γ X A} → Γ ⊢ A → (x : X ∈ Γ) → (Γ ∖ᴳ x) ⊢ {!!} → (Γ ∖ᴳ x) ⊢ {!!}
--- substᵈ = {!!}
+--   subst-dist-VAR‴ : ∀ {Γ n X A} → (x : X ∈ Γ) → (y : A ∈ (Γ ∖ᴳ x)) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → VARs[ n ] ⌊ y ⌋ˣ ∴ A ≡ substᴬ′ (VARs[ n ] ⌊ wkˣ x y ⌋ˣ ∴ A) x s
+
+--   subst-dist-LAM′ : ∀ {Γ n X A B} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ , B ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → LAMs[ n ] (substᵛ′ ts (pop {B = B} x) (wkᵗ top s)) ∴ A ≡ substᴬ′ (LAMs[ n ] ts ∴ A) x s
+
+--   subst-dist-APP′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts us : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → APPs[ n ] (substᵛ′ ts x s) (substᵛ′ us x s) ∴ A ≡ substᴬ′ (APPs[ n ] ts us ∴ A) x s
+
+--   subst-dist-PAIR′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts us : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → PAIRs[ n ] (substᵛ′ ts x s) (substᵛ′ us x s) ∴ A ≡ substᴬ′ (PAIRs[ n ] ts us ∴ A) x s
+
+--   subst-dist-FST′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → FSTs[ n ] (substᵛ′ ts x s) ∴ A ≡ substᴬ′ (FSTs[ n ] ts ∴ A) x s
+--   subst-dist-SND′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → SNDs[ n ] (substᵛ′ ts x s) ∴ A ≡ substᴬ′ (SNDs[ n ] ts ∴ A) x s
+--   subst-dist-UP′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → UPs[ n ] (substᵛ′ ts x s) ∴ A ≡ substᴬ′ (UPs[ n ] ts ∴ A) x s
+--   subst-dist-DOWN′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → DOWNs[ n ] (substᵛ′ ts x s) ∴ A ≡ substᴬ′ (DOWNs[ n ] ts ∴ A) x s
+--   subst-dist-BOOM′ : ∀ {Γ n X A} → (x : X ∈ Γ) → (ts : Vec ⌊ Γ ⌋ᴳ n) → {s : ⌊ Γ ∖ᴳ x ⌋ᴳ ⊢◌}
+--       → BOOMs[ n ] (substᵛ′ ts x s) ∴ A ≡ substᴬ′ (BOOMs[ n ] ts ∴ A) x s
+
+
+-- postulate
+--   oops3 : ∀ {Γ n A} → (y : A ∈ Γ) → (s : ⌊ Γ ∖ᴳ y ⌋ᴳ ⊢◌)
+--       → substᴬ′ (VARs[ n ] ⌊ y ⌋ˣ ∴ A) y s ≡ wkᴬ* {⌊ Γ ∖ᴳ y ⌋ᴳ} A
+
+
+-- substˣ : ∀ {Γ X A} → (n : ℕ) → (y : A ∈ Γ) → (x : X ∈ Γ) → {A′ : Ty ⌊ Γ ∖ᴳ x ⌋ᴳ}
+--     → (z : (Γ ∖ᴳ x) ⊢ wkᴬ* X)
+--     → {{_ : substᴬ′ (VARs[ n ] ⌊ y ⌋ˣ ∴ A) x ⌊ z ⌋ᵈ ≡ A′}}
+--     → (Γ ∖ᴳ x) ⊢ A′
+-- substˣ n y          x  z {{refl}} with x ≈?ˣ′ y
+-- substˣ n y          .y z {{refl}} | same rewrite oops3 {n = n} y ⌊ z ⌋ᵈ = z
+-- substˣ n .(wkˣ x y) x  z {{refl}} | diff .x y = var[ n ] y {{subst-dist-VAR‴ {n = n} x y}}
+
+
+-- substᵈ : ∀ {Γ X} → {A : Ty ⌊ Γ ⌋ᴳ} → Γ ⊢ A → (x : X ∈ Γ) → {A′ : Ty ⌊ Γ ∖ᴳ x ⌋ᴳ}
+--     → (z : (Γ ∖ᴳ x) ⊢ wkᴬ* X)
+--     → {{_ : substᴬ′ A x ⌊ z ⌋ᵈ ≡ A′}}
+--     → (Γ ∖ᴳ x) ⊢ A′
+
+-- substᵈ (var[ n ] y {{refl}}) x z {{refl}} =
+--     substˣ n y x z
+
+-- substᵈ (lam[ n ] {ts = ts} d {{refl}}) x z {{refl}} =
+--     lam[ n ] {ts = substᵛ′ ts (pop x) (wkᵗ top ⌊ z ⌋ᵈ)}
+--         (substᵈ d (pop x) {!wkᵈ top z {{refl}}!} {{subst-dist-vec′ (pop x) ts}})
+--         {{subst-dist-LAM′ x ts}}
+
+-- substᵈ (app[ n ] {ts} {us} d e {{refl}}) x z {{refl}} =
+--     app[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) (substᵈ e x z {{subst-dist-vec′ x us}}) {{subst-dist-APP′ x ts us}}
+
+-- substᵈ (pair[ n ] {ts} {us} d e {{refl}}) x z {{refl}} =
+--     pair[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) (substᵈ e x z {{subst-dist-vec′ x us}}) {{subst-dist-PAIR′ x ts us}}
+
+-- substᵈ (fst[ n ] {ts} d {{refl}}) x z {{refl}} =
+--     fst[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) {{subst-dist-FST′ x ts}}
+
+-- substᵈ (snd[ n ] {ts} d {{refl}}) x z {{refl}} =
+--     snd[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) {{subst-dist-SND′ x ts}}
+
+-- substᵈ (up[ n ] {ts} d {{refl}}) x z {{refl}} =
+--     up[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) {{subst-dist-UP′ x ts}}
+
+-- substᵈ (down[ n ] {ts} d {{refl}}) x z {{refl}} =
+--     down[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) {{subst-dist-DOWN′ x ts}}
+
+-- substᵈ (boom[ n ] {ts} d {{refl}}) x z {{refl}} =
+--     boom[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) {{subst-dist-BOOM′ x ts}}
