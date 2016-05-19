@@ -11,6 +11,13 @@ open import AltArtemov.Type.Inversion
 
 _≟ᴬ_ : ∀ {g} → (A A′ : Ty g) → Dec (A ≡ A′)
 
+★       ≟ᴬ ★         = yes refl
+★       ≟ᴬ (_ ∶ _)   = no λ ()
+★       ≟ᴬ (_ ⊃ _)   = no λ ()
+★       ≟ᴬ (_ ∧ _)   = no λ ()
+★       ≟ᴬ ⊥        = no λ ()
+
+(_ ∶ _) ≟ᴬ ★         = no λ ()
 (t ∶ A) ≟ᴬ (t′ ∶ A′) with t ≟ᵗ t′ | A ≟ᴬ A′
 (t ∶ A) ≟ᴬ (.t ∶ .A) | yes refl | yes refl = yes refl
 ...                  | no  t≢t′ | _        = no (t≢t′ ∘ inv-∶-t)
@@ -19,6 +26,7 @@ _≟ᴬ_ : ∀ {g} → (A A′ : Ty g) → Dec (A ≡ A′)
 (_ ∶ _) ≟ᴬ (_ ∧ _)   = no λ ()
 (_ ∶ _) ≟ᴬ ⊥        = no λ ()
 
+(_ ⊃ _) ≟ᴬ ★         = no λ ()
 (_ ⊃ _) ≟ᴬ (_ ∶ _)   = no λ ()
 (A ⊃ B) ≟ᴬ (A′ ⊃ B′) with A ≟ᴬ A′ | B ≟ᴬ B′
 (A ⊃ B) ≟ᴬ (.A ⊃ .B) | yes refl | yes refl = yes refl
@@ -27,6 +35,7 @@ _≟ᴬ_ : ∀ {g} → (A A′ : Ty g) → Dec (A ≡ A′)
 (_ ⊃ _) ≟ᴬ (_ ∧ _)   = no λ ()
 (_ ⊃ _) ≟ᴬ ⊥        = no λ ()
 
+(_ ∧ _) ≟ᴬ ★         = no λ ()
 (_ ∧ _) ≟ᴬ (_ ∶ _)   = no λ ()
 (_ ∧ _) ≟ᴬ (_ ⊃ _)   = no λ ()
 (A ∧ B) ≟ᴬ (A′ ∧ B′) with A ≟ᴬ A′ | B ≟ᴬ B′
@@ -35,6 +44,7 @@ _≟ᴬ_ : ∀ {g} → (A A′ : Ty g) → Dec (A ≡ A′)
 ...                  | _        | no  B≢B′ = no (B≢B′ ∘ inv-∧-B)
 (_ ∧ _) ≟ᴬ ⊥        = no λ ()
 
+⊥      ≟ᴬ ★         = no λ ()
 ⊥      ≟ᴬ (_ ∶ _)   = no λ ()
 ⊥      ≟ᴬ (_ ⊃ _)   = no λ ()
 ⊥      ≟ᴬ (_ ∧ _)   = no λ ()

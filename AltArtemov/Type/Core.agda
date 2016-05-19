@@ -9,6 +9,7 @@ infixr 15 _∶_
 infixl 20 _∧_
 
 data Ty (g : CxR) : Set where
+  ★   : Ty g
   _∶_ : g ⊢◌ → Ty g → Ty g
   _⊃_ : Ty g → Ty g → Ty g
   _∧_ : Ty g → Ty g → Ty g

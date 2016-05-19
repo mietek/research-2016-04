@@ -8,56 +8,103 @@ open import AltArtemov.Term.Representation
 open import AltArtemov.Type
 open import AltArtemov.Variable
 
-open import AltArtemov.WIP.TySubst#
+
+infixr 15 _∴_
+
+_∴_ : ∀ {g n} → Vec g n → Ty ∅ → Ty g
+[]       ∴ A = wkᴬ* A
+(t ∷ ts) ∴ A = t ∶ ts ∴ A
 
 
 infix 0 _⊢_
 
 data _⊢_ (Γ : Cx) : Ty ⌊ Γ ⌋ᴳ → Set where
-  var[_] : (n : ℕ) → {A : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  var[_] : (n : ℕ) {A : Ty ∅}
       → (x : A ∈ Γ)
-      → {{_ : VARs[ n ] ⌊ x ⌋ˣ ∴ A ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ VARs[ n ] ⌊ x ⌋ˣ ∴ A
 
-  lam[_] : (n : ℕ) → {A : Ty ∅} → {ts : Vec ⌊ Γ , A ⌋ᴳ n} → {B : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  lam[_] : (n : ℕ) {A : Ty ∅} {ts : Vec ⌊ Γ , A ⌋ᴳ n} {B : Ty ∅}
       → Γ , A ⊢ ts ∴ B
-      → {{_ : LAMs[ n ] ts ∴ (A ⊃ B) ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ LAMs[ n ] ts ∴ (A ⊃ B)
 
-  app[_] : (n : ℕ) → {ts us : Vec ⌊ Γ ⌋ᴳ n} → {A B : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  app[_] : (n : ℕ) {ts us : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
       → Γ ⊢ ts ∴ (A ⊃ B)    → Γ ⊢ us ∴ A
-      → {{_ : APPs[ n ] ts us ∴ B ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ APPs[ n ] ts us ∴ B
 
-  pair[_] : (n : ℕ) → {ts us : Vec ⌊ Γ ⌋ᴳ n} → {A B : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  pair[_] : (n : ℕ) {ts us : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
       → Γ ⊢ ts ∴ A    → Γ ⊢ us ∴ B
-      → {{_ : PAIRs[ n ] ts us ∴ (A ∧ B) ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ PAIRs[ n ] ts us ∴ (A ∧ B)
 
-  fst[_] : (n : ℕ) → {ts : Vec ⌊ Γ ⌋ᴳ n} → {A B : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  fst[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
       → Γ ⊢ ts ∴ (A ∧ B)
-      → {{_ : FSTs[ n ] ts ∴ A ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ FSTs[ n ] ts ∴ A
 
-  snd[_] : (n : ℕ) → {ts : Vec ⌊ Γ ⌋ᴳ n} → {A B : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  snd[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
       → Γ ⊢ ts ∴ (A ∧ B)
-      → {{_ : SNDs[ n ] ts ∴ B ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ SNDs[ n ] ts ∴ B
 
-  up[_] : (n : ℕ) → {ts : Vec ⌊ Γ ⌋ᴳ n} → {s : ∅ ⊢◌} → {A : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  up[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {s : ∅ ⊢◌} {A : Ty ∅}
       → Γ ⊢ ts ∴ s ∶ A
-      → {{_ : UPs[ n ] ts ∴ ! s ∶ s ∶ A ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ UPs[ n ] ts ∴ ! s ∶ s ∶ A
 
-  down[_] : (n : ℕ) → {ts : Vec ⌊ Γ ⌋ᴳ n} → {s : ∅ ⊢◌} → {A : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  down[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {s : ∅ ⊢◌} {A : Ty ∅}
       → Γ ⊢ ts ∴ s ∶ A
-      → {{_ : DOWNs[ n ] ts ∴ A ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ DOWNs[ n ] ts ∴ A
 
-  boom[_] : (n : ℕ) → {ts : Vec ⌊ Γ ⌋ᴳ n} → {A : Ty ∅} → {Z : Ty ⌊ Γ ⌋ᴳ}
+  boom[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {C : Ty ∅}
       → Γ ⊢ ts ∴ ⊥
-      → {{_ : BOOMs[ n ] ts ∴ A ≡ Z}}
-      → Γ ⊢ Z
+      → Γ ⊢ BOOMs[ n ] ts ∴ C
+
+
+data Ne (Ξ : (Δ : Cx) → Ty ⌊ Δ ⌋ᴳ → Set) (Γ : Cx) : Ty ⌊ Γ ⌋ᴳ → Set where
+  var[_] : (n : ℕ) {A : Ty ∅}
+      → (x : A ∈ Γ)
+      → Ne Ξ Γ (VARs[ n ] ⌊ x ⌋ˣ ∴ A)
+
+  app[_] : (n : ℕ) {ts us : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
+      → Ne Ξ Γ (ts ∴ (A ⊃ B))    → Ξ Γ (us ∴ A)
+      → Ne Ξ Γ (APPs[ n ] ts us ∴ B)
+
+  fst[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
+      → Ne Ξ Γ (ts ∴ (A ∧ B))
+      → Ne Ξ Γ (FSTs[ n ] ts ∴ A)
+
+  snd[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {A B : Ty ∅}
+      → Ne Ξ Γ (ts ∴ (A ∧ B))
+      → Ne Ξ Γ (SNDs[ n ] ts ∴ B)
+
+  boom[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {C : Ty ∅}
+      → Ne Ξ Γ (ts ∴ ⊥)
+      → Ne Ξ Γ (BOOMs[ n ] ts ∴ C)
+
+
+data Nf (Δ : Cx) : Ty ⌊ Δ ⌋ᴳ → Set where
+  ne : Ne Nf Δ ★ → Nf Δ ★
+
+  lam[_] : (n : ℕ) {A : Ty ∅} {ts : Vec ⌊ Δ , A ⌋ᴳ n} {B : Ty ∅}
+      → Nf (Δ , A) (ts ∴ B)
+      → Nf Δ (LAMs[ n ] ts ∴ (A ⊃ B))
+
+  pair[_] : (n : ℕ) {ts us : Vec ⌊ Δ ⌋ᴳ n} {A B : Ty ∅}
+      → Nf Δ (ts ∴ A)    → Nf Δ (us ∴ B)
+      → Nf Δ (PAIRs[ n ] ts us ∴ (A ∧ B))
+
+
+mutual
+  data Val (Δ : Cx) : Ty ⌊ Δ ⌋ᴳ → Set where
+    ne : ∀ {A} → Ne Val Δ A → Val Δ A
+
+    lam[_] : (n : ℕ) {Γ : Cx} {A : Ty ∅} {ts : Vec ⌊ Γ , A ⌋ᴳ n} {B : Ty ∅}
+        → Γ , A ⊢ ts ∴ B    → Env Δ Γ
+        → Val Δ {!LAMs[ n ] ts ∴ (A ⊃ B)!}
+
+    pair[_] : (n : ℕ) {ts us : Vec ⌊ Δ ⌋ᴳ n} {A B : Ty ∅}
+        → Val Δ (ts ∴ A)    → Val Δ (us ∴ B)
+        → Val Δ (PAIRs[ n ] ts us ∴ (A ∧ B))
+
+  data Env (Δ : Cx) : Cx → Set where
+    ∅   : Env Δ ∅
+    _,_ : ∀ {Γ} {A : Ty ∅} → Env Δ Γ → Val Δ (wkᴬ* A) → Env Δ (Γ , A)
 
 
 ⌊_⌋ᵈ : ∀ {Γ A} → Γ ⊢ A → ⌊ Γ ⌋ᴳ ⊢◌

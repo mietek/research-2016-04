@@ -8,8 +8,6 @@ open import AltArtemov.Term.Representation
 open import AltArtemov.Type
 open import AltArtemov.Variable
 
-open import AltArtemov.WIP.TySubst#
-
 
 var³ : ∀ {Γ A Z}
     → (x : A ∈ Γ)
