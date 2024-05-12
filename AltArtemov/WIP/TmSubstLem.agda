@@ -10,10 +10,11 @@ open import AltArtemov.Term.Core
 open import AltArtemov.Term.Representation
 open import AltArtemov.Variable
 
-open import AltArtemov.Term.Substitution
+-- open import AltArtemov.Term.Substitution
 open import AltArtemov.WIP.TySubst#
 
 
+{-
 ∖-dist : ∀ {Γ X} → (x : X ∈ Γ) → ⌊ Γ ∖ᴳ x ⌋ᴳ ≡ ⌊ Γ ⌋ᴳ ∖ᵍ ⌊ x ⌋ˣ
 ∖-dist top     = refl
 ∖-dist (pop x) = cong _,◌ (∖-dist x)
@@ -262,3 +263,5 @@ wkᵈ x (boom[ n ] {ts} d {{refl}}) {{refl}} =
 
 -- substᵈ (boom[ n ] {ts} d {{refl}}) x z {{refl}} =
 --     boom[ n ] (substᵈ d x z {{subst-dist-vec′ x ts}}) {{subst-dist-BOOM′ x ts}}
+
+-}

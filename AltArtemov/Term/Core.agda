@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module AltArtemov.Term.Core where
 
 open import Data.Nat using (ℕ)
@@ -90,6 +92,7 @@ data Nf (Δ : Cx) : Ty ⌊ Δ ⌋ᴳ → Set where
       → Nf Δ (PAIRs[ n ] ts us ∴ (A ∧ B))
 
 
+-- TODO: unfinished
 mutual
   data Val (Δ : Cx) : Ty ⌊ Δ ⌋ᴳ → Set where
     ne : ∀ {A} → Ne Val Δ A → Val Δ A

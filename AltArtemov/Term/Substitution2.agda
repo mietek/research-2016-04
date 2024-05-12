@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module AltArtemov.Term.Substitution2 where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
@@ -11,8 +13,8 @@ open import AltArtemov.Variable
 open import AltArtemov.WIP.TySubst#
 
 
-weak : ∀ {Γ A} → (Γ , A) ≳ᴳ Γ
-weak = skip ≳ᴳ-refl
+-- weak : ∀ {Γ A} → (Γ , A) ≳ᴳ Γ
+-- weak = skip ≳ᴳ-refl
 
 mapˣ : ∀ {Γ Γ′ A} → Γ ≳ᴳ Γ′ → A ∈ Γ′ → A ∈ Γ
 mapˣ done     x       = x
@@ -20,17 +22,17 @@ mapˣ (skip p) x       = pop (mapˣ p x)
 mapˣ (keep p) top     = top
 mapˣ (keep p) (pop x) = pop (mapˣ p x)
 
-mapᵗ : ∀ {Γ Γ′ A} → (p : Γ ≳ᴳ Γ′) → Γ′ ⊢ A → Γ ⊢ mapᴬ (≳ᴳ⇒≳ᵍ p) A
+mapᵗ : ∀ {Γ Γ′ A} → (p : Γ ≳ᴳ Γ′) → Γ′ ⊢ A → Γ ⊢ {!mapᴬ (≳ᴳ⇒≳ᵍ p) A!}
 --mapᵗ : ∀ {Γ Γ′ A A′} → (p : Γ ≳ᴳ Γ′) → Γ′ ⊢ A → {{_ : mapᴬ (≳ᴳ-proj p) A ≡ A′}} → Γ ⊢ A′
-mapᵗ p (var[ n ] v {{refl}})    = var[ n ] (mapˣ p v) {{{!!}}}
-mapᵗ p (lam[ n ] t {{refl}})    = lam[ n ] (mapᵗ (keep p) t) {{{!refl!}}}
-mapᵗ p (app[ n ] t u {{refl}})  = app[ n ] (mapᵗ p t) (mapᵗ p u) {{{!!}}}
-mapᵗ p (pair[ n ] t u {{refl}}) = pair[ n ] (mapᵗ p t) (mapᵗ p u) {{{!!}}}
-mapᵗ p (fst[ n ] t {{refl}})    = fst[ n ] (mapᵗ p t) {{{!!}}}
-mapᵗ p (snd[ n ] t {{refl}})    = snd[ n ] (mapᵗ p t) {{{!!}}}
-mapᵗ p (up[ n ] t {{refl}})     = up[ n ] (mapᵗ p t) {{{!!}}}
-mapᵗ p (down[ n ] t {{refl}})   = down[ n ] (mapᵗ p t) {{{!!}}}
-mapᵗ p (boom[ n ] t {{refl}})   = boom[ n ] (mapᵗ p t) {{{!refl!}}}
+mapᵗ p (var[ n ] v)    = var[ n ] (mapˣ p v)
+mapᵗ p (lam[ n ] t)    = lam[ n ] (mapᵗ (keep p) t)
+mapᵗ p (app[ n ] t u)  = app[ n ] (mapᵗ p t) (mapᵗ p u)
+mapᵗ p (pair[ n ] t u) = pair[ n ] (mapᵗ p t) (mapᵗ p u)
+mapᵗ p (fst[ n ] t)    = fst[ n ] (mapᵗ p t)
+mapᵗ p (snd[ n ] t)    = snd[ n ] (mapᵗ p t)
+mapᵗ p (up[ n ] t)     = up[ n ] (mapᵗ p t)
+mapᵗ p (down[ n ] t)   = down[ n ] (mapᵗ p t)
+mapᵗ p (boom[ n ] t)   = boom[ n ] (mapᵗ p t)
 
 
 

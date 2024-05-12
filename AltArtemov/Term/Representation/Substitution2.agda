@@ -11,8 +11,8 @@ open import AltArtemov.Variable.Representation
 open import Data.Fin.Missing
 
 
-weak : ∀ {g} → (g ,◌) ≳ᵍ g
-weak = skip ≳ᵍ-refl
+-- weak : ∀ {g} → (g ,◌) ≳ᵍ g
+-- weak = skip ≳ᵍ-refl
 
 mapⁱ : ∀ {g g′} → g ≳ᵍ g′ → ◌∈ g′ → ◌∈ g
 mapⁱ done     i       = i

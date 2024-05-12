@@ -11,6 +11,7 @@ open import AltArtemov.Variable
 open import AltArtemov.WIP.TySubst#
 
 
+{-
 data Ne (Ξ : (Γ : Cx) → Ty ⌊ Γ ⌋ᴳ → Set) (Γ : Cx) : Ty ⌊ Γ ⌋ᴳ → Set where
   var[_] : (n : ℕ) {A : Ty ∅} →
            (x : A ∈ Γ) →
@@ -78,3 +79,4 @@ data Nf (Γ : Cx) : Ty ⌊ Γ ⌋ᴳ → Set where
   up[_] : (n : ℕ) {ts : Vec ⌊ Γ ⌋ᴳ n} {s : ∅ ⊢◌} {A : Ty ∅} →
           Nf Γ (ts ∴ s ∶ A) →
           Nf Γ (UPs[ n ] ts ∴ ! s ∶ s ∶ A)
+-}

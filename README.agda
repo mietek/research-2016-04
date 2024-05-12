@@ -1,47 +1,65 @@
 module README where
 
--- open import AltArtemov
 
-open import Common.Delay.Core
-open import Common.Delay.StrongBisimilarity
-open import Common.Delay.Convergence
+--------------------------------------------------------------------------------
 
-open import AltArtemov.Context.Representation.Core
-open import AltArtemov.Context.Representation.Equality
-open import AltArtemov.Context.Representation.OPE
+import Data.Fin.Missing
 
-open import AltArtemov.Variable.Representation.Core
-open import AltArtemov.Variable.Representation.Equality
-open import AltArtemov.Variable.Representation.Notation
+import Common.Delay.Core
+import Common.Delay.StrongBisimilarity
+import Common.Delay.Convergence
 
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Term.Representation.Inversion
-open import AltArtemov.Term.Representation.Equality
-open import AltArtemov.Term.Representation.Notation.Level1
-open import AltArtemov.Term.Representation.Notation.Level2
-open import AltArtemov.Term.Representation.Notation.Level3
-open import AltArtemov.Term.Representation.Renaming
+import AltArtemov
 
-open import AltArtemov.Term.Representation.Vector.Core
-open import AltArtemov.Term.Representation.Vector.Notation
+import AltArtemov.Context
+import AltArtemov.Context.Core
+import AltArtemov.Context.OPE
+import AltArtemov.Context.Representation
+import AltArtemov.Context.Representation.Core
+import AltArtemov.Context.Representation.Equality
+import AltArtemov.Context.Representation.OPE
 
-open import AltArtemov.Type.Core
-open import AltArtemov.Type.Inversion
-open import AltArtemov.Type.Equality
-open import AltArtemov.Type.Renaming
+import AltArtemov.Variable
+import AltArtemov.Variable.Core
+import AltArtemov.Variable.Notation
+import AltArtemov.Variable.Representation
+import AltArtemov.Variable.Representation.Core
+import AltArtemov.Variable.Representation.Equality
+import AltArtemov.Variable.Representation.Notation
 
-open import AltArtemov.Context.Core
-open import AltArtemov.Context.OPE
+import AltArtemov.Term
+import AltArtemov.Term.Core
+import AltArtemov.Term.Notation
+import AltArtemov.Term.Notation.Level1
+import AltArtemov.Term.Notation.Level2
+import AltArtemov.Term.Notation.Level3
+import AltArtemov.Term.Renaming
+import AltArtemov.Term.Representation
+import AltArtemov.Term.Representation.Conversion
+import AltArtemov.Term.Representation.Core
+import AltArtemov.Term.Representation.Inversion
+import AltArtemov.Term.Representation.Equality
+import AltArtemov.Term.Representation.Notation
+import AltArtemov.Term.Representation.Notation.Level1
+import AltArtemov.Term.Representation.Notation.Level2
+import AltArtemov.Term.Representation.Notation.Level3
+import AltArtemov.Term.Representation.Renaming
+import AltArtemov.Term.Representation.Substitution2
+import AltArtemov.Term.Representation.Vector
+import AltArtemov.Term.Representation.Vector.Core
+import AltArtemov.Term.Representation.Vector.Notation
+import AltArtemov.Term.Substitution2
 
-open import AltArtemov.Variable.Core
-open import AltArtemov.Variable.Notation
+import AltArtemov.Type
+import AltArtemov.Type.Core
+import AltArtemov.Type.Inversion
+import AltArtemov.Type.Equality
+import AltArtemov.Type.Renaming
 
--- open import AltArtemov.Term.Core
--- open import AltArtemov.Term.Notation.Level1
--- open import AltArtemov.Term.Notation.Level2
--- open import AltArtemov.Term.Notation.Level3
--- open import AltArtemov.Term.Substitution
+import AltArtemov.WIP.Evaluation
+import AltArtemov.WIP.TmRSubst#
+import AltArtemov.WIP.TySubst#
+import AltArtemov.WIP.TmSubstLem
 
--- open import AltArtemov.WIP.TmRSubst#
--- open import AltArtemov.WIP.TySubst#
--- open import AltArtemov.WIP.TmSubstLem
+
+--------------------------------------------------------------------------------
