@@ -1,7 +1,7 @@
-module AltArtemov.Variable.Notation where
+module Try2.AltArtemov.Variable.Notation where
 
-open import AltArtemov.Context
-open import AltArtemov.Variable.Core
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Variable.Core
 
 
 0ˣ : ∀ {Γ A} → A ∈ (Γ , A)

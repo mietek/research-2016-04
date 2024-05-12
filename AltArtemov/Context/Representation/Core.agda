@@ -1,4 +1,4 @@
-module AltArtemov.Context.Representation.Core where
+module Try2.AltArtemov.Context.Representation.Core where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)

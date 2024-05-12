@@ -1,9 +1,9 @@
-module AltArtemov.Variable.Representation.Core where
+module Try2.AltArtemov.Variable.Representation.Core where
 
 open import Data.Fin using (Fin ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov.Context.Representation
+open import Try2.AltArtemov.Context.Representation
 
 
 data ◌∈_ : CxR → Set where

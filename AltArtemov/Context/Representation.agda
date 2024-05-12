@@ -1,5 +1,5 @@
-module AltArtemov.Context.Representation where
+module Try2.AltArtemov.Context.Representation where
 
-open import AltArtemov.Context.Representation.Core public
-open import AltArtemov.Context.Representation.Equality public
-open import AltArtemov.Context.Representation.OPE public
+open import Try2.AltArtemov.Context.Representation.Core public
+open import Try2.AltArtemov.Context.Representation.Equality public
+open import Try2.AltArtemov.Context.Representation.OPE public

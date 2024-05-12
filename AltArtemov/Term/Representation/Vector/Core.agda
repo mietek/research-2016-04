@@ -1,10 +1,10 @@
-module AltArtemov.Term.Representation.Vector.Core where
+module Try2.AltArtemov.Term.Representation.Vector.Core where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Variable.Representation
 
 
 infixr 5 _∷_

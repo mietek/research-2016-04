@@ -1,12 +1,12 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module AltArtemov.Term.Representation.Conversion where
+module Try2.AltArtemov.Term.Representation.Conversion where
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Term.Representation.Renaming
--- open import AltArtemov.Term.Representation.Substitution
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Term.Representation.Renaming
+-- open import Try2.AltArtemov.Term.Representation.Substitution
+open import Try2.AltArtemov.Variable.Representation
 
 
 -- TODO: unfinished

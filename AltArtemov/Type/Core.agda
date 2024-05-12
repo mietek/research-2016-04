@@ -1,7 +1,7 @@
-module AltArtemov.Type.Core where
+module Try2.AltArtemov.Type.Core where
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation
 
 
 infixr 10 _⊃_

@@ -1,10 +1,10 @@
-module Common.Delay.Convergence where
+module Try2.Common.Delay.Convergence where
 
 open import Data.Product using (∃)
 open import Size using (Size ; Size<_ ; ∞)
 
-open import Common.Delay.Core
-open import Common.Delay.StrongBisimilarity
+open import Try2.Common.Delay.Core
+open import Try2.Common.Delay.StrongBisimilarity
 
 
 

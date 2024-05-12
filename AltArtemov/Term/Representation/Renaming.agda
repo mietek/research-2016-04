@@ -1,13 +1,13 @@
-module AltArtemov.Term.Representation.Renaming where
+module Try2.AltArtemov.Term.Representation.Renaming where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 open import Data.Fin using (Fin ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; cong)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Term.Representation.Vector
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Term.Representation.Vector
+open import Try2.AltArtemov.Variable.Representation
 
 
 RRen : (CxR → Set) → CxR → CxR → Set

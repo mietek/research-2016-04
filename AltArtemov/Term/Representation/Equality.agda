@@ -1,13 +1,13 @@
-module AltArtemov.Term.Representation.Equality where
+module Try2.AltArtemov.Term.Representation.Equality where
 
 open import Function using (_∘_)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import Relation.Nullary using (Dec ; yes ; no)
 import Data.Nat as ℕ
 
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Term.Representation.Inversion
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Term.Representation.Inversion
+open import Try2.AltArtemov.Variable.Representation
 
 
 _≟ᵗ_ : ∀ {g} → (t t′ : g ⊢◌) → Dec (t ≡ t′)

@@ -1,10 +1,10 @@
-module AltArtemov.Term.Representation.Inversion where
+module Try2.AltArtemov.Term.Representation.Inversion where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Variable.Representation
 
 
 inv-VAR-n : ∀ {g n n′} {i i′ : ◌∈ g} → _⊢◌.VAR[ n ] i ≡ VAR[ n′ ] i′ → n ≡ n′

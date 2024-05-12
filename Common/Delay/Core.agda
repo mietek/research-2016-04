@@ -1,4 +1,4 @@
-module Common.Delay.Core where
+module Try2.Common.Delay.Core where
 
 open import Category.Monad public using (RawMonad)
 open import Data.Maybe using (Maybe ; just ; nothing)

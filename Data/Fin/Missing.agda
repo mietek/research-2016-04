@@ -1,4 +1,4 @@
-module Data.Fin.Missing where
+module Try2.Data.Fin.Missing where
 
 open import Data.Nat using (ℕ)
 open import Data.Fin using (Fin ; zero ; suc)

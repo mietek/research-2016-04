@@ -1,11 +1,11 @@
-module AltArtemov.Variable.Core where
+module Try2.AltArtemov.Variable.Core where
 
 open import Data.Fin using (Fin)
 open import Function using (_∘_)
 
-open import AltArtemov.Context
-open import AltArtemov.Type
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Type
+open import Try2.AltArtemov.Variable.Representation
 
 
 data _∈_ (A : Ty ∅) : Cx → Set where

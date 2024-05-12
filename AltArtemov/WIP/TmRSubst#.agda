@@ -1,18 +1,18 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module AltArtemov.WIP.TmRSubst# where
+module Try2.AltArtemov.WIP.TmRSubst# where
 
 open import Data.Nat using (suc)
 open import Data.Fin using (Fin ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; cong)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Term.Representation.Equality
--- open import AltArtemov.Term.Representation.Substitution
-open import AltArtemov.Variable.Representation
-open import Data.Fin.Missing
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Term.Representation.Equality
+-- open import Try2.AltArtemov.Term.Representation.Substitution
+open import Try2.AltArtemov.Variable.Representation
+open import Try2.Data.Fin.Missing
 
 
 _∖ᵍ#_ : (g : CxR) → Fin (suc ⌊ g ⌋ᵍ) → CxR

@@ -1,14 +1,14 @@
-module AltArtemov.WIP.Evaluation where
+module Try2.AltArtemov.WIP.Evaluation where
 
 open import Data.Nat using (ℕ)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
-open import AltArtemov.Context
-open import AltArtemov.Type
-open import AltArtemov.Term
-open import AltArtemov.Variable
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Type
+open import Try2.AltArtemov.Term
+open import Try2.AltArtemov.Variable
 
-open import AltArtemov.WIP.TySubst#
+open import Try2.AltArtemov.WIP.TySubst#
 
 
 {-

@@ -1,9 +1,9 @@
-module AltArtemov.Context.OPE where
+module Try2.AltArtemov.Context.OPE where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; cong)
 
-open import AltArtemov.Context.Core
-open import AltArtemov.Context.Representation
+open import Try2.AltArtemov.Context.Core
+open import Try2.AltArtemov.Context.Representation
 
 
 data _≥_ : (Γ Γ′ : Cx) → Set where

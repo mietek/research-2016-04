@@ -1,10 +1,10 @@
-module AltArtemov.Context.Core where
+module Try2.AltArtemov.Context.Core where
 
 open import Data.Nat using (ℕ)
 open import Function using (_∘_)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Type
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Type
 
 
 infixl 5 _,_

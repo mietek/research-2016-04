@@ -1,12 +1,12 @@
-module AltArtemov.Term.Notation.Level1 where
+module Try2.AltArtemov.Term.Notation.Level1 where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov.Context
-open import AltArtemov.Term.Core
-open import AltArtemov.Term.Representation
-open import AltArtemov.Type
-open import AltArtemov.Variable
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Term.Core
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Type
+open import Try2.AltArtemov.Variable
 
 
 var : ∀ {Γ A Z}

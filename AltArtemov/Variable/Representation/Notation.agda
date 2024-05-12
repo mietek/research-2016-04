@@ -1,7 +1,7 @@
-module AltArtemov.Variable.Representation.Notation where
+module Try2.AltArtemov.Variable.Representation.Notation where
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Variable.Representation.Core
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Variable.Representation.Core
 
 
 0ⁱ : ∀ {g} → ◌∈ (g ,◌)

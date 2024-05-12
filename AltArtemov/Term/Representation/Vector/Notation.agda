@@ -1,11 +1,11 @@
-module AltArtemov.Term.Representation.Vector.Notation where
+module Try2.AltArtemov.Term.Representation.Vector.Notation where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Term.Representation.Vector.Core
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Term.Representation.Vector.Core
+open import Try2.AltArtemov.Variable.Representation
 
 
 VARs[_] : ∀ {g} → (n : ℕ) → ◌∈ g → Vec g n

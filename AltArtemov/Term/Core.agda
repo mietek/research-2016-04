@@ -1,14 +1,14 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module AltArtemov.Term.Core where
+module Try2.AltArtemov.Term.Core where
 
 open import Data.Nat using (ℕ)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
-open import AltArtemov.Context
-open import AltArtemov.Term.Representation
-open import AltArtemov.Type
-open import AltArtemov.Variable
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Type
+open import Try2.AltArtemov.Variable
 
 
 infixr 15 _∴_

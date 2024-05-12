@@ -1,5 +1,5 @@
-module AltArtemov.Variable.Representation where
+module Try2.AltArtemov.Variable.Representation where
 
-open import AltArtemov.Variable.Representation.Core public
-open import AltArtemov.Variable.Representation.Equality public
-open import AltArtemov.Variable.Representation.Notation public
+open import Try2.AltArtemov.Variable.Representation.Core public
+open import Try2.AltArtemov.Variable.Representation.Equality public
+open import Try2.AltArtemov.Variable.Representation.Notation public

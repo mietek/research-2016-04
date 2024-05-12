@@ -1,12 +1,12 @@
-module AltArtemov.Type.Equality where
+module Try2.AltArtemov.Type.Equality where
 
 open import Function using (_∘_)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import Relation.Nullary using (Dec ; yes ; no)
 
-open import AltArtemov.Term.Representation
-open import AltArtemov.Type.Core
-open import AltArtemov.Type.Inversion
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Type.Core
+open import Try2.AltArtemov.Type.Inversion
 
 
 _≟ᴬ_ : ∀ {g} → (A A′ : Ty g) → Dec (A ≡ A′)

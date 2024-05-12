@@ -1,17 +1,17 @@
-module AltArtemov.WIP.TmSubstLem where
+module Try2.AltArtemov.WIP.TmSubstLem where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; sym ; cong ; subst)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov.Context
-open import AltArtemov.Type
-open import AltArtemov.Term.Core
-open import AltArtemov.Term.Representation
-open import AltArtemov.Variable
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Type
+open import Try2.AltArtemov.Term.Core
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Variable
 
--- open import AltArtemov.Term.Substitution
-open import AltArtemov.WIP.TySubst#
+-- open import Try2.AltArtemov.Term.Substitution
+open import Try2.AltArtemov.WIP.TySubst#
 
 
 {-

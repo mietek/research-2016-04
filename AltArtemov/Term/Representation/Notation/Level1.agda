@@ -1,8 +1,8 @@
-module AltArtemov.Term.Representation.Notation.Level1 where
+module Try2.AltArtemov.Term.Representation.Notation.Level1 where
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation.Core
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation.Core
+open import Try2.AltArtemov.Variable.Representation
 
 
 VAR  : ∀ {g} → ◌∈ g → g ⊢◌

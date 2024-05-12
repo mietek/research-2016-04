@@ -1,18 +1,18 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module AltArtemov.WIP.TySubst# where
+module Try2.AltArtemov.WIP.TySubst# where
 
 open import Data.Nat using (suc)
 open import Data.Fin using (Fin ; zero ; suc)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation
-open import AltArtemov.Type.Core
--- open import AltArtemov.Type.Substitution
-open import AltArtemov.Variable.Representation
-open import Data.Fin.Missing
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Type.Core
+-- open import Try2.AltArtemov.Type.Substitution
+open import Try2.AltArtemov.Variable.Representation
+open import Try2.Data.Fin.Missing
 
-open import AltArtemov.WIP.TmRSubst#
+open import Try2.AltArtemov.WIP.TmRSubst#
 
 
 wkᴬ# : ∀ {g} → (k : Fin (suc ⌊ g ⌋ᵍ)) → Ty (g ∖ᵍ# k) → Ty g

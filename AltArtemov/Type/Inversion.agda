@@ -1,9 +1,9 @@
-module AltArtemov.Type.Inversion where
+module Try2.AltArtemov.Type.Inversion where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov.Term.Representation
-open import AltArtemov.Type.Core
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Type.Core
 
 
 inv-∶-t : ∀ {g} {t t′ : g ⊢◌} {A A′ : Ty g} → t ∶ A ≡ t′ ∶ A′ → t ≡ t′

@@ -1,10 +1,10 @@
-module AltArtemov.Context.Representation.Equality where
+module Try2.AltArtemov.Context.Representation.Equality where
 
 open import Function using (_∘_)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import Relation.Nullary using (Dec ; yes ; no)
 
-open import AltArtemov.Context.Representation.Core
+open import Try2.AltArtemov.Context.Representation.Core
 
 
 _≟ᵍ_ : (g g′ : CxR) → Dec (g ≡ g′)

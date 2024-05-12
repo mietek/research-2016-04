@@ -1,9 +1,9 @@
-module AltArtemov.Type.Renaming where
+module Try2.AltArtemov.Type.Renaming where
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Term.Representation
-open import AltArtemov.Type.Core
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Term.Representation
+open import Try2.AltArtemov.Type.Core
+open import Try2.AltArtemov.Variable.Representation
 
 
 renᴬ : ∀ {g g′} → g′ ≥ᵍ g → RRen Ty g g′

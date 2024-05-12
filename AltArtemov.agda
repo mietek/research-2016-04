@@ -1,6 +1,6 @@
-module AltArtemov where
+module Try2.AltArtemov where
 
-open import AltArtemov.Context public
-open import AltArtemov.Variable public
-open import AltArtemov.Term public
-open import AltArtemov.Type public
+open import Try2.AltArtemov.Context public
+open import Try2.AltArtemov.Variable public
+open import Try2.AltArtemov.Term public
+open import Try2.AltArtemov.Type public

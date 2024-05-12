@@ -1,9 +1,9 @@
-module AltArtemov.Term.Representation.Core where
+module Try2.AltArtemov.Term.Representation.Core where
 
 open import Data.Nat using (ℕ)
 
-open import AltArtemov.Context.Representation
-open import AltArtemov.Variable.Representation
+open import Try2.AltArtemov.Context.Representation
+open import Try2.AltArtemov.Variable.Representation
 
 
 data _⊢◌ (g : CxR) : Set where

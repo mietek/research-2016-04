@@ -1,8 +1,8 @@
-module AltArtemov.Term.Renaming where
+module Try2.AltArtemov.Term.Renaming where
 
-open import AltArtemov.Context
-open import AltArtemov.Type
-open import AltArtemov.Variable
+open import Try2.AltArtemov.Context
+open import Try2.AltArtemov.Type
+open import Try2.AltArtemov.Variable
 
 
 Ren : ∀ {X : Set} → (Cx → X → Set) → Cx → Cx → Set
