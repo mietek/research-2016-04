@@ -1,6 +1,6 @@
-module Common.Variable where
+module Try3.Common.Variable where
 
-open import Common.OrderPreservingEmbedding public
+open import Try3.Common.OrderPreservingEmbedding public
 
 
 data Var (X : Set) : Cx X → X → Set where

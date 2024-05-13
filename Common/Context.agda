@@ -1,6 +1,6 @@
-module Common.Context where
+module Try3.Common.Context where
 
-open import Common.Core public
+open import Try3.Common.Core public
 
 
 data Cx (X : Set) : Set where

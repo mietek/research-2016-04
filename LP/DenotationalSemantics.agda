@@ -1,6 +1,6 @@
-module LP.DenotationalSemantics where
+module Try3.LP.DenotationalSemantics where
 
-open import LP.Core public
+open import Try3.LP.Core public
 
 
 mutual

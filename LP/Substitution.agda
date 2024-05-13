@@ -1,8 +1,8 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module LP.Substitution where
+module Try3.LP.Substitution where
 
-open import LP.Weakening public
+open import Try3.LP.Weakening public
 
 
 subst-var⁻ : ∀ {Γ Δ A B} → (v : Var Ty Γ B) (x : Var Ty Γ A) (s : Tm (Γ - x) Δ A) →

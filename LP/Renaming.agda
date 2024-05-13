@@ -1,8 +1,8 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module LP.Renaming where
+module Try3.LP.Renaming where
 
-open import LP.Core public
+open import Try3.LP.Core public
 
 
 ren-tm : ∀ {Γ Γ′ Δ A} → Γ′ ≥ Γ → Tm Γ Δ A → Tm Γ′ Δ A

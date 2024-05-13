@@ -1,32 +1,32 @@
-module Everything where
+module Try3.Everything where
 
 
 --------------------------------------------------------------------------------
 
-import Common.Core
-import Common.Context
-import Common.OrderPreservingEmbedding
-import Common.Variable
+import Try3.Common.Core
+import Try3.Common.Context
+import Try3.Common.OrderPreservingEmbedding
+import Try3.Common.Variable
 
-import S4.Core
-import S4.Examples
-import S4.Weakening
-import S4.Substitution
-import S4.Conversion
+import Try3.S4.Core
+import Try3.S4.Examples
+import Try3.S4.Weakening
+import Try3.S4.Substitution
+import Try3.S4.Conversion
 
 -- TODO: The up rule seems not to allow weakening and substitution.
-import LP.Core
-import LP.Examples
-import LP.AltArtemovNotation
-import LP.ForgetfulProjection
-import LP.DenotationalSemantics
-import LP.Weakening
-import LP.Substitution
-import LP.Renaming
+import Try3.LP.Core
+import Try3.LP.Examples
+import Try3.LP.AltArtemovNotation
+import Try3.LP.ForgetfulProjection
+import Try3.LP.DenotationalSemantics
+import Try3.LP.Weakening
+import Try3.LP.Substitution
+import Try3.LP.Renaming
 
 -- TODO: The notion of equality needs more thought.
-import LPWithEquality.Core
-import LPWithEquality.Examples
+import Try3.LPWithEquality.Core
+import Try3.LPWithEquality.Examples
 
 
 --------------------------------------------------------------------------------

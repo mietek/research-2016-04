@@ -1,6 +1,6 @@
-module S4.Core where
+module Try3.S4.Core where
 
-open import Common.Variable public
+open import Try3.Common.Variable public
 
 
 data Ty : Set where

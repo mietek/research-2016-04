@@ -1,6 +1,6 @@
-module S4.Substitution where
+module Try3.S4.Substitution where
 
-open import S4.Weakening public
+open import Try3.S4.Weakening public
 
 
 subst-var⁻ : ∀ {Γ Δ A B} → (v : Var Ty Γ B) (x : Var Ty Γ A) (s : Tm (Γ - x) Δ A) →

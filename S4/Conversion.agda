@@ -1,6 +1,6 @@
-module S4.Conversion where
+module Try3.S4.Conversion where
 
-open import S4.Substitution public
+open import Try3.S4.Substitution public
 
 
 data _⇔_ {Γ Δ} : ∀ {A} → Tm Γ Δ A → Tm Γ Δ A → Set where

@@ -1,8 +1,8 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module LPWithEquality.Examples where
+module Try3.LPWithEquality.Examples where
 
-open import LPWithEquality.Core public
+open import Try3.LPWithEquality.Core public
 
 
 ≑refl : ∀ {Γ Δ A} → Tm Γ Δ (A ≑ A)

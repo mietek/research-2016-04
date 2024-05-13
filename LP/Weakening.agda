@@ -1,8 +1,8 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module LP.Weakening where
+module Try3.LP.Weakening where
 
-open import LP.Core public
+open import Try3.LP.Core public
 
 
 wk-tm⁻ : ∀ {Γ Δ A B} → (x : Var Ty Γ A) → Tm (Γ - x) Δ B → Tm Γ Δ B

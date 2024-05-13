@@ -1,6 +1,6 @@
-module S4.Weakening where
+module Try3.S4.Weakening where
 
-open import S4.Core public
+open import Try3.S4.Core public
 
 
 wk-tm⁻ : ∀ {Γ Δ A B} → (x : Var Ty Γ A) → Tm (Γ - x) Δ B → Tm Γ Δ B

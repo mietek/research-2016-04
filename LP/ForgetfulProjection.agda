@@ -1,7 +1,7 @@
-module LP.ForgetfulProjection where
+module Try3.LP.ForgetfulProjection where
 
-open import LP.Core public
-import S4.Core as S4
+open import Try3.LP.Core public
+import Try3.S4.Core as S4
 
 
 ⌊_⌋ᴬ : Ty → S4.Ty

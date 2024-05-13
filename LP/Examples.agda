@@ -1,6 +1,6 @@
-module LP.Examples where
+module Try3.LP.Examples where
 
-open import LP.Core public
+open import Try3.LP.Core public
 
 
 I : ∀ {Γ Δ A} → Tm Γ Δ (A ⊃ A)

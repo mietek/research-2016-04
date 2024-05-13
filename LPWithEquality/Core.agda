@@ -1,6 +1,6 @@
-module LPWithEquality.Core where
+module Try3.LPWithEquality.Core where
 
-open import Common.Variable public
+open import Try3.Common.Variable public
 
 
 mutual

@@ -1,6 +1,6 @@
-module S4.Examples where
+module Try3.S4.Examples where
 
-open import S4.Core public
+open import Try3.S4.Core public
 
 
 I : ∀ {Γ Δ A} → Tm Γ Δ (A ⊃ A)

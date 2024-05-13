@@ -1,4 +1,4 @@
-module Common.Core where
+module Try3.Common.Core where
 
 open import Data.Empty using () renaming (⊥ to Empty ; ⊥-elim to empty) public
 open import Data.Fin using (Fin ; zero ; suc) public
