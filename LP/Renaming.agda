@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module LP.Renaming where
 
 open import LP.Core public

@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module LP.Substitution where
 
 open import LP.Weakening public

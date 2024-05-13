@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module LPWithEquality.Examples where
 
 open import LPWithEquality.Core public

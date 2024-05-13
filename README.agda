@@ -1,5 +1,8 @@
 module README where
 
+
+--------------------------------------------------------------------------------
+
 import Common.Core
 import Common.Context
 import Common.OrderPreservingEmbedding
@@ -17,10 +20,13 @@ import LP.Examples
 import LP.AltArtemovNotation
 import LP.ForgetfulProjection
 import LP.DenotationalSemantics
---import LP.Weakening
---import LP.Substitution
---import LP.Renaming
+import LP.Weakening
+import LP.Substitution
+import LP.Renaming
 
 -- TODO: The notion of equality needs more thought.
 import LPWithEquality.Core
---import LPWithEquality.Examples
+import LPWithEquality.Examples
+
+
+--------------------------------------------------------------------------------

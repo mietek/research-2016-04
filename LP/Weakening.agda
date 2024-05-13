@@ -1,3 +1,5 @@
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module LP.Weakening where
 
 open import LP.Core public
