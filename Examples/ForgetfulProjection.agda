@@ -13,14 +13,14 @@ import Examples.S4 as S4
 postulate
   ignore-≑ : S4.Ty
 
-°[_] : ∀ A → S4.Ty
+°[_] : ∀ (A : Ty) → S4.Ty
 °[ ⊥ ]    = S4.⊥
 °[ A ⊃ B ] = °[ A ] S4.⊃ °[ B ]
 °[ A ∧ B ] = °[ A ] S4.∧ °[ B ]
 °[ t ∶ A ] = S4.□ °[ A ]
 °[ A ≑ B ] = ignore-≑
 
-_°≡_ : ∀ {{Γ Δ′ Γ′}} {A A′} (d : Γ ⊢ A) (d′ : Δ′ ∙ Γ′ ⊢ A′) → Set
+_°≡_ : ∀ {A A′} (d : ∅ ⊢ A) (d′ : S4.∅ ∙ S4.∅ ⊢ A′) → Set
 d °≡ d′ = °[ ty d ] ≡ S4.ty d′
 
 

@@ -12,12 +12,12 @@ open import Relation.Nullary using (¬_ ; yes ; no)
 
 open import Algebra using (module CommutativeSemiringWithoutOne ; module DistributiveLattice)
 import Data.Nat.Properties as ℕ
-open module ℕCSWO = CommutativeSemiringWithoutOne ℕ.⊔-⊓-0-commutativeSemiringWithoutOne using (*-isSemigroup) renaming (zero to ⊓-zero)
-open module ℕDL = DistributiveLattice ℕ.distributiveLattice using () renaming (∨-comm to ⊓-comm ; ∨-assoc to ⊓-assoc) public
+open module ℕCSWO = CommutativeSemiringWithoutOne ℕ.⊔-⊓-commutativeSemiringWithoutOne using (*-isSemigroup) renaming (zero to ⊓-zero)
+open module ℕDL = DistributiveLattice ℕ.⊓-⊔-distributiveLattice using () renaming (∨-comm to ⊓-comm ; ∨-assoc to ⊓-assoc) public
 
 open import Relation.Binary using (module DecTotalOrder)
 import Data.Nat as ℕ
-open module ℕDTO = DecTotalOrder ℕ.decTotalOrder using () renaming (trans to ≤-trans ; total to ≤-total) public
+open module ℕDTO = DecTotalOrder ℕ.≤-decTotalOrder using () renaming (trans to ≤-trans ; total to ≤-total) public
 
 
 n≤sn : ∀ {n} → n ≤ suc n

@@ -7,7 +7,7 @@ infixl 2 _,_
 infixr 1 _∋_
 
 data Cx : Set where
-  instance ∅ : Cx
+  ∅   : Cx
   _,_ : ∀ (Γ : Cx) (A : Ty) → Cx
 
 data _∋_ : ∀ (Γ : Cx) (A : Ty) → Set where

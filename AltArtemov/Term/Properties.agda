@@ -15,7 +15,7 @@ open import Data.Nat.Missing
 
 
 -- Terms have levels.
-lev : ∀ t → ℕ
+lev : ∀ (t : Tm) → ℕ
 lev (VAR[ n ] i)    = n
 lev (LAM[ n ] t)    = n ⊓ lev t
 lev (APP[ n ] t s)  = n ⊓ lev t ⊓ lev s
@@ -29,7 +29,7 @@ lev (EQ[ n ] t s)   = n ⊓ lev t ⊓ lev s
 
 
 -- Terms can be quoted.
-quo : ∀ t → Tm
+quo : ∀ (t : Tm) → Tm
 quo (VAR[ n ] i)    = VAR[ suc n ] i
 quo (LAM[ n ] t)    = LAM[ suc n ] (quo t)
 quo (APP[ n ] t s)  = APP[ suc n ] (quo t) (quo s)

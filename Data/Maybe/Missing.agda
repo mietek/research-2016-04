@@ -2,7 +2,7 @@ module Data.Maybe.Missing where
 
 open import Category.Monad using (RawMonad)
 open import Data.Maybe using (Maybe ; just ; nothing)
-import Data.Maybe as M
+import Data.Maybe.Categorical as M
 
 
 return : ∀ {ℓ} {X : Set ℓ} → X → Maybe X

@@ -58,35 +58,35 @@ such that  A = B (mod Sc).
 
 -- A1.  t ∶ (F → G) → (s ∶ F → (t ∙ s) ∶ G)
 
-A1 : ∀ {t s F G} → ⊩ t ∶ (F ⊃ G) ⊃ s ∶ F ⊃ (APP t s) ∶ G
+A1 : ∀ {t s F G Γ} → Γ ⊢ t ∶ (F ⊃ G) ⊃ s ∶ F ⊃ (APP t s) ∶ G
 A1 = lam (lam (app² v1 v0))
 
 
 -- A2.  t ∶ F → F
 
-A2 : ∀ {t F} → ⊩ t ∶ F ⊃ F
+A2 : ∀ {t F Γ} → Γ ⊢ t ∶ F ⊃ F
 A2 = lam (down v0)
 
 
 -- A3.  t ∶ F → ! t ∶ (t ∶ F)
 
-A3 : ∀ {t F} → ⊩ t ∶ F ⊃ quo t ∶ t ∶ F
+A3 : ∀ {t F Γ} → Γ ⊢ t ∶ F ⊃ quo t ∶ t ∶ F
 A3 = lam (up v0)
 
 
 -- A4.  Unification axiom
 
-A4 : ∀ {t F G} → ⊩ t ∶ F ⊃ t ∶ G ⊃ F ≑ G
+A4 : ∀ {t F G Γ} → Γ ⊢ t ∶ F ⊃ t ∶ G ⊃ F ≑ G
 A4 = lam (lam (eq v1 v0))
 
 
-id² : ∀ {A} → ⊩ LAM V0 ∶ (A ⊃ A)
+id² : ∀ {A Γ} → Γ ⊢ LAM V0 ∶ (A ⊃ A)
 id² = lam² v0²
 
-test : ∀ {A B} → ⊩ (A ≠ (B ⊃ B)) ⊃ (LAM V0 ∶ A) ⊃ ⊥
+test : ∀ {A B Γ} → Γ ⊢ (A ≠ (B ⊃ B)) ⊃ (LAM V0 ∶ A) ⊃ ⊥
 test = lam (lam (app v1 (eq v0 id²)))
 
-test² : ∀ {A B} → ⊩ LAM (LAM (APP V1 (EQ V0 (LAM² V0²)))) ∶ ((A ≠ (B ⊃ B)) ⊃ (LAM V0 ∶ A) ⊃ ⊥)
+test² : ∀ {A B Γ} → Γ ⊢ LAM (LAM (APP V1 (EQ V0 (LAM² V0²)))) ∶ ((A ≠ (B ⊃ B)) ⊃ (LAM V0 ∶ A) ⊃ ⊥)
 test² = nec test
 
 

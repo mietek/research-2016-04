@@ -53,11 +53,5 @@ data _∙_⊢_ (Δ Γ : Cx) : ∀ (A : Ty) → Set where
       → Δ ∙ Γ ⊢ C
 
 
-infixr 0 ⊩_
-
-⊩_ : ∀ (A : Ty) → Set
-⊩ A = ∀ {{Δ Γ : Cx}} → Δ ∙ Γ ⊢ A
-
-
 ty : ∀ {Δ Γ A} (d : Δ ∙ Γ ⊢ A) → Ty
 ty {A = A} d = A

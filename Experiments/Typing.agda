@@ -69,10 +69,10 @@ mutual
 module Example where
   open import Examples.AltArtemov
 
-  pI : ∀ {A} → rep (I {A}) ≡ LAM V0
+  pI : ∀ {A Γ} → rep {Γ} (I {A}) ≡ LAM V0
   pI = refl
 
-  tI : ∀ {A} → ty (I {A}) ≡ (A ⊃ A)
+  tI : ∀ {A Γ} → ty {Γ} (I {A}) ≡ (A ⊃ A)
   tI = refl
 
 
@@ -82,5 +82,5 @@ module Example where
   postulate
     ugh : ∀ Γ A → locate (Γ , A) zero A ≡ just top    -- TODO: Remove this.
 
-  zI : ∀ {A} → check ∅ (rep (I {A})) (ty (I {A})) ≡ just (I {A})
-  zI {A} rewrite ugh ∅ A = refl
+  zI : ∀ {A Γ} → check Γ (rep {Γ} (I {A})) (ty {Γ} (I {A})) ≡ just (I {A})
+  zI {A} {Γ} rewrite ugh Γ A = refl

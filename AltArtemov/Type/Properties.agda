@@ -16,7 +16,7 @@ open import Data.Nat.Missing
 
 
 -- Types have levels.
-lev : ∀ A → ℕ
+lev : ∀ (A : Ty) → ℕ
 lev ⊥      = 0
 lev (A ⊃ B) = 0
 lev (A ∧ B) = 0
@@ -100,7 +100,7 @@ _≟_ : Decidable {A = Ty} _≡_
 
 -- TODO
 
-can-lower : ∀ A → Maybe Ty
+can-lower : ∀ (A : Ty) → Maybe Ty
 can-lower ⊥      = nothing
 can-lower (A ⊃ B) = nothing
 can-lower (A ∧ B) = nothing

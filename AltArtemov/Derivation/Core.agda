@@ -58,9 +58,3 @@ data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
   eq[_] : ∀ n {ts ss : Tms n} {u A B}
       → (d : Γ ⊢ ts ∶⋯∶ u ∶ A)    → (c : Γ ⊢ ss ∶⋯∶ u ∶ B)
       → Γ ⊢ EQs[ n ] ts ss ∶⋯∶ (A ≑ B)
-
-
-infixr 0 ⊩_
-
-⊩_ : ∀ (A : Ty) → Set
-⊩ A = ∀ {{Γ : Cx}} → Γ ⊢ A

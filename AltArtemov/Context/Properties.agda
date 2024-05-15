@@ -13,7 +13,7 @@ ix (pop i) = suc (ix i)
 
 
 -- Contexts can be weakened.
-_++_ : ∀ Γ Δ → Cx
+_++_ : ∀ (Γ Δ : Cx) → Cx
 Γ ++ ∅       = Γ
 Γ ++ (Δ , A) = Γ ++ Δ , A
 

@@ -62,7 +62,7 @@ principles:
 
 -- 2.  λ∞ postulates the principle  x ∶ A ⊢ A.  -}
 
-P2 : ∀ {x A} → ⊩ x ∶ A ⊃ A
+P2 : ∀ {x A Γ} → Γ ⊢ x ∶ A ⊃ A
 P2 = lam (down v0)
 
 

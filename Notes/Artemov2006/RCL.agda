@@ -31,7 +31,7 @@ combinators  d,  o,  and  c.   The principles of RCL are:
 
 -- A1.  t ∶ A → A
 
-A1 : ∀ {t A} → ⊩ t ∶ A ⊃ A
+A1 : ∀ {t A Γ} → Γ ⊢ t ∶ A ⊃ A
 A1 = lam (down v0)
 
 
@@ -40,7 +40,7 @@ A1 = lam (down v0)
 k : Tm
 k = LAM (LAM V1)
 
-A2 : ∀ {A B} → ⊩ k ∶ (A ⊃ B ⊃ A)
+A2 : ∀ {A B Γ} → Γ ⊢ k ∶ (A ⊃ B ⊃ A)
 A2 = lam² (lam² v1²)
 
 
@@ -49,7 +49,7 @@ A2 = lam² (lam² v1²)
 s : Tm
 s = LAM (LAM (LAM (APP (APP V2 V0) (APP V1 V0))))
 
-A3 : ∀ {A B C} → ⊩ s ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
+A3 : ∀ {A B C Γ} → Γ ⊢ s ∶ ((A ⊃ B ⊃ C) ⊃ (A ⊃ B) ⊃ A ⊃ C)
 A3 = lam² (lam² (lam² (app² (app² v2² v0²) (app² v1² v0²))))
 
 
@@ -58,7 +58,7 @@ A3 = lam² (lam² (lam² (app² (app² v2² v0²) (app² v1² v0²))))
 d : Tm
 d = LAM (DOWN V0)
 
-A4 : ∀ {t A} → ⊩ d ∶ (t ∶ A ⊃ A)
+A4 : ∀ {t A Γ} → Γ ⊢ d ∶ (t ∶ A ⊃ A)
 A4 = lam² (down² v0²)
 
 
@@ -67,7 +67,7 @@ A4 = lam² (down² v0²)
 o : Tm
 o = LAM (LAM (APP² V1 V0))
 
-A5 : ∀ {u v A B} → ⊩ o ∶ (u ∶ (A ⊃ B) ⊃ v ∶ A ⊃ (APP u v) ∶ B)
+A5 : ∀ {u v A B Γ} → Γ ⊢ o ∶ (u ∶ (A ⊃ B) ⊃ v ∶ A ⊃ (APP u v) ∶ B)
 A5 = lam² (lam² (app³ v1² v0²))
 
 
@@ -76,7 +76,7 @@ A5 = lam² (lam² (app³ v1² v0²))
 c : Tm
 c = LAM (UP V0)
 
-A6 : ∀ {t A} → ⊩ c ∶ (t ∶ A ⊃ quo t ∶ t ∶ A)
+A6 : ∀ {t A Γ} → Γ ⊢ c ∶ (t ∶ A ⊃ quo t ∶ t ∶ A)
 A6 = lam² (up² v0²)
 
 
@@ -85,7 +85,7 @@ A6 = lam² (up² v0²)
 --                         -----------.
 --                              B
 
-MP : ∀ {A B} → ⊩ A ⊃ B → ⊩ A → ⊩ B
+MP : ∀ {A B Γ} → Γ ⊢ A ⊃ B → Γ ⊢ A → Γ ⊢ B
 MP f x = app f x
 
 
@@ -106,7 +106,7 @@ application rule
 
 -}
 
-X1 : ∀ {u v A B} → ⊩ u ∶ (A ⊃ B) ⊃ v ∶ A ⊃ (APP u v) ∶ B
+X1 : ∀ {u v A B Γ} → Γ ⊢ u ∶ (A ⊃ B) ⊃ v ∶ A ⊃ (APP u v) ∶ B
 X1 = lam (lam (app² v1 v0))
 
 
