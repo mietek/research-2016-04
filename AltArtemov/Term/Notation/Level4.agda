@@ -12,6 +12,15 @@ LAM⁴ t₄ = LAM[ 3 ] t₄
 APP⁴ : ∀ t₄ s₄ → Tm
 APP⁴ t₄ s₄ = APP[ 3 ] t₄ s₄
 
+PAIR⁴ : ∀ t₄ s₄ → Tm
+PAIR⁴ t₄ s₄ = PAIR[ 3 ] t₄ s₄
+
+FST⁴ : ∀ t₄ → Tm
+FST⁴ t₄ = FST[ 3 ] t₄
+
+SND⁴ : ∀ t₄ → Tm
+SND⁴ t₄ = SND[ 3 ] t₄
+
 UP⁴ : ∀ t₄ → Tm
 UP⁴ t₄ = UP[ 3 ] t₄
 

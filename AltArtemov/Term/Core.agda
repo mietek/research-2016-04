@@ -13,6 +13,15 @@ data Tm : Set where
   -- Function application. (⊃E)
   APP[_] : ∀ (n : ℕ) (t s : Tm) → Tm
 
+  -- Product. (∧I)
+  PAIR[_] : ∀ (n : ℕ) (t s : Tm) → Tm
+
+  -- First projection. (∧E₁)
+  FST[_] : ∀ (n : ℕ) (t : Tm) → Tm
+
+  -- Second projection. (∧E₂)
+  SND[_] : ∀ (n : ℕ) (t : Tm) → Tm
+
   -- Reification.
   UP[_] : ∀ (n : ℕ) (t : Tm) → Tm
 

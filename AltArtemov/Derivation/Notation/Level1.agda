@@ -22,6 +22,21 @@ app : ∀ {A B Γ}
     → Γ ⊢ B
 app = app[ 0 ] {ts = []} {ss = []}
 
+pair : ∀ {A B Γ}
+    → Γ ⊢ A    → Γ ⊢ B
+    → Γ ⊢ A ∧ B
+pair = pair[ 0 ] {ts = []} {ss = []}
+
+fst : ∀ {A B Γ}
+    → Γ ⊢ A ∧ B
+    → Γ ⊢ A
+fst = fst[ 0 ] {ts = []}
+
+snd : ∀ {A B Γ}
+    → Γ ⊢ A ∧ B
+    → Γ ⊢ B
+snd = snd[ 0 ] {ts = []}
+
 up : ∀ {u A Γ}
     → Γ ⊢ u ∶ A
     → Γ ⊢ quo u ∶ u ∶ A

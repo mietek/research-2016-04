@@ -12,6 +12,15 @@ LAM³ t₃ = LAM[ 2 ] t₃
 APP³ : ∀ t₃ s₃ → Tm
 APP³ t₃ s₃ = APP[ 2 ] t₃ s₃
 
+PAIR³ : ∀ t₃ s₃ → Tm
+PAIR³ t₃ s₃ = PAIR[ 2 ] t₃ s₃
+
+FST³ : ∀ t₃ → Tm
+FST³ t₃ = FST[ 2 ] t₃
+
+SND³ : ∀ t₃ → Tm
+SND³ t₃ = SND[ 2 ] t₃
+
 UP³ : ∀ t₃ → Tm
 UP³ t₃ = UP[ 2 ] t₃
 

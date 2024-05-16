@@ -24,6 +24,21 @@ data _⊢_ (Γ : Cx) : ∀ (A : Ty) → Set where
       → (d : Γ ⊢ ts ∶⋯∶ (A ⊃ B))    → (c : Γ ⊢ ss ∶⋯∶ A)
       → Γ ⊢ APPs[ n ] ts ss ∶⋯∶ B
 
+  -- Product. (∧I)
+  pair[_] : ∀ n {ts ss : Tms n} {A B}
+      → (d : Γ ⊢ ts ∶⋯∶ A)    → (c : Γ ⊢ ss ∶⋯∶ B)
+      → Γ ⊢ PAIRs[ n ] ts ss ∶⋯∶ (A ∧ B)
+
+  -- First projection. (∧E₁)
+  fst[_] : ∀ n {ts : Tms n} {A B}
+      → (d : Γ ⊢ ts ∶⋯∶ (A ∧ B))
+      → Γ ⊢ FSTs[ n ] ts ∶⋯∶ A
+
+  -- Second projection. (∧E₂)
+  snd[_] : ∀ n {ts : Tms n} {A B}
+      → (d : Γ ⊢ ts ∶⋯∶ (A ∧ B))
+      → Γ ⊢ SNDs[ n ] ts ∶⋯∶ B
+
   -- Reification.
   up[_] : ∀ n {ts : Tms n} {u A}
       → (d : Γ ⊢ ts ∶⋯∶ u ∶ A)

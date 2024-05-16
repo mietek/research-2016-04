@@ -13,6 +13,9 @@ data Ty : Set where
   -- Implication.
   _⊃_ : (A B : Ty) → Ty
 
+  -- Conjunction.
+  _∧_ : (A B : Ty) → Ty
+
   -- Type assertion.
   _∶_ : (t : Tm) → (A : Ty) → Ty
 

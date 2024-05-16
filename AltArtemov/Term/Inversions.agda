@@ -29,6 +29,30 @@ APP-inv-s : ∀ {n t s n′ t′ s′} → APP[ n ] t s ≡ APP[ n′ ] t′ s�
 APP-inv-s refl = refl
 
 
+PAIR-inv-n : ∀ {n t s n′ t′ s′} → PAIR[ n ] t s ≡ PAIR[ n′ ] t′ s′ → n ≡ n′
+PAIR-inv-n refl = refl
+
+PAIR-inv-t : ∀ {n t s n′ t′ s′} → PAIR[ n ] t s ≡ PAIR[ n′ ] t′ s′ → t ≡ t′
+PAIR-inv-t refl = refl
+
+PAIR-inv-s : ∀ {n t s n′ t′ s′} → PAIR[ n ] t s ≡ PAIR[ n′ ] t′ s′ → s ≡ s′
+PAIR-inv-s refl = refl
+
+
+FST-inv-n : ∀ {n t n′ t′} → FST[ n ] t ≡ FST[ n′ ] t′ → n ≡ n′
+FST-inv-n refl = refl
+
+FST-inv-t : ∀ {n t n′ t′} → FST[ n ] t ≡ FST[ n′ ] t′ → t ≡ t′
+FST-inv-t refl = refl
+
+
+SND-inv-n : ∀ {n t n′ t′} → SND[ n ] t ≡ SND[ n′ ] t′ → n ≡ n′
+SND-inv-n refl = refl
+
+SND-inv-t : ∀ {n t n′ t′} → SND[ n ] t ≡ SND[ n′ ] t′ → t ≡ t′
+SND-inv-t refl = refl
+
+
 UP-inv-n : ∀ {n t n′ t′} → UP[ n ] t ≡ UP[ n′ ] t′ → n ≡ n′
 UP-inv-n refl = refl
 

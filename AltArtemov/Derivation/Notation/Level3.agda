@@ -22,6 +22,21 @@ app³ : ∀ {t₂ t s₂ s A B Γ}
     → Γ ⊢ APP² t₂ s₂ ∶ APP t s ∶ B
 app³ {t₂} {t} {s₂} {s} = app[ 2 ] {ts = t₂ ∷ t ∷ []} {ss = s₂ ∷ s ∷ []}
 
+pair³ : ∀ {t₂ t s₂ s A B Γ}
+    → Γ ⊢ t₂ ∶ t ∶ A    → Γ ⊢ s₂ ∶ s ∶ B
+    → Γ ⊢ PAIR² t₂ s₂ ∶ PAIR t s ∶ (A ∧ B)
+pair³ {t₂} {t} {s₂} {s} = pair[ 2 ] {ts = t₂ ∷ t ∷ []} {ss = s₂ ∷ s ∷ []}
+
+fst³ : ∀ {t₂ t A B Γ}
+    → Γ ⊢ t₂ ∶ t ∶ (A ∧ B)
+    → Γ ⊢ FST² t₂ ∶ FST t ∶ A
+fst³ {t₂} {t} = fst[ 2 ] {ts = t₂ ∷ t ∷ []}
+
+snd³ : ∀ {t₂ t A B Γ}
+    → Γ ⊢ t₂ ∶ t ∶ (A ∧ B)
+    → Γ ⊢ SND² t₂ ∶ SND t ∶ B
+snd³ {t₂} {t} = snd[ 2 ] {ts = t₂ ∷ t ∷ []}
+
 up³ : ∀ {t₂ t u A Γ}
     → Γ ⊢ t₂ ∶ t ∶ u ∶ A
     → Γ ⊢ UP² t₂ ∶ UP t ∶ quo u ∶ u ∶ A

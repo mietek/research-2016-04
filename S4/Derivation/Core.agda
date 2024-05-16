@@ -22,6 +22,21 @@ data _∙_⊢_ (Δ Γ : Cx) : ∀ (A : Ty) → Set where
       → (d : Δ ∙ Γ ⊢ A ⊃ B)    → (c : Δ ∙ Γ ⊢ A)
       → Δ ∙ Γ ⊢ B
 
+  -- Product. (∧I)
+  pair : ∀ {A B}
+      → (d : Δ ∙ Γ ⊢ A)    → (c : Δ ∙ Γ ⊢ B)
+      → Δ ∙ Γ ⊢ A ∧ B
+
+  -- First projection. (∧E₁)
+  fst : ∀ {A B}
+      → (d : Δ ∙ Γ ⊢ A ∧ B)
+      → Δ ∙ Γ ⊢ A
+
+  -- Second projection. (∧E₂)
+  snd : ∀ {A B}
+      → (d : Δ ∙ Γ ⊢ A ∧ B)
+      → Δ ∙ Γ ⊢ B
+
   -- Modal variable reference.
   var* : ∀ {A}
       → (i : Δ ∋ A)

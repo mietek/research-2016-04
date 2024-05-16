@@ -10,5 +10,8 @@ data Ty : Set where
   -- Implication.
   _⊃_ : (A B : Ty) → Ty
 
+  -- Conjunction.
+  _∧_ : (A B : Ty) → Ty
+
   -- Modality.
   □_ : (A : Ty) → Ty

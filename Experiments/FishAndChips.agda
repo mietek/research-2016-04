@@ -1,9 +1,9 @@
 module Experiments.FishAndChips where
 
 open import Data.List using (List ; [] ; _∷_)
-open import Data.Nat using (ℕ)
+open import Data.Nat using (ℕ ; zero ; suc)
 open import Function using (_∘_)
-open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; subst)
+open import Relation.Binary.PropositionalEquality -- using (_≡_ ; refl ; subst)
 
 open import AltArtemov
 
@@ -35,15 +35,17 @@ Shub Γ Δ = ∀ As → Sub (Γ ⊂+ As) (Δ ⊂+ As)
 
 -- Substitution.
 
-postulate
-  [_/_] : ∀ {Γ Δ} (θ : Shub Γ Δ) {A} → Γ ⊢ A → Δ ⊢ A
-
--- TODO
-{-[ θ / var[ n ] i ]   = {!θ [] i!}
-[ θ / lam[ n ] t ]   = lam[ n ] [ θ ∘ {!!} / t ]
-[ θ / app[ n ] t s ] = app[ n ] [ θ / t ] [ θ / s ]
-[ θ / up[ n ] t ]    = up[ n ] [ θ / t ]
-[ θ / down[ n ] t ]  = down[ n ] [ θ / t ]-}
+[_/_] : ∀ {Γ Δ} (θ : Shub Γ Δ) {A} → Γ ⊢ A → Δ ⊢ A
+[ θ / var[ zero ] i ]  = θ [] i
+[ θ / var[ suc n ] i ] = {!θ ? i!}
+[ θ / lam[ n ] t ]     = lam[ n ] [ θ ∘ {!!} / t ]
+[ θ / app[ n ] t s ]   = app[ n ] [ θ / t ] [ θ / s ]
+[ θ / pair[ n ] t s ]  = pair[ n ] [ θ / t ] [ θ / s ]
+[ θ / fst[ n ] t ]     = fst[ n ] [ θ / t ]
+[ θ / snd[ n ] t ]     = snd[ n ] [ θ / t ]
+[ θ / up[ n ] t ]      = up[ n ] [ θ / t ]
+[ θ / down[ n ] t ]    = down[ n ] [ θ / t ]
+[ θ / boom[ n ] t ]    = boom[ n ] [ θ / t ]
 
 
 -- Any simultaneous renaming can be shiftable.

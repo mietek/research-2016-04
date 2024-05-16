@@ -19,6 +19,7 @@ open import Data.Nat.Missing
 lev : ∀ A → ℕ
 lev ⊥      = 0
 lev (A ⊃ B) = 0
+lev (A ∧ B) = 0
 lev (t ∶ A) = suc (lev A)
 
 
@@ -36,6 +37,7 @@ z<′lev-t∶A t A = z<′sn
 lower : ∀ A (z<′l : zero <′ lev A) → Ty
 lower ⊥      ()
 lower (A ⊃ B) ()
+lower (A ∧ B) ()
 lower (t ∶ A) z<′l = A
 
 
@@ -48,6 +50,7 @@ lower-t∶A≡A t A = refl
 tm : ∀ A (z<′l : zero <′ lev A) → Tm
 tm ⊥      ()
 tm (A ⊃ B) ()
+tm (A ∧ B) ()
 tm (t ∶ A) z<′l = t
 
 
@@ -55,15 +58,25 @@ tm (t ∶ A) z<′l = t
 _≟_ : Decidable {A = Ty} _≡_
 ⊥      ≟ ⊥        = yes refl
 ⊥      ≟ (_ ⊃ _)   = no λ ()
+⊥      ≟ (_ ∧ _)   = no λ ()
 ⊥      ≟ (_ ∶ _)   = no λ ()
 (_ ⊃ _) ≟ ⊥        = no λ ()
 (A ⊃ B) ≟ (A′ ⊃ B′) with A ≟ A′ | B ≟ B′
 (A ⊃ B) ≟ (.A ⊃ .B) | yes refl | yes refl = yes refl
 ...                 | no  A≢A′ | _        = no (A≢A′ ∘ ⊃-inv-A)
 ...                 | _        | no  B≢B′ = no (B≢B′ ∘ ⊃-inv-B)
+(_ ⊃ _) ≟ (_ ∧ _)   = no λ ()
 (_ ⊃ _) ≟ (_ ∶ _)   = no λ ()
+(_ ∧ _) ≟ ⊥        = no λ ()
+(_ ∧ _) ≟ (_ ⊃ _)   = no λ ()
+(A ∧ B) ≟ (A′ ∧ B′) with A ≟ A′ | B ≟ B′
+(A ∧ B) ≟ (.A ∧ .B) | yes refl | yes refl = yes refl
+...                 | no  A≢A′ | _        = no (A≢A′ ∘ ∧-inv-A)
+...                 | _        | no  B≢B′ = no (B≢B′ ∘ ∧-inv-B)
+(_ ∧ _) ≟ (_ ∶ _)   = no λ ()
 (_ ∶ _) ≟ ⊥        = no λ ()
 (_ ∶ _) ≟ (_ ⊃ _)   = no λ ()
+(_ ∶ _) ≟ (_ ∧ _)   = no λ ()
 (t ∶ A) ≟ (t′ ∶ A′) with t Tm≟ t′ | A ≟ A′
 (t ∶ A) ≟ (.t ∶ .A) | yes refl | yes refl = yes refl
 ...                 | no  t≢t′ | _        = no (t≢t′ ∘ ∶-inv-t)
@@ -75,6 +88,7 @@ _≟_ : Decidable {A = Ty} _≡_
 can-lower : ∀ A → Maybe Ty
 can-lower ⊥      = nothing
 can-lower (A ⊃ B) = nothing
+can-lower (A ∧ B) = nothing
 can-lower (t ∶ A) = just A
 
 HighTy : ∀ A → Set

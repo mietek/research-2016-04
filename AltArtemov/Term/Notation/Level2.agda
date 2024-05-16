@@ -12,6 +12,15 @@ LAM² t₂ = LAM[ 1 ] t₂
 APP² : ∀ t₂ s₂ → Tm
 APP² t₂ s₂ = APP[ 1 ] t₂ s₂
 
+PAIR² : ∀ t₂ s₂ → Tm
+PAIR² t₂ s₂ = PAIR[ 1 ] t₂ s₂
+
+FST² : ∀ t₂ → Tm
+FST² t₂ = FST[ 1 ] t₂
+
+SND² : ∀ t₂ → Tm
+SND² t₂ = SND[ 1 ] t₂
+
 UP² : ∀ t₂ → Tm
 UP² t₂ = UP[ 1 ] t₂
 

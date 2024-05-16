@@ -33,6 +33,24 @@ APPs[ zero ]  []       []       = []
 APPs[ suc n ] (t ∷ ts) (s ∷ ss) = APP[ n ] t s ∷ APPs[ n ] ts ss
 
 
+-- PAIRⁿ tₙ sₙ ∶ PAIRⁿ⁻¹ tₙ₋₁ sₙ₋₁ ∶ ⋯ ∶ PAIR t s
+PAIRs[_] : ∀ n (ts ss : Tms n) → Tms n
+PAIRs[ zero ]  []       []       = []
+PAIRs[ suc n ] (t ∷ ts) (s ∷ ss) = PAIR[ n ] t s ∷ PAIRs[ n ] ts ss
+
+
+-- FSTⁿ tₙ ∶ FSTⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ FST t
+FSTs[_] : ∀ n (ts : Tms n) → Tms n
+FSTs[ zero ]  []       = []
+FSTs[ suc n ] (t ∷ ts) = FST[ n ] t ∷ FSTs[ n ] ts
+
+
+-- SNDⁿ tₙ ∶ SNDⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ SND t
+SNDs[_] : ∀ n (ts : Tms n) → Tms n
+SNDs[ zero ]  []       = []
+SNDs[ suc n ] (t ∷ ts) = SND[ n ] t ∷ SNDs[ n ] ts
+
+
 -- UPⁿ tₙ ∶ UPⁿ⁻¹ tₙ₋₁ ∶ ⋯ ∶ UP t
 UPs[_] : ∀ n (ts : Tms n) → Tms n
 UPs[ zero ]  []       = []
