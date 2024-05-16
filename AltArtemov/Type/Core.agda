@@ -4,6 +4,7 @@ open import AltArtemov.Term
 
 
 infixr 2 _⊃_
+infixr 3 _≑_ _≠_
 infixr 5 _∶_
 
 data Ty : Set where
