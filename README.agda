@@ -1,11 +1,10 @@
 module README where
 
---open import AltArtemov
+-- open import AltArtemov
 
 open import Common.Delay.Core
 open import Common.Delay.StrongBisimilarity
 open import Common.Delay.Convergence
-
 
 open import AltArtemov.Context.Representation.Core
 open import AltArtemov.Context.Representation.Equality
@@ -37,13 +36,12 @@ open import AltArtemov.Context.OPE
 open import AltArtemov.Variable.Core
 open import AltArtemov.Variable.Notation
 
-open import AltArtemov.Term.Core
-open import AltArtemov.Term.Notation.Level1
-open import AltArtemov.Term.Notation.Level2
-open import AltArtemov.Term.Notation.Level3
---open import AltArtemov.Term.Substitution
+-- open import AltArtemov.Term.Core
+-- open import AltArtemov.Term.Notation.Level1
+-- open import AltArtemov.Term.Notation.Level2
+-- open import AltArtemov.Term.Notation.Level3
+-- open import AltArtemov.Term.Substitution
 
-
---open import AltArtemov.WIP.TmRSubst#
---open import AltArtemov.WIP.TySubst#
---open import AltArtemov.WIP.TmSubstLem
+-- open import AltArtemov.WIP.TmRSubst#
+-- open import AltArtemov.WIP.TySubst#
+-- open import AltArtemov.WIP.TmSubstLem
