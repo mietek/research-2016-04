@@ -44,3 +44,19 @@ id•ᵍr (lift r) = cong lift (id•ᵍr r)
 g≥ᵍ∅ : ∀ {g} → g ≥ᵍ ∅
 g≥ᵍ∅ {∅}    = id
 g≥ᵍ∅ {g ,◌} = weak g≥ᵍ∅
+
+
+data _≳ᵍ_ : CxR → CxR → Set where
+  done : ∅ ≳ᵍ ∅
+  skip : ∀ {g g′} → g ≳ᵍ g′ → (g ,◌) ≳ᵍ g′
+  keep : ∀ {g g′} → g ≳ᵍ g′ → (g ,◌) ≳ᵍ (g′ ,◌)
+
+≳ᵍ-refl : ∀ {g} → g ≳ᵍ g
+≳ᵍ-refl {∅}    = done
+≳ᵍ-refl {g ,◌} = keep ≳ᵍ-refl
+
+≳ᵍ-trans : ∀ {g g′ g″} → g ≳ᵍ g′ → g′ ≳ᵍ g″ → g ≳ᵍ g″
+≳ᵍ-trans done done         = done
+≳ᵍ-trans (skip p) q        = skip (≳ᵍ-trans p q)
+≳ᵍ-trans (keep p) (skip q) = skip (≳ᵍ-trans p q)
+≳ᵍ-trans (keep p) (keep q) = keep (≳ᵍ-trans p q)
