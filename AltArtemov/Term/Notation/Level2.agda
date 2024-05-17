@@ -1,6 +1,6 @@
-module AltArtemov.Term.Notation.Level2 where
+module Try1.AltArtemov.Term.Notation.Level2 where
 
-open import AltArtemov.Term.Core
+open import Try1.AltArtemov.Term.Core
 
 
 VAR² : ∀ i → Tm

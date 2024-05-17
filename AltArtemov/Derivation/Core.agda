@@ -1,9 +1,9 @@
-module AltArtemov.Derivation.Core where
+module Try1.AltArtemov.Derivation.Core where
 
-open import AltArtemov.Context
-open import AltArtemov.Term
-open import AltArtemov.TermVector
-open import AltArtemov.Type
+open import Try1.AltArtemov.Context
+open import Try1.AltArtemov.Term
+open import Try1.AltArtemov.TermVector
+open import Try1.AltArtemov.Type
 
 
 infixr 0 _⊢_

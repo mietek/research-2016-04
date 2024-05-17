@@ -1,6 +1,6 @@
-module AltArtemov.Context.Notation where
+module Try1.AltArtemov.Context.Notation where
 
-open import AltArtemov.Context.Core
+open import Try1.AltArtemov.Context.Core
 
 
 ix0 : ∀ {Γ A} → Γ , A ∋ A

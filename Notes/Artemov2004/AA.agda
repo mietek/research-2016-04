@@ -1,6 +1,6 @@
-module Notes.Artemov2004.AA where
+module Try1.Notes.Artemov2004.AA where
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 {-

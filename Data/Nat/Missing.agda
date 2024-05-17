@@ -1,4 +1,4 @@
-module Data.Nat.Missing where
+module Try1.Data.Nat.Missing where
 
 open import Data.Empty renaming (⊥-elim to expl)
 open import Data.Nat using (ℕ ; zero ; suc ; pred ; _⊓_ ; ≤-pred ; _≤_ ; z≤n ; s≤s ; _≤?_ ; _≤′_ ; ≤′-refl ; ≤′-step ; _<_ ; _<′_)

@@ -1,8 +1,8 @@
-module S4.Context.Core where
+module Try1.S4.Context.Core where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 
-open import S4.Type
+open import Try1.S4.Type
 
 
 infixl 2 _,_

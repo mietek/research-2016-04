@@ -1,11 +1,12 @@
-module Examples.ForgetfulProjection where
+module Try1.Examples.ForgetfulProjection where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov
-open import Examples.AltArtemov
-open import S4 using (_∙_⊢_)
-import Examples.S4 as S4
+open import Try1.AltArtemov
+open import Try1.Examples.AltArtemov
+import Try1.S4 as S4
+open S4 using (_∙_⊢_)
+import Try1.Examples.S4 as S4
 
 
 -- TODO

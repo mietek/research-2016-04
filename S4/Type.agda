@@ -1,4 +1,4 @@
-module S4.Type where
+module Try1.S4.Type where
 
 
 infixr 2 _⊃_

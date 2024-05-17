@@ -1,4 +1,4 @@
-module AltArtemov.Term.Core where
+module Try1.AltArtemov.Term.Core where
 
 open import Data.Nat using (ℕ)
 

@@ -1,8 +1,8 @@
-module AltArtemov.Type.Inversions where
+module Try1.AltArtemov.Type.Inversions where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov.Type.Core
+open import Try1.AltArtemov.Type.Core
 
 
 ⊃-inv-A : ∀ {A B A′ B′} → (A ⊃ B) ≡ (A′ ⊃ B′) → A ≡ A′

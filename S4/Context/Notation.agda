@@ -1,6 +1,6 @@
-module S4.Context.Notation where
+module Try1.S4.Context.Notation where
 
-open import S4.Context.Core
+open import Try1.S4.Context.Core
 
 
 ix0 : ∀ {Γ A} → Γ , A ∋ A

@@ -1,8 +1,8 @@
-module Notes.Artemov2006.FLP where
+module Try1.Notes.Artemov2006.FLP where
 
 open import Relation.Binary.PropositionalEquality using (_≡_) renaming (refl to ≡-refl)
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 {-

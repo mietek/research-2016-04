@@ -1,4 +1,4 @@
-module AltArtemov.Type.Properties where
+module Try1.AltArtemov.Type.Properties where
 
 open import Data.Empty using () renaming (⊥ to Empty)
 open import Data.Nat using (ℕ ; zero ; suc ; _<′_) renaming (_≟_ to _ℕ≟_)
@@ -9,10 +9,10 @@ open import Relation.Binary using (Decidable)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov.Term
-open import AltArtemov.Type.Core
-open import AltArtemov.Type.Inversions
-open import Data.Nat.Missing
+open import Try1.AltArtemov.Term
+open import Try1.AltArtemov.Type.Core
+open import Try1.AltArtemov.Type.Inversions
+open import Try1.Data.Nat.Missing
 
 
 -- Types have levels.

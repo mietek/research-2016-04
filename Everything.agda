@@ -5,86 +5,86 @@ module Everything where
 
 -- Some theorems of propositional logic and the λ-calculus, and some first-
 -- and second-level realisations of theorems of the modal logic S4.
-import Examples.AltArtemov
+import Try1.Examples.AltArtemov
 
 -- Some theorems of propositional logic and the modal logic S4.
-import Examples.S4
+import Try1.Examples.S4
 
 -- Demonstration of forgetful projection from the reflective λ-calculus to
 -- the modal logic S4.
-import Examples.ForgetfulProjection
+import Try1.Examples.ForgetfulProjection
 
 -- Demonstration of the isomorphism between propositional logic and the
 -- λ-calculus, and between first- and second-level realisations of theorems
 -- of the modal logic S4.
-import Examples.Isomorphism
+import Try1.Examples.Isomorphism
 
 -- Some examples of reasoning with negation and principle of explosion.
-import Examples.Negation
+import Try1.Examples.Negation
 
 -- Descriptions of the reflective λ-calculus (λ∞) and reflective combinatory
 -- logic (RCL).
-import Notes.Artemov2004.AA
-import Notes.Artemov2004.RCL
+import Try1.Notes.Artemov2004.AA
+import Try1.Notes.Artemov2004.RCL
 
 -- Descriptions of the logic of functional proofs (FLP) and RCL.
-import Notes.Artemov2006.FLP
-import Notes.Artemov2006.RCL
+import Try1.Notes.Artemov2006.FLP
+import Try1.Notes.Artemov2006.RCL
 
 
 --------------------------------------------------------------------------------
 
-import Data.Nat.Missing
-import Data.Maybe.Missing
+import Try1.Data.Nat.Missing
+import Try1.Data.Maybe.Missing
 
-import AltArtemov
-import AltArtemov.Context
-import AltArtemov.Context.Core
-import AltArtemov.Context.Notation
-import AltArtemov.Context.Properties
-import AltArtemov.Derivation
-import AltArtemov.Derivation.Core
-import AltArtemov.Derivation.Notation.Level1
-import AltArtemov.Derivation.Notation.Level2
-import AltArtemov.Derivation.Notation.Level3
-import AltArtemov.Derivation.Notation.Level4
-import AltArtemov.Derivation.Properties
-import AltArtemov.Term
-import AltArtemov.Term.Core
-import AltArtemov.Term.Inversions
-import AltArtemov.Term.Notation.Level1
-import AltArtemov.Term.Notation.Level2
-import AltArtemov.Term.Notation.Level3
-import AltArtemov.Term.Notation.Level4
-import AltArtemov.Term.Properties
-import AltArtemov.TermVector
-import AltArtemov.TermVector.Core
-import AltArtemov.TermVector.Notation
-import AltArtemov.Type
-import AltArtemov.Type.Core
-import AltArtemov.Type.Inversions
-import AltArtemov.Type.Properties
+import Try1.AltArtemov
+import Try1.AltArtemov.Context
+import Try1.AltArtemov.Context.Core
+import Try1.AltArtemov.Context.Notation
+import Try1.AltArtemov.Context.Properties
+import Try1.AltArtemov.Derivation
+import Try1.AltArtemov.Derivation.Core
+import Try1.AltArtemov.Derivation.Notation.Level1
+import Try1.AltArtemov.Derivation.Notation.Level2
+import Try1.AltArtemov.Derivation.Notation.Level3
+import Try1.AltArtemov.Derivation.Notation.Level4
+import Try1.AltArtemov.Derivation.Properties
+import Try1.AltArtemov.Term
+import Try1.AltArtemov.Term.Core
+import Try1.AltArtemov.Term.Inversions
+import Try1.AltArtemov.Term.Notation.Level1
+import Try1.AltArtemov.Term.Notation.Level2
+import Try1.AltArtemov.Term.Notation.Level3
+import Try1.AltArtemov.Term.Notation.Level4
+import Try1.AltArtemov.Term.Properties
+import Try1.AltArtemov.TermVector
+import Try1.AltArtemov.TermVector.Core
+import Try1.AltArtemov.TermVector.Notation
+import Try1.AltArtemov.Type
+import Try1.AltArtemov.Type.Core
+import Try1.AltArtemov.Type.Inversions
+import Try1.AltArtemov.Type.Properties
 
-import S4
-import S4.Context
-import S4.Context.Core
-import S4.Context.Notation
-import S4.Derivation
-import S4.Derivation.Core
-import S4.Derivation.Notation
-import S4.Type
+import Try1.S4
+import Try1.S4.Context
+import Try1.S4.Context.Core
+import Try1.S4.Context.Notation
+import Try1.S4.Derivation
+import Try1.S4.Derivation.Core
+import Try1.S4.Derivation.Notation
+import Try1.S4.Type
 
-import Experiments.Prelude
+import Try1.Experiments.Prelude
 
-import Experiments.FishAndChips -- TODO: unfinished
-import Experiments.Examples.FishAndChips
+import Try1.Experiments.FishAndChips -- TODO: unfinished
+import Try1.Experiments.Examples.FishAndChips
 
-import Experiments.Shallow
-import Experiments.Examples.Shallow
+import Try1.Experiments.Shallow
+import Try1.Experiments.Examples.Shallow
 
-import Experiments.Typing
+import Try1.Experiments.Typing
 
-import Experiments.Interpretation -- TODO: unfinished
+import Try1.Experiments.Interpretation -- TODO: unfinished
 
 
 --------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-module Experiments.Typing where
+module Try1.Experiments.Typing where
 
 open import Data.Empty using () renaming (⊥ to Empty ; ⊥-elim to boom)
 open import Data.Maybe using (Maybe ; just ; nothing ; map)
@@ -7,8 +7,8 @@ open import Function using (const)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov
-open import Data.Maybe.Missing
+open import Try1.AltArtemov
+open import Try1.Data.Maybe.Missing
 
 
 lookup : ∀ (Γ : Cx) (i : ℕ) → Maybe Ty
@@ -67,7 +67,7 @@ mutual
 
 
 module Example where
-  open import Examples.AltArtemov
+  open import Try1.Examples.AltArtemov
 
   pI : ∀ {A Γ} → rep {Γ} (I {A}) ≡ LAM V0
   pI = refl

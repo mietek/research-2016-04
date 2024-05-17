@@ -1,4 +1,4 @@
-module AltArtemov.Term.Properties where
+module Try1.AltArtemov.Term.Properties where
 
 open import Data.Empty using () renaming (⊥ to Empty)
 open import Data.Nat using (ℕ ; zero ; suc ; _⊓_ ; _<′_ ; pred) renaming (_≟_ to _ℕ≟_)
@@ -9,9 +9,9 @@ open import Relation.Binary using (Decidable)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; subst)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov.Term.Core
-open import AltArtemov.Term.Inversions
-open import Data.Nat.Missing
+open import Try1.AltArtemov.Term.Core
+open import Try1.AltArtemov.Term.Inversions
+open import Try1.Data.Nat.Missing
 
 
 -- Terms have levels.

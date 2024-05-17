@@ -1,6 +1,6 @@
-module Experiments.Prelude where
+module Try1.Experiments.Prelude where
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 -- Function.

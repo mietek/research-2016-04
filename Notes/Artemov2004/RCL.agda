@@ -1,6 +1,6 @@
-module Notes.Artemov2004.RCL where
+module Try1.Notes.Artemov2004.RCL where
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 {-

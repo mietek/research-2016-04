@@ -1,9 +1,9 @@
-module Experiments.Examples.FishAndChips where
+module Try1.Experiments.Examples.FishAndChips where
 
 open import Relation.Binary.PropositionalEquality using (refl)
 
-open import AltArtemov
-open import Experiments.FishAndChips
+open import Try1.AltArtemov
+open import Try1.Experiments.FishAndChips
 
 
 -- Some theorems of propositional logic.

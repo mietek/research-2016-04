@@ -1,6 +1,6 @@
-module AltArtemov.Type.Core where
+module Try1.AltArtemov.Type.Core where
 
-open import AltArtemov.Term
+open import Try1.AltArtemov.Term
 
 
 infixr 2 _⊃_

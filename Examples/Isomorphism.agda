@@ -1,9 +1,9 @@
-module Examples.Isomorphism where
+module Try1.Examples.Isomorphism where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov
-open import Examples.AltArtemov
+open import Try1.AltArtemov
+open import Try1.Examples.AltArtemov
 
 
 _⇑≡_ : ∀ {A} (d : ∅ ⊢ A) (d′ : ∅ ⊢ rep d ∶ A) → Set

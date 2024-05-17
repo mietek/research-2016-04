@@ -1,7 +1,7 @@
-module S4.Derivation.Core where
+module Try1.S4.Derivation.Core where
 
-open import S4.Context
-open import S4.Type
+open import Try1.S4.Context
+open import Try1.S4.Type
 
 
 infixr 0 _∙_⊢_

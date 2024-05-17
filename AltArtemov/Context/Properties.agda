@@ -1,9 +1,9 @@
-module AltArtemov.Context.Properties where
+module Try1.AltArtemov.Context.Properties where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; cong)
 
-open import AltArtemov.Context.Core
+open import Try1.AltArtemov.Context.Core
 
 
 -- Context indices can be represented as naturals.

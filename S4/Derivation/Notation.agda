@@ -1,7 +1,7 @@
-module S4.Derivation.Notation where
+module Try1.S4.Derivation.Notation where
 
-open import S4.Derivation.Core
-open import S4.Context
+open import Try1.S4.Derivation.Core
+open import Try1.S4.Context
 
 
 v0 : ∀ {Δ Γ A} → Δ ∙ Γ , A ⊢ A

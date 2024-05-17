@@ -1,6 +1,6 @@
-module Examples.S4 where
+module Try1.Examples.S4 where
 
-open import S4
+open import Try1.S4
 
 
 -- Some theorems of propositional logic.

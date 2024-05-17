@@ -1,4 +1,4 @@
-module Experiments.Shallow where
+module Try1.Experiments.Shallow where
 
 
 -- Truth.

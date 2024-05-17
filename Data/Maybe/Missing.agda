@@ -1,4 +1,4 @@
-module Data.Maybe.Missing where
+module Try1.Data.Maybe.Missing where
 
 open import Category.Monad using (RawMonad)
 open import Data.Maybe using (Maybe ; just ; nothing)

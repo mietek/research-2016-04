@@ -1,12 +1,12 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module Experiments.Interpretation where
+module Try1.Experiments.Interpretation where
 
 open import Data.Product using (_×_)
 
-open import AltArtemov as AA using (Ty ; _⊃_ ; _∶_ ; Cx ; ∅ ; _,_ ; _∋_ ; Tm ; [] ; _∷_ ; _⊢_)
-open import Experiments.Typing
-open import Experiments.Shallow
+open import Try1.AltArtemov as AA using (Ty ; _⊃_ ; _∶_ ; Cx ; ∅ ; _,_ ; _∋_ ; Tm ; [] ; _∷_ ; _⊢_)
+open import Try1.Experiments.Typing
+open import Try1.Experiments.Shallow
 
 
 level : ∀ (t : Tm) → ℕ

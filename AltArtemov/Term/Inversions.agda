@@ -1,8 +1,8 @@
-module AltArtemov.Term.Inversions where
+module Try1.AltArtemov.Term.Inversions where
 
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl)
 
-open import AltArtemov.Term.Core
+open import Try1.AltArtemov.Term.Core
 
 
 VAR-inv-n : ∀ {n i n′ i′} → VAR[ n ] i ≡ VAR[ n′ ] i′ → n ≡ n′

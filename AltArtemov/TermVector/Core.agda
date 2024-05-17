@@ -1,8 +1,8 @@
-module AltArtemov.TermVector.Core where
+module Try1.AltArtemov.TermVector.Core where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 
-open import AltArtemov.Term
+open import Try1.AltArtemov.Term
 
 
 infixr 5 _∷_

@@ -1,6 +1,6 @@
-module Examples.Negation where
+module Try1.Examples.Negation where
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 -- Some examples of reasoning with negation and principle of explosion.

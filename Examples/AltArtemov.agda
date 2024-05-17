@@ -1,6 +1,6 @@
-module Examples.AltArtemov where
+module Try1.Examples.AltArtemov where
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 -- Some theorems of propositional logic.

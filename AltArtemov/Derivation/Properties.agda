@@ -1,4 +1,4 @@
-module AltArtemov.Derivation.Properties where
+module Try1.AltArtemov.Derivation.Properties where
 
 open import Data.Empty using () renaming (⊥ to Empty)
 open import Data.Nat using (ℕ ; zero ; suc ; _<′_ ; _⊓_) renaming (_≟_ to _ℕ≟_)
@@ -7,12 +7,12 @@ open import Data.Unit using () renaming (⊤ to Unit)
 open import Relation.Binary.PropositionalEquality using (_≡_ ; refl ; subst ; sym)
 open import Relation.Nullary using (yes ; no)
 
-open import AltArtemov.Context
-open import AltArtemov.Derivation.Core
-open import AltArtemov.Term
-open import AltArtemov.TermVector
-open import AltArtemov.Type
-open import Data.Nat.Missing
+open import Try1.AltArtemov.Context
+open import Try1.AltArtemov.Derivation.Core
+open import Try1.AltArtemov.Term
+open import Try1.AltArtemov.TermVector
+open import Try1.AltArtemov.Type
+open import Try1.Data.Nat.Missing
 
 
 -- Derivations have types.

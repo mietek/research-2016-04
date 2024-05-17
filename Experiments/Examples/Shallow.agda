@@ -1,6 +1,6 @@
-module Experiments.Examples.Shallow where
+module Try1.Experiments.Examples.Shallow where
 
-open import Experiments.Shallow
+open import Try1.Experiments.Shallow
 
 
 -- Some theorems of propositional logic.

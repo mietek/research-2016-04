@@ -1,10 +1,10 @@
-module AltArtemov.TermVector.Notation where
+module Try1.AltArtemov.TermVector.Notation where
 
 open import Data.Nat using (ℕ ; zero ; suc)
 
-open import AltArtemov.Term
-open import AltArtemov.TermVector.Core
-open import AltArtemov.Type
+open import Try1.AltArtemov.Term
+open import Try1.AltArtemov.TermVector.Core
+open import Try1.AltArtemov.Type
 
 
 infixr 5 _∶⋯∶_

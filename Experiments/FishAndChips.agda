@@ -1,13 +1,13 @@
 {-# OPTIONS --allow-unsolved-metas #-}
 
-module Experiments.FishAndChips where
+module Try1.Experiments.FishAndChips where
 
 open import Data.List using (List ; [] ; _∷_)
 open import Data.Nat using (ℕ ; zero ; suc)
 open import Function using (_∘_)
 open import Relation.Binary.PropositionalEquality -- using (_≡_ ; refl ; subst)
 
-open import AltArtemov
+open import Try1.AltArtemov
 
 
 -- Type of simultaneous renamings.
