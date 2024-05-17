@@ -93,5 +93,7 @@ import Try1.Experiments.Interpretation -- TODO: unfinished
 
 import Try2.Everything
 
+import Try3.Everything
+
 
 --------------------------------------------------------------------------------
